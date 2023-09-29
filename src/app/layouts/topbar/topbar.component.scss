@@ -1,0 +1,99 @@
+.navbar-brand-box {
+    box-shadow: none !important;
+}
+
+
+input[type="search"] {
+    border: none;
+    background: transparent;
+    margin: 30px;
+    padding: 7px 30px !important;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-top: -10px;
+    width: 140%;
+}
+
+input[type="search"]::placeholder {
+    color: #bbb;
+}
+
+button[type="submit"]:focus,
+input[type="search"]:focus {
+    box-shadow: 0 0 3px 0 #67b9b0;
+    border-color: #67b9b0;
+    outline: none;
+}
+
+
+
+.input-field {
+    width: 100%;
+    padding: 30px !important;
+    text-align: center;
+}
+
+.wrapword {
+    word-wrap: break-word;
+}
+
+.pointer {
+    cursor: pointer;
+  }
+
+
+.ng-select-custom {
+    position: absolute;
+    left: 2rem;
+    width: 25rem;
+    background-color: #fcfcff;
+  }
+
+.icon{
+    position: relative !important;
+    top: -0.9px !important;
+    padding: 9.8px;
+    min-width: 40px;
+    left: -1px;
+    border: none;
+}
+
+
+
+.notification-scroll {
+    white-space: initial;
+}
+
+
+.fl-search-border{
+    box-shadow: 1px 0 0 -1px  #67b9b0;
+    border-color: #4db3a7;
+    outline: none;
+    border-right: none !important;
+}
+
+.fl-search{
+    border-radius: 3px;
+    height: 2.4rem;
+    position: absolute;
+    top: 15px;
+    left: 178px;
+    width: 29rem;
+    background: #f7f8f9;
+}
+
+.fl-search:focus-within{
+    box-shadow: 0 0 3px 0 #37a799;
+    border-color: #67b9b0;
+    outline: none;
+}
+
+.fl-search .clear-btn{
+    position: absolute;
+    right: 11px;
+    top: 8px;
+    color: #7b787a;
+    font-size: 19px;
+}

@@ -1,0 +1,424 @@
+<div class="row custom-text">
+    <div class="card shadow-lg mt-4 mb-4 mx-0 px-0 bg-wrap rounded_card">
+        <div class="card-body bg-content">
+            <div class="row pb-2">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img _ngcontent-ado-c113="" src="assets/images/menu-icon/FunctionalSkillGapMatrix.png"
+                                alt="" class="d-block" />
+                        </div>
+                        <div class="col-lg-11 pt-2 paragraph">
+                            <h5 style="
+                  width: 100%;
+                  font-family: Ubuntu;
+                  font-size: 23px;
+                  font-weight: bold;
+                  text-align: left;
+                  color: #454545;
+                  margin-top: 8px;
+                ">
+                                Functional Skill Gap Matrix
+                            </h5>
+                            <!-- <p class="text-muted " style="font-family:Ubuntu; font-size: 12px;">Here is how the skill
+                                gap for your function looks; Create a strategy to close the gap</p> -->
+                        </div>
+                    </div>
+                </div>
+                <!--div class="col-lg-4 text-end pt-2">
+                    <a routerLink="/functional-skill-gap-matrix/view-general-comments" class="btn custom_btn me-2"> View
+                        General Comments</a>
+                </div-->
+            </div>
+
+            <hr />
+            <div class="row m-0 p-0">
+                <form [formGroup]="filterTeamForm">
+                    <div class="card-body m-0 p-0">
+                        <div class="row m-0 p-0">
+                            <div class="col-lg-3 pb-3">
+                                <label for="choices-multiple-remove-button" class="form-label font-size-16"
+                                    style="font-weight: normal; color: #051436">Department</label>
+                                <ng-select name="dept" placeholder="eg. department"
+                                    [(ngModel)]="functionalSkillObj.dept" formControlName="dept"
+                                    (change)="getSelectedDept()" [clearable]="false"
+                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                    [multiple]="false" [maxSelectedItems]="1">
+                                    <ng-option *ngFor="let department of dept" [value]="department.dept_id">
+                                        {{ department.name }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-3 pb-3">
+                                <label for="choices-multiple-remove-button" class="form-label font-size-16"
+                                    style="font-weight: normal; color: #051436">Sub Department</label>
+                                <ng-select name="subDept" placeholder="eg. sub department" [(ngModel)]="selectedSubdept"
+                                    formControlName="subDept" (change)="getSelectedSubdept()" [clearable]="false"
+                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                    [multiple]="false" [maxSelectedItems]="1">
+                                    <ng-option *ngFor="let sdept of subDept" [value]="sdept.subdept_id">
+                                        {{ sdept.name }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+        
+                            <div class="col-lg-3 pb-3">
+                                <span class="col"><label for="floatingInput" class="font-size-16"
+                                        style="font-weight: normal; color: #051436">Domain
+                                    </label></span>
+
+                                <span class="col">
+
+                                    <ng-select name="domain" placeholder="eg. domain" formControlName="domain"
+                                        [(ngModel)]="functionalSkillObj.domain" (change)="getSelectedDomain($event)"
+                                        class=" ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                        [ngClass]="
+                      functionalSkillObj.domain == 1
+                        ? 'ng-select-multiple1'
+                        : functionalSkillObj.domain == 2
+                        ? 'ng-select-multiple2'
+                        : functionalSkillObj.domain == 3
+                        ? 'ng-select-multiple3'
+                        : 'ng-select-multiple'
+                    "  [maxSelectedItems]="1" [clearable]="true">
+                                        <ng-option *ngFor="let domain of domainList" [value]="domain.domain_id">
+                                            {{ domain.domain_nm | lowercase }}
+                                        </ng-option>
+                                    </ng-select>
+                                </span>
+                            </div>
+
+ 
+
+                            <div class="col-lg-3 pb-3">
+                                <span class="col"><label for="floatingInput" class="font-size-16"
+                                        style="font-weight: normal; color: #051436">Sub Domain
+                                    </label></span>
+                                <span class="col">
+                                    <ng-select name="subdomain" placeholder="eg. sub domain" formControlName="subdomain"
+                                        [(ngModel)]="functionalSkillObj.subdomain"
+                                        (change)="getSelectedSubDomain($event)"
+                                        class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                        [multiple]="false" [maxSelectedItems]="1" [clearable]="false">
+                                        <ng-option *ngFor="let subdomain of subdomainList"
+                                            [value]="subdomain.subdomain_id">
+                                            {{ subdomain.subdomain_nm | lowercase }}
+                                        </ng-option>
+                                    </ng-select>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 pb-3">
+                                <span class="col"><label for="floatingInput" class="font-size-16"
+                                        style="font-weight: normal; color: #051436">
+                                        Level 1 : Key Areas
+                                    </label></span>
+                                <span class="col">
+                                    <ng-select name="level1" placeholder="eg. key areas" formControlName="level1"
+                                        [(ngModel)]="functionalSkillObj.level1"
+                                        class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                        [clearable]="false" [multiple]="false" [maxSelectedItems]="1"
+                                        (change)="getSelectLevel1(strongAreaModel1)">
+                                        <ng-option *ngFor="let level1 of level1List" [value]="level1.tech_skill_id">
+                                            {{ level1.skill_nm }}
+                                        </ng-option>
+                                    </ng-select>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 pb-3">
+                                <span class="col"><label for="floatingInput" class="font-size-16"
+                                        style="font-weight: normal; color: #051436">Level 2 : Specialisation
+                                    </label></span>
+                                <span class="col">
+                                    <ng-select name="level2" placeholder="eg. specialisation" formControlName="level2"
+                                        [readonly]="isLevelEmpty" [(ngModel)]="functionalSkillObj.level2"
+                                        class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                        [clearable]="false" [multiple]="false" [maxSelectedItems]="1"
+                                        (change)="getSelectLevel2(strongAreaModel1)">
+                                        <ng-option *ngFor="let level2 of level2List" [value]="level2.tech_skill_id">
+                                            {{ level2.skill_nm }}
+                                        </ng-option>
+                                    </ng-select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-xl-2 pt-4" *ngIf="isShowSelectLevel">
+                    <button class="btn custom_btn_danger me-2" style="height: 41px; margin-top: -3px"
+                        (click)="clearSkills()">
+                        Clear Skills
+                    </button>
+                </div>
+                <div class="col-xl-10 pt-4" *ngIf="isShowSelectLevel">
+                    <button class="btn custom_btn_white me-2" style="height: 45px; margin-top: -5px; margin-left: -91px"
+                        (click)="addSkillsLastLevel(strongAreaModel1)">
+                        <i class="fa fa-plus"></i> Add Skills
+                    </button>
+                    <span *ngFor="let proj_skills of finalAddedLevels; let i = index">
+                        <p [ngClass]="
+                proj_skills.domain_id == 1
+                  ? 'badge-soft-custom-purple'
+                  : proj_skills.domain_id == 2
+                  ? 'badge-soft-custom-primary'
+                  : proj_skills.domain_id == 3
+                  ? 'badge-soft-custom-warning'
+                  : 'badge-soft-custom-green'
+              " class="badge py-2 me-2 font-size-15" style="height: 41px">
+                            {{ proj_skills.skill_nm }}
+
+                            <img class="Ellipse-910" src="assets/images/users/Arrow.png" (click)="selectedClose(i)" />
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-0 p-0" *ngIf="!submitted">
+        <div class="card shadow-lg mx-0 px-0 rounded_card" style="height: 221px">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card w-100 text-center dotter-border rounded_card">
+                            <div class="card-body">
+                                <img class="text-center" src="assets/images/icons/CreateSkillGapMatrix3.png" alt=""
+                                    style="width: 50px; height: 50px" />
+                                <h6 class="pt-4 pb-0" style="font-family: Ubuntu">
+                                    Create Skill Gap Matrix
+                                </h6>
+                                <!-- <p class="text-muted">Lorem Ipsum is simply dummy text</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row px-2" *ngIf="submitted">
+            <div class="col-md-2"></div>
+            <div class="col-md-2" *ngFor="let depth of techDepthLevels">
+                <div class="card rounded_card" style="border-radius: 6px">
+                    <div class="text-center p-2" style="
+              font-family: Ubuntu;
+              font-size: 14px;
+              font-weight: 500;
+              color: #4b5768;
+            ">
+                        {{ depth.technical_depth_nm }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-0 p-0">
+            <div class="col-12" *ngFor="let skillGap of skillMatrixResult">
+                <div class="card p-2 rounded_card" style="margin-top: -15px; margin-bottom: 30px">
+                    <div class="row py-2 px-0">
+                        <div class="col-md-2 px-2">
+                            <div class="dropdown" ngbDropdown>
+                                <a class="btn btn-link text-dark dropdown-toggle shadow-none" style="
+                    margin-left: -5px;
+                    margin-top: 4px;
+                    white-space: normal;
+                    text-align: left;
+                    word-break: break-word;
+                  " href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    ngbDropdownToggle>
+                                    <span style="
+                      font-size: 16px;
+                      font-family: Ubuntu;
+                      font-weight: 500;
+                    ">
+                                        {{ skillGap.skill_nm }}
+                                    </span>
+                                    <i class="uil uil-ellipsis-v"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                                    <li class="pb-2">
+                                        <b>Level 1 : </b> {{ skillGap.level1.skill_nm }}
+                                    </li>
+                                    <li class="pb-2" *ngIf="skillGap.level2">
+                                        <b> Level 2 : </b> {{ skillGap.level2.skill_nm }}
+                                    </li>
+                                </ul>
+                                <!-- end ul -->
+                            </div>
+
+                            <span *ngIf="skillGap.team_skill_id">
+                                <p class="ps-2 targetDepth-border-level{{
+                    skillGap.maxDepthAchieved >=
+                    skillGap.technical_depth.level_no
+                      ? 5
+                      : 5 -
+                        (skillGap.technical_depth.level_no -
+                          skillGap.maxDepthAchieved)
+                  }}">
+                                    {{ skillGap.technical_depth.technical_depth_nm }}
+                                </p>
+                                <div class="progress gap-1">
+                                    <div *ngFor="
+                      let level of counter(skillGap.technical_depth.level_no);
+                      let i = index
+                    " class="progress-bar tech-depth-static-bar targetDepth-bg{{
+                      skillGap.maxDepthAchieved >=
+                      skillGap.technical_depth.level_no
+                        ? 5
+                        : 5 -
+                          (skillGap.technical_depth.level_no -
+                            skillGap.maxDepthAchieved)
+                    }}" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col-md-2" *ngFor="let depth of techDepthLevels">
+                            <div class="card p-2 rounded_card" [ngClass]="{
+                  'techDepth-card1':
+                    skillGap.technical_depth.level_no == -1 ||
+                    skillGap.technical_depth.level_no - depth.level_no == 4,
+                  'techDepth-card2':
+                    skillGap.technical_depth.level_no - depth.level_no == 3,
+                  'techDepth-card3':
+                    skillGap.technical_depth.level_no - depth.level_no == 2,
+                  'techDepth-card4':
+                    skillGap.technical_depth.level_no - depth.level_no == 1,
+                  'techDepth-card5':
+                    skillGap.technical_depth.level_no != -1 &&
+                    depth.level_no >= skillGap.technical_depth.level_no
+                }" style="height: 100%; width: 100%">
+                                <div class="row gap-1" *ngIf="skillGap.depthByEmp">
+                                    <span *ngFor="let emp of skillGap.depthByEmp[depth.level_no]" class="col-3">
+                                        <span *ngIf="emp.emp_info != null || emp.emp_info != undefined">
+                                            <a routerLink="/team/profile" [queryParams]="{ userId: emp.sg_id }"
+                                                target="_blank">
+                                                <span *ngIf="
+                            depth.technical_depth_id == emp.technical_depth_id
+                          ">
+                                                    <span *ngIf="
+                              emp.emp_info.emp_image != undefined ||
+                                emp.emp_info.emp_image != null;
+                              else elseBlock
+                            ">
+                                                        <img style="
+                                border-radius: 50%;
+                                height: 30px;
+                                width: 30px;
+                              " src="{{ emp.emp_info.emp_image }}" />
+                                                    </span>
+                                                </span>
+
+                                                <ng-template #elseBlock>
+                                                    <img style="
+                              border-radius: 50%;
+                              height: 30px;
+                              width: 30px;
+                            " src="assets/images/profile-pic2.png" />
+                                                </ng-template>
+                                            </a>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center pt-3" *ngIf="
+                !skillGap.general_comment_history && skillGap.team_skill_id
+              ">
+                            <a class="text-decoration-underline"
+                                routerLink="/functional-skill-gap-matrix/view-general-comments"
+                                [queryParams]="{ skillGapMatrixId: skillGap.team_skill_id }">
+                                <img src="assets/images/users/comment.png" style="padding: 5px" />
+                                <a style="color: #00448a">View & Add Comments</a>
+                            </a>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-9 text-dark pt-3" *ngIf="skillGap.general_comment_history">
+                            <a class="text-muted" routerLink="/functional-skill-gap-matrix/view-general-comments"
+                                [queryParams]="{ skillGapMatrixId: skillGap.team_skill_id }">
+                                <h6 style="
+                    font-family: Ubuntu;
+                    font-size: 16px;
+                    font-weight: normal;
+                  ">
+                                    <img src="assets/images/users/comment.png" /> Comments |
+                                    <a class="text-decoration-underline" style="color: #00448a">
+                                        See All
+                                    </a>
+                                </h6>
+                                {{ skillGap.general_comment_history }}
+                            </a>
+                        </div>
+                        <div class="col-lg-1" *ngIf="
+                skillGap.general_comment_history &&
+                currentUserId.role == this.appRoles.roles[2] &&
+                currentUserId.tempRole == this.appRoles.roles[2]
+              ">
+                            <a routerLink="/functional-skill-gap-matrix/view-general-comments"
+                                [queryParams]="{ skillGapMatrixId: skillGap.team_skill_id }" class="btn bg-light Edit"
+                                style="margin-top: 20px; color: #00448a" target="_blank"><i class="fas fa-pencil-alt"
+                                    aria-hidden="true"></i> Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #strongAreaModel1 let-modal>
+    <div class="modal-header" style="background-color: #f6f8fd">
+        <span class="row" style="margin-top: 13px">
+            <span class="text-start">
+                <h5 class="modal-title">Choose a Skills Or Multiple Skills</h5>
+            </span>
+            <span class="text-end" style="margin-top: -25px">
+                <a type="button" class="btn-close shadow-lg" (click)="closelevel()" style="
+            margin-left: 147px;
+            border-radius: 20px;
+            background-color: hsl(0, 0%, 100%);
+          "></a>
+            </span>
+            <br />
+            <!-- <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting
+            </p> -->
+        </span>
+    </div>
+
+    <form name="FilterForm" (ngSubmit)="fs.form.valid && filterForm(fs)" #fs="ngForm" role="form" class="form"
+        novalidate>
+        <div class="h-80">
+            <div class="modal-body" style="height: 400px; overflow-y: auto">
+                <div class="row">
+                    <div class="body-black font-size-18"
+                        style="margin-bottom: 10px; font-weight: 500; margin-top: 15px">
+                        <span *ngIf="functionalSkillObj.level2">
+                            Level 3 : Core Specialisation
+                        </span>
+                        <span *ngIf="!functionalSkillObj.level2">
+                            Level 2 : Specialisation
+                        </span>
+                    </div>
+                    <div class="pb-2" *ngFor="let level3 of levelsArr; let i = index" style="width: 50%"
+                        [ngClass]="level3.checked == true ? 'radio-on' : ''">
+                        <span class="col form-check form-checkbox-border checkbox-bg-info">
+                            <input class="form-check-input checkbox-resize"
+                                [ngClass]="level3.checked == true ? 'radio-on' : ''" type="checkbox" id="level3_{{ i }}"
+                                [checked]="isSelectedLevel(level3)" (change)="onChangeLevel(level3, $event)"
+                                [value]="level3.tech_skill_id" name="level3" />
+                            <label class="form-check-label font-size-13 text-muted text-capitalize ps-2" for="level3_{{ i }}">
+                                {{ level3.skill_nm | lowercase }}
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn custom_btn_danger me-2" (click)="closelevel()">Cancel</a>
+                <button type="submit" class="btn theme-custom-color w-sm" [disabled]="!isDisable" id="btn-save-event">
+                    Add
+                </button>
+            </div>
+        </div>
+    </form>
+</ng-template>

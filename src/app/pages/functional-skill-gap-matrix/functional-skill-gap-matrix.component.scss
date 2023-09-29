@@ -1,0 +1,93 @@
+.dotter-border {
+    border: 1px dashed #dbdee4;
+    background-color: #f7f8f9;
+}
+
+.dotter-border :hover {
+    border: 1px dashed #3168a0;
+}
+
+.dotter-border .card-body :hover {
+    border: none;
+    background-color: #f7f8f9;
+}
+
+@media (min-width: 768px) {
+    .col-md-2 {
+        flex: 0 0 auto;
+        width: 14% !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-dialog .modal-dialog-scrollable .modal-content {
+        max-width: 800px !important;
+        margin: 1.75rem auto !important;
+    }
+}
+
+.modal-dialog .modal-dialog-scrollable .modal-content {
+    max-width: 800px !important;
+    margin: 1.75rem auto !important;
+}
+
+.dropdown-menu {
+    width: max-content;
+    padding: 20px;
+}
+
+.badge-soft-custom-primary {
+    background-color: #c3dffa;
+    color: #1d527c;
+    padding: 7px;
+
+}
+
+.badge-soft-custom-warning {
+    background-color: #fdefdb;
+    color: #a35828;
+    padding: 7px;
+
+}
+
+.badge-soft-custom-purple {
+    background-color: #eac4ff;
+    color: #904fab;
+    padding: 7px;
+
+}
+
+.badge-soft-custom-green {
+    background-color: #f0f8f0;
+    color: #64a559;
+    padding: 7px;
+
+}
+
+.d-block{
+    margin-top: 9px;
+}
+
+.badge-soft-custom-orange {
+    background-color: #f8f0ed;
+    color: #e86838;
+    padding: 7px;
+
+}
+
+.badge-soft-custom-blue {
+    background-color: #f4f0fd;
+    color: #916ff7;
+    padding: 7px;
+    height: 30px;
+}
+
+.Ellipse-910 {
+    width: 30px;
+    height: 30px;
+    margin: -2px 0 0 16px;
+    padding: 7.4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 20px;
+  }

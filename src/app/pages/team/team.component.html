@@ -1,0 +1,402 @@
+<div class="row custom-text m-0 p-0">
+
+    <div class="card rounded_card bg-wrap shadow-lg" style="margin-bottom:-5px;">
+        <div class="card-body bg-content">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img _ngcontent-ado-c113="" src="assets/images/menu-icon/Team.png" alt="" class="d-block">
+
+                        </div>
+                        <div class="col-lg-6 pt-2 paragraph">
+                            <div *ngIf="currentUserId.role == this.appRoles.roles[1] || currentUserId.role == this.appRoles.roles[0] ">
+                                <h5 class="theme-title-text font-size-23 themealign">Employees Details</h5>
+                            </div>
+                            <div
+                                *ngIf="(currentUserId.role == this.appRoles.roles[2] && currentUserId.tempRole == this.appRoles.roles[2] ) || (currentUserId.role == this.appRoles.roles[3] && currentUserId.tempRole == this.appRoles.roles[3])">
+                                <h5 class="theme-title-text font-size-23">Team Details</h5>
+                            </div>
+                            <!-- <p class="paragraph" style="font-size:12px; font-family: Ubuntu;">Lorem Ipsum is simply
+                                dummy text of the printing and typesetting industry</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 pt-2" *ngIf="this.currentUserId.role == this.appRoles.roles[0]">
+                    <div class="row">
+                    <div  class ="col-lg-6">
+                    <ng-select name="cdTeamFilter" [(ngModel)]="cdTeamFilter" (click)="getcdTeamFilter($event)"
+                        [clearable]="false" class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                        [multiple]="false" [maxSelectedItems]="1">
+                        <ng-option value="All" selected> Employees </ng-option>
+                        <ng-option value="Team"> Teams </ng-option>
+                    </ng-select>
+                   </div>
+
+                   <div class ="col-lg-6">
+                        <ng-select name="search" [(ngModel)]="searchTerm" (change)="searchFn($event)"
+                            class="text-capitalize select-custom ng-select ng-select-searchable ng-select-clearable ng-select-bottoms" [multiple]="false"
+                            [maxSelectedItems]="1" [clearable]="false" placeholder="Search Employee Members">
+                            <ng-option *ngFor="let list of searchList" [value]="list.sg_id">
+                                {{list.emp_nm | lowercase}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-4 ng-custom " *ngIf="this.currentUserId.role != this.appRoles.roles[0]">
+                    <ng-select name="search" [(ngModel)]="searchTerm" (change)="searchFn($event)"
+                        class="text-capitalize ng-select-custom ng-select ng-select-searchable ng-select-clearable ng-select-bottoms" [multiple]="false"
+                        [maxSelectedItems]="1" [clearable]="false" placeholder="Search Team Members">
+                        <ng-option *ngFor="let list of searchList" [value]="list.sg_id">
+                            {{list.emp_nm | lowercase}}
+                        </ng-option>
+                    </ng-select>
+                </div>
+                <div class="settings col-lg-2 ng-custom"  *ngIf="this.currentUserId.role == this.appRoles.roles[1]">
+                <!-- <a class="btn custom_btn_danger me-2" (click)="closelevel()">Cancel</a> -->
+                <button type="submit" class="btn theme-custom-color w-sm" (click)="openModelSetting(openContentSetting)"  id="btn-save-event">
+                    Settings
+                </button>
+                </div>
+                <ng-template #openContentSetting let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="">Approval Window
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()">
+                        </button>
+                    </div>
+                    <form name="settingForm" (ngSubmit)="fs.form.valid && onSubmitSetting(fs);" #fs="ngForm" role="forms" class="forms"
+                        novalidate>
+                        <div class="card rounded_card mb-0 shadow-lg">
+                            <div class="card-body">
+                                <div class="modal-body">
+                                    <div class="row modalSetting">
+                                    <div class="row">
+                                    <div class="col-lg-6">
+                                    <label for="Technical Skill Approval" class="label">Technical Skill Approval</label> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="switch">
+                                            <input type="checkbox" [(ngModel)] = "getTechnicalSkillInfo.setting_value" name = "ENABLE_TECHNICAL_SKILL_APPROVAL"  >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <input type="hidden" id="Technical Skill Id" [(ngModel)] = "getTechnicalSkillInfo.setting_id" name = "TECHNICAL_SKILL_ID">
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-lg-6">
+                                    <label for="Behavioural Skill Approval" class="label">Behavioural Skill Approval</label>
+                                   </div> 
+                                   <div class="col-lg-6">
+                                        <label class="switch">
+                                            <input type="checkbox" [(ngModel)] = "getBehaviouralSkillInfo.setting_value" name="ENABLE_BEHAVIOURAL_SKILL_APPROVAL" >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <input type="hidden" id="Behavioural Skill Id" [(ngModel)] = "getBehaviouralSkillInfo.setting_id" name="BEHAVIOURAL_SKILL_ID">
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-lg-6" >
+                                    <label for="VALID_FROM">Valid From</label>
+                                    </div>
+                                    <div class="col-lg-6" >
+                                    <input type="date"  id="Valid From" style="margin-left:30px" [(ngModel)] = "getValidFromInfo.setting_value" name="VALID_FROM" min="{{todaydate | date: 'yyyy-MM-dd'}}">
+                                    </div>
+                                    <input type="hidden" id="Valid From Id" [(ngModel)] = "getValidFromInfo.setting_id" name="VALID_FROM_ID">
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-lg-6" >
+                                    <label for="VALID_TO">Valid To</label>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-bottom:20px">
+                                    <input type="date" id="Valid To" style="margin-left:30px" [(ngModel)] = "getValidToInfo.setting_value" name="VALID_TO" min="{{todaydate | date: 'yyyy-MM-dd'}}">
+                                    </div>
+                                    <input type="hidden" id="Valid To Id" [(ngModel)] = "getValidToInfo.setting_id" name="VALID_TO_ID">
+                                    </div>
+                                    </div>
+                                    <div class="modal-footer cursor-pointer">
+                                        <button type="button" class="btn custom_btn_danger bulk-close-btn " data-bs-dismiss="modal"
+                                            aria-label="Close" (click)="modal.close('Close click')"><span
+                                                class="fa fa-times">&nbsp;</span> Close</button>
+                                        <button class="btn custom_btn addbtnstudy upload-btn" >
+                                           Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+
+                <div class="col-lg-3 text-end pt-2 addbutton"
+                    *ngIf="this.currentUserId.role == this.appRoles.roles[2] && this.currentUserId.tempRole== this.appRoles.roles[2] ">
+                    <button data-bs-toggle="modal" data-bs-target="#bulkUploadModel"
+                        (click)="bulkUploadModelFn(bulkUploadModel);" class="btn custom_btn addbtnstudy">
+                        <span class="custom_btn_space"> <i class="fas fa-plus"></i></span>Upload</button>
+                </div>
+                <ng-template #bulkUploadModel let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bulkUploadModelTitle">Team Skills Bulk Upload
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="onClose()">
+                        </button>
+                    </div>
+                    <form name="uploadForm" (ngSubmit)="fs.form.valid && onUpload(fs);" #fs="ngForm" role="forms"
+                        class="forms" novalidate>
+                        <div class="card rounded_card mb-0 shadow-lg">
+                            <div class="card-body">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <label for="uploadFile" class="font-size-16 body-black"> Bulk Upload
+                                            </label>
+                                            <span class="text-danger">*</span>
+                                            <input class="form-control" type="file" (change)="onChange($event)"
+                                                name="fileupload" id="fileupload" [(ngModel)]="uploadObj.fileupload"
+                                                #fileupload="ngModel"
+                                                [ngClass]="{ 'is-invalid': fs.submitted && fileupload.invalid }"
+                                                required>
+                                            <span class="text-danger" *ngIf="fs.submitted && fileupload.invalid">
+                                                <span *ngIf="form['fileupload']?.errors?.['required']">Excel File is required</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="col form-check form-checkbox-border1 checkbox-bg-info">
+                                        <input class="form-check-input checkbox-resize" type="checkbox" id="skillExists"
+                                            name="skillExists" [(ngModel)]="skillExists" [value]="skillExists">
+                                        <span class="form_align">{{skillMapName}}</span>
+                                        <label class="form-check-label font-size-13 text-muted ps-2" for="skillExists">
+                                        </label>
+                                    </span>
+                                    <div *ngIf="responseMsg != undefined">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div *ngIf="responseMsg?.status == 'success'">
+                                                    <div *ngFor="let statusMsg of responseMsg?.statusMsgs">
+                                                        <span class="text-success">{{statusMsg}}</span>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="responseMsg?.status == 'invalid'">
+                                                    <div *ngFor="let statusMsg of inValidArray">
+                                                        <span class="text-danger">{{statusMsg}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer cursor-pointer">
+                                        <a href="assets/sample-file/sample.xlsx" download="sample-team-skills-bulk-upload.xlsx"><button type="button"
+                                                class="btn btn custom_btn addbtnstudy sample-file"><span class="fas fa-file-download">&nbsp;</span>
+                                                Sample</button></a>
+                                        <button type="button" class="btn custom_btn_danger bulk-close-btn " data-bs-dismiss="modal" aria-label="Close"
+                                            (click)="modal.close('Close click')"><span class="fa fa-times">&nbsp;</span> Close</button>
+                                        <button class="btn custom_btn addbtnstudy upload-btn" [disabled]="loading == true">
+                                            <span class="custom_btn_space" *ngIf="loading != true "><i class="fas fa-plus"></i></span>
+                                            <span class="custom_btn_space" *ngIf="loading == true "><i class="fa fa-spinner fa-spin"
+                                                    *ngIf="loading == true"></i>
+                                            </span>Upload</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+            </div>
+            <hr>
+            <div class="general_faq m-0 p-0 pb-0">
+                <ngb-accordion #acc="ngbAccordion" [closeOthers]="true">
+                    <ngb-panel id="static-1">
+                        <ng-template ngbPanelTitle class="accordion-header">
+                            <h2 class="accordion-header" id="gen-ques-headingOne">
+                                <button class="accordion-button accordion-header-text border-0" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne"
+                                    aria-expanded="true" aria-controls="gen-ques-collapseOne" (click)="collapseBtn()">
+                                    <img src="assets/images/icons/Filterby.png" class="pe-2" alt=""> Filter by skills
+                                </button>
+                            </h2>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="mt-0 m-0 p-0">
+                                <!-- <form (ngSubmit)="filterTeam()" [formGroup]="filterTeamForm"> -->
+                                <div class="card-body">
+                                    <div class="row m-0 p-0">
+                                        <div class="col-lg-3 pb-3">
+                                            <label for="choices-multiple-remove-button"
+                                                class="form-label box-title-text font-size-16">Department</label>
+                                            <ng-select name="dept" [(ngModel)]="selectedDept"
+                                                (change)="getSelectedDept()" [clearable]="false"
+                                                class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                                [multiple]="false" [maxSelectedItems]="1">
+                                                <ng-option *ngFor="let department of dept" [value]="department.dept_id">
+                                                    {{ department.name }}
+                                                </ng-option>
+                                            </ng-select>
+                                        </div>
+                                        <div class="col-lg-3 pb-3">
+                                            <label for="choices-multiple-remove-button"
+                                                class="form-label box-title-text font-size-16">Sub
+                                                Department</label>
+                                            <ng-select name="subDept" [(ngModel)]="selectedSubdept"
+                                                (change)="getSelectedSubdept()"
+                                                class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                                [clearable]="false" [multiple]="false" [maxSelectedItems]="1">
+                                                <ng-option *ngFor="let sdept of subDept" [value]="sdept.subdept_id">
+                                                    {{sdept.name}}
+                                                </ng-option>
+                                            </ng-select>
+                                        </div>
+                                        <div class="col-lg-3 pb-3">
+                                            <span class="col"><label for="floatingInput"
+                                                    class="box-title-text font-size-16">Domain
+                                                </label></span>
+                                            <span class="col">
+                                                <ng-select name="domain" [(ngModel)]="selectedDomain"
+                                                    (change)="getSelectedDomain(selectedDomain)"
+                                                    class="text-capitalize ng-select  ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                                    [ngClass]="selectedDomain == 1 ? 'ng-select-multiple1' : (selectedDomain == 2 ? 'ng-select-multiple2' : (selectedDomain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                                    [multiple]="true" [maxSelectedItems]="1" [disabled]="isDropdownDisabled" [clearable]="false">
+                                                    <ng-option *ngFor="let domain of domainList"
+                                                        [value]="domain.domain_id">
+                                                        {{domain.domain_nm | lowercase}}
+                                                    </ng-option>
+                                                </ng-select>
+
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 pb-3">
+                                            <span class="col"><label for="floatingInput"
+                                                    class="box-title-text font-size-16">Sub Domain
+                                                </label></span>
+                                            <span class="col">
+                                                <ng-select name="subdomain" [(ngModel)]="selectedSubDomain"
+                                                    (change)="getSelectedSubDomain()"
+                                                    class="text-capitalize ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                                    [multiple]="false" [maxSelectedItems]="1" [clearable]="false">
+                                                    <ng-option *ngFor="let subdomain of subdomainList"
+                                                        [value]="subdomain.subdomain_id">
+                                                        {{subdomain.subdomain_nm | lowercase}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 pb-3">
+                                            <span class="col"><label for="floatingInput"
+                                                    class="box-title-text font-size-16"> Level 1 : Key Areas
+                                                </label></span>
+                                            <span class="col">
+                                                <ng-select name="level1" [(ngModel)]="selectedLevel1"
+                                                    (change)="getSelectedLevel1()"
+                                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                                    [multiple]="false" [maxSelectedItems]="1" [clearable]="false">
+                                                    <ng-option *ngFor="let level1 of level1List"
+                                                        [value]="level1.tech_skill_id">
+                                                        {{level1.skill_nm | lowercase}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 pb-3">
+                                            <span class="col"><label for="floatingInput"
+                                                    class="box-title-text font-size-16">Level 2 : Specialisation
+                                                </label></span>
+                                            <span class="col">
+                                                <ng-select name="level2" [(ngModel)]="selectedLevel2"
+                                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                                    [multiple]="false" [maxSelectedItems]="1" [clearable]="false"
+                                                    (change)="getSelectedLevel2()">
+                                                    <ng-option *ngFor="let level2 of level2List"
+                                                        [value]="level2.tech_skill_id">
+                                                        {{level2.skill_nm | lowercase}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3 pb-3" *ngIf="islevel3length == true && level3List.length > 0">
+                                            <span class="col"><label for="floatingInput"
+                                                    class="box-title-text font-size-16">Level 3 : Core Specialisation
+                                                </label></span>
+                                            <span class="col">
+                                                <ng-select name="level3" [(ngModel)]="selectedLevel3"
+                                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                                    [multiple]="false" [maxSelectedItems]="1" [clearable]="false"
+                                                    (change)="getSelectedLevel3()">
+                                                    <ng-option *ngFor="let level3 of level3List"
+                                                        [value]="level3.tech_skill_id">
+                                                        {{level3.skill_nm | lowercase}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+            </div>
+        </div>
+    </div>
+
+    <label for="floatingInput" class="font-size-20 box-title-text pt-4 pb-2"> {{totalCount}}
+        Employees</label>
+    <div class="row m-0 p-0">
+
+        <div class="col-lg-2 mb-2" *ngFor="let team of teams; let i = index">
+            <a routerLink="/team/profile/" [queryParams]="{userId: team.sg_id}">
+                <!--a routerLink="/team/profile"-->
+                <div class="card shadow-lg rounded_card h-100">
+                    <div class="card-body p-0 pb-4">
+                        <div class="position-relative overflow-hidden rounded-top" style="height: 50px;">
+                            <div class="bg-overlay bg-gradient pbackground" [ngClass]="cardBg[i]"></div>
+                        </div>
+                        <div class="text-center p-2">
+                            <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                                <div class="avatar-lg">
+                                    <span *ngIf="team?.emp_image">
+                                        <img class="rounded-circle img-thumbnail" src="{{team?.emp_image}}" alt="">
+                                    </span>
+                                    <span *ngIf="!team?.emp_image">
+                                        <img class="rounded-circle img-thumbnail" style="margin-bottom:35px;"
+                                            src="assets/images/profile-pic2.png" alt="">
+                                    </span>
+                                    <!-- <img src="assets/images/users/avatar-1.jpg" alt=""
+                                        class="rounded-circle img-thumbnail" style="margin-bottom:35px;"> -->
+                                </div>
+                                <a href="javascript:void(0);" class="d-block position-absolute bottom-0 end-0">
+                                    <div class="avatar-sm">
+
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6 class="box-title-text font-size-18 text-center text-capitalize">{{team?.emp_nm |
+                                lowercase}}
+                                </h6>
+                                <p class="font-size-14 theme-desc-text-light text-center">Emp No : {{team?.emp_id}} </p>
+                                <p class="font-size-14 theme-desc-text-light text-center text-capitalize">Dept :
+                                    {{team?.level2_dept}}
+                                </p>
+                                <p
+                                    class=" badge card-bottom-text badge-soft-secondary m-0 font-size-14 py-2 me-2 text-center text-capitalize">
+                                    {{team?.designation_nm | lowercase}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <div class="text-md-right float-md-end pagination-rounded">
+                <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2" [collectionSize]="totalCount"
+                    [(page)]="page" [pageSize]="limit" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"
+                    (pageChange)="loadPage(page)">
+                </ngb-pagination>
+            </div>
+        </div>
+    </div>
+</div>

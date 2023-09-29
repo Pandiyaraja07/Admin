@@ -1,0 +1,451 @@
+<div *ngIf="
+    !employeeRole
+  ">
+  <span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize">Profile / {{
+    basicInfo?.emp_nm | lowercase }} /
+    <a style="color: #00448a">Strengths and Improvements</a></span>
+
+  <h5 class="mb-0 font-size-23 heading-black" style="margin-left: -10px; padding-top: -0.5rem">
+    <a class="btn pointer" onclick="history.back()"><i class="fas fa-arrow-left p-2"></i></a>
+    Strengths and Improvements of
+    <a class="text-capitalize heading-black">{{
+      basicInfo?.emp_nm | lowercase
+      }}</a>
+  </h5>
+</div>
+
+<div class="row">
+  <div class="card mt-2 rounded_card bg-wrap shadow-lg">
+    <div class="card-body bg-content">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-1">
+              <img _ngcontent-ado-c113="" src="assets/images/menu-icon/StrengthImprovement.png" alt=""
+                class="d-block" />
+            </div>
+            <div class="col-lg-11 pt-2">
+              <h5 class="heading-black headalign">
+                Strengths and Improvements
+              </h5>
+              <!-- <p class="heading-grey">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 text-end pt-2" *ngIf="
+            (flRole && flRoletemp) ||  
+            (supervisorRole && supervisorRoletemp) ||
+             (flAccess) || flRole
+              
+          ">
+          <a data-bs-toggle="modal" (click)="strongAreaModelFn(strongAreaModel)" class="btn custom_btn addbtnjobchat">
+            <i class="fas fa-plus"></i>
+            Add
+          </a>
+        </div>
+
+        <ng-template #strongAreaModel let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="strongAreaModelTitle">
+              Add / Update Good At and Needs Focus On
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+              (click)="onClose()"></button>
+          </div>
+          <form name="peopleReviewForm" (ngSubmit)="fs.form.valid && onSubmit(fs)" #fs="ngForm" role="form" class="form"
+            novalidate>
+            <div class="card rounded_card mb-0 shadow-lg">
+              <div class="card-body">
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="mb-3 col-lg-6">
+                      <div class="form-check form-radio-border text-center">
+                        <input class="form-check-input radio-btn-resize" type="radio" value="Accelerator"
+                          name="review_type" id="Accelerator" [(ngModel)]="peopleReviewObj.review_type"
+                          #review_type="ngModel" [ngClass]="{
+                            'is-invalid': fs.submitted && review_type.invalid
+                          }" required />
+                        <label class="form-check-label font-size-13 text-muted" for="Accelerator">
+                          Good At
+                        </label>
+                      </div>
+                      <span class="text-danger" *ngIf="fs.submitted && review_type.invalid">
+                        <span *ngIf="review_type?.errors?.required">review_type required</span>
+                      </span>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                      <div class="form-check form-radio-border text-center">
+                        <input class="form-check-input radio-btn-resize" type="radio" value="Decelerator"
+                          name="review_type" id="Decelerator" [(ngModel)]="peopleReviewObj.review_type"
+                          #review_type="ngModel" [ngClass]="{
+                            'is-invalid': fs.submitted && review_type.invalid
+                          }" required />
+                        <label class="form-check-label font-size-13 text-muted" for="Decelerator">
+                          Needs Focus On
+                        </label>
+                      </div>
+                      <span class="text-danger" *ngIf="fs.submitted && review_type.invalid">
+                        <span *ngIf="review_type?.errors?.required">review_type required</span>
+                      </span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="mb-3">
+                    <label class="form-check-label font-size-13 text-muted" for="review">
+                      Review
+                    </label>
+                    <span class="text-danger">*</span>
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="review" name="review" placeholder="Enter review"
+                        #review="ngModel" [(ngModel)]="peopleReviewObj.review" [ngClass]="{
+                          'is-invalid': fs.submitted && review.invalid
+                        }" required />
+                    </div>
+                    <span class="text-danger" *ngIf="fs.submitted && review.invalid">
+                      <span *ngIf="review?.errors?.required">review is required</span>
+                    </span>
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-check-label font-size-13 text-muted">Enter Description</label>
+                    <span class="text-danger">*</span>
+                    <div class="custom_enter_text">
+                      (The entered text cannot exceed more than 500 characters)
+                    </div>
+                    <div class="form-floating">
+                      <textarea class="form-control p-1" placeholder="Description" name="description" id="description"
+                        [(ngModel)]="peopleReviewObj.description" style="height: 100px" #description="ngModel"
+                        maxlength="500" [ngClass]="{
+                          'is-invalid': fs.submitted && description.invalid
+                        }" required>
+                      </textarea>
+                    </div>
+                    <span class="text-danger" *ngIf="fs.submitted && description.invalid">
+                      <span *ngIf="description?.errors?.required">description is required</span>
+                    </span>
+                  </div>
+                  <div class="modal-footer cursor-pointer">
+                    <button type="button" class="btn custom_btn_danger" data-bs-dismiss="modal" aria-label="Close"
+                      (click)="onClose()">
+                      Close
+                    </button>
+                    <button type="submit" class="btn custom_btn" id="btn-save-event">
+                      {{ button }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="row px-0 mx-0">
+    <ul ngbNav #justifyNav="ngbNav" [activeId]="1" class="nav nav-tabs nav-tabs-custom ps-4 pt-4 custom-tab-head">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+          <span class="d-none d-sm-block" (click)="onTypeChange('Accelerator')">Good At</span>
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+          <span class="d-none d-sm-block" (click)="onTypeChange('Decelerator')">Needs Focus On</span>
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+        </ng-template>
+      </li>
+    </ul>
+    <div class="tab-content mx-0 px-0 py-3 text-muted">
+      <div [ngbNavOutlet]="justifyNav"></div>
+    </div>
+  </div>
+
+  <ng-template #TabContent>
+    <div class="row">
+      <div class="col-lg-8 col-sm-12">
+        <label for="floatingInput" class="" style="
+            margin-top: 5px;
+            margin-left: 5px;
+            font-size: 18px;
+            font-weight: normal;
+          ">Good At : {{ totalCount }}
+        </label>
+      </div>
+      <div class="col-lg-4 text-end col-sm-12">
+        <div class="row">
+          <span class="col pt-2"><label for="floatingInput" class="font-size-16"
+              style="font-weight: normal; margin-right: -25px">Sort by:
+            </label></span>
+          <span class="col-md-4">
+            <ng-select style="width: 93px; padding: 2px; margin-left: 20px" [(ngModel)]="selectedSortOp"
+              [searchable]="false" [clearable]="false" name="selectedSortOp" id="selectedSortOp" [clearable]="false"
+              (change)="selectedSortFn()">
+              <ng-option *ngFor="let list of selectValue" [value]="list">{{
+                list
+                }}</ng-option>
+            </ng-select>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 mb-3" style="margin-top: 10px" *ngFor="let review of peopleReview; let i = index">
+        <div class="card rounded_card shadow-lg accelerator-card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0 badge-soft-primary rounded_card shadow-sm" style="height: 100px">
+              <h6 style="font-size: 18px; font-weight: 500; font-family: Ubuntu">
+                {{ review.review }}
+              </h6>
+            </blockquote>
+            <div class="mt-3 paragraph" style="height: 285px">
+              <p>{{ review.description }}</p>
+            </div>
+
+
+            <div class="row" style="margin-bottom: -22px;">
+              <div class="col-md-6" style="height: 13px;">
+                <div class="row">
+                  <div class="col-md-6 font-size-14" style="margin-top: -50px;" *ngIf="review.approval_status == 0">
+
+                    <div class="flex"
+                      *ngIf="flAccess || supervisorAccess">
+
+                      <div>
+                        <a (click)="PeopleReviewApproveAction(1, review.people_review_id)"
+                          class="btn  badge badge-soft-secondary  py-2 mb-0 me-2 font-size-16 approvebtn"><i
+                            class="far fa-check-circle text-success"></i>
+                          Approve
+                        </a>
+                      </div>
+                      <div>
+                        <a (click)="PeopleReviewApproveAction(2, review.people_review_id)"
+                          class="btn badge badge-soft-secondary  py-2 mb-0 me-2 font-size-16 rejectbtn"><i
+                            class="far fa-times-circle text-danger"></i>
+                          Reject
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="!flAccess && !supervisorAccess">
+                      <span class="badge rounded-pill badge-outline-secondary ms-1 p-1 approved"
+                        style="margin-top: 35px;">
+                        <span class="text-warning font-size-14 pr-2"><i class="fas fa-hourglass-half pr-4"></i></span>
+                        Pending
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 font-size-14" style="margin-top: -150px;" *ngIf="review.approval_status == 1">
+                    <span class="badge rounded-pill badge-outline-secondary ms-1  approved1" style="margin-top:100px;">
+                      <span class="text-success font-size-14 pr-2"><i class="fas fa-check-circle"></i></span>
+                      Approved
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 font-size-14 " style="margin-top: -50px;" *ngIf="review.approval_status == 2">
+                    <span class="badge rounded-pill badge-outline-secondary ms-1 approved" style="margin-top:35px;">
+                      <span class="text-danger font-size-14 pr-2"><i class="fas fa-window-close"></i></span>
+                      Recheck
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mb-3">             
+                 <div>
+                  <span class="ms-1 p-1" style="color: #64748b" *ngIf="review.updated_ts == null; else elseBlock">
+                    <span class="font-size-13 pr-2"><i class="fas fa-clock"></i>
+                      <span class="details-definition font-size-14 ml-1">Updated on
+                      </span>
+                    </span>
+                    {{ review.created_ts | localtime }}
+                  </span>
+                  <ng-template #elseBlock>
+                    <span class="ms-1 p-1" style="color: #64748b" *ngIf="review.updated_ts != null">
+                      <span class="font-size-13 pr-2"><i class="fas fa-clock"></i>
+                        <span class="details-definition font-size-14 ml-1">updated on
+                        </span>
+                      </span>
+                      {{ review.updated_ts | localtime }}
+                    </span>
+                  </ng-template>
+                </div>
+                <div >
+                  <div class="font-size-13 text-muted float-end edit-delete" *ngIf="
+                  flAccess || supervisorAccess || ownProfile
+                ">
+                    <span *ngIf="review.approval_status != 1">
+                      <i class="fa fa-trash text-danger ml-2 delete_icon_top" style="padding: 10px; cursor: pointer"
+                        data-toggle="tooltip" (click)="openDeleteModal(i)"></i>
+                    </span>
+                    <span *ngIf="review.approval_status != 1">
+                      <a class="text-decoration-underline Edit" style="cursor: pointer"
+                        (click)="editCareer(i, strongAreaModel)">
+                        <i class="fas fa-pencil-alt"></i>
+                        Edit
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Tab Content -->
+  <ng-template #TabContent1>
+    <div class="">
+      <div class="row">
+        <div class="col-lg-8 col-sm-12">
+          <label for="floatingInput" class="font-size-18" style="
+              margin-top: 5px;
+              margin-left: 5px;
+              font-size: 18px;
+              font-weight: normal;
+            ">Needs Focus On : {{ totalCount }}
+          </label>
+        </div>
+        <div class="col-lg-4 text-end col-sm-12">
+          <div class="row">
+            <span class="col pt-2"><label for="floatingInput" class="font-size-16"
+                style="font-weight: normal; margin-right: -25px">Sort by:
+              </label></span>
+            <span class="col-md-4">
+              <ng-select style="width: 93px; padding: 2px; margin-left: 20px" [(ngModel)]="selectedSortOp"
+                [searchable]="false" [clearable]="false" name="selectedSortOp" id="selectedSortOp" [clearable]="false"
+                (change)="selectedSortFn()">
+                <ng-option *ngFor="let list of selectValue" [value]="list">{{ list }}
+                </ng-option>
+              </ng-select>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 mb-3" style="margin-top: 10px" *ngFor="let review of peopleReview; let i = index">
+        <div class="card rounded_card shadow-lg accelerator-card">
+          <div class="card-body">
+            <blockquote class="blockquote mb-0 badge-soft-warning rounded_card shadow-sm" style="height: 100px">
+              <h6 style="font-size: 18px; font-weight: 500; font-family: Ubuntu">
+                {{ review.review }}
+              </h6>
+            </blockquote>
+            <div class="mt-3 paragraph" style="height: 285px">
+              <p>{{ review.description }}</p>
+            </div>
+
+            <div class="row" style="margin-bottom: -22px;">
+              <div class="col-md-6" style="height: 13px;">
+                <div class="row">
+                  <div class="col-md-6 font-size-14" style="margin-top: -50px;" *ngIf="review.approval_status == 0">
+
+                    <div class="flex"
+                      *ngIf="flAccess || supervisorAccess">
+
+                      <div >
+                        <a (click)="PeopleReviewApproveAction(1, review.people_review_id)"
+                          class="btn  badge badge-soft-secondary  py-2 mb-0 me-2 font-size-16 approvebtn"><i
+                            class="far fa-check-circle text-success"></i>
+                          Approve
+                        </a>
+                      </div>
+                      <div >
+                        <a (click)="PeopleReviewApproveAction(2, review.people_review_id)"
+                          class="btn badge badge-soft-secondary  py-2 mb-0 me-2 font-size-16 rejectbtn"><i
+                            class="far fa-times-circle text-danger"></i>
+                          Reject
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="!flAccess && !supervisorAccess">
+                      <span class="badge rounded-pill badge-outline-secondary ms-1 p-1 approved"
+                        style="margin-top: 35px;">
+                        <span class="text-warning font-size-14 pr-2"><i class="fas fa-hourglass-half pr-4"></i></span>
+                        Pending
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="row">
+                  <div class="col-md-6 font-size-14" style="margin-top: -150px;" *ngIf="review.approval_status == 1">
+                    <span class="badge rounded-pill badge-outline-secondary ms-1  approved1" style="margin-top:100px;">
+                      <span class="text-success font-size-14 pr-2"><i class="fas fa-check-circle"></i></span>
+                      Approved
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 font-size-14 " style="margin-top: -50px;" *ngIf="review.approval_status == 2">
+                    <span class="badge rounded-pill badge-outline-secondary ms-1 approved" style="margin-top:-100px;">
+                      <span class="text-danger font-size-14 pr-2"><i class="fas fa-window-close"></i></span>
+                      Recheck
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <div>
+                  <span class="ms-1 p-1" style="color: #64748b" *ngIf="review.updated_ts == null; else elseBlock">
+                    <span class="font-size-13 pr-2"><i class="fas fa-clock"></i>
+                      <span class="details-definition font-size-14 ml-1">updated on
+                      </span>
+                    </span>
+                    {{ review.created_ts | localtime }}
+                  </span>
+                  <ng-template #elseBlock>
+                    <span class="ms-1 p-1" style="color: #64748b" *ngIf="review.updated_ts != null">
+                      <span class="font-size-13 pr-2"><i class="fas fa-clock"></i>
+                        <span class="details-definition font-size-14 ml-1">Updated on
+                        </span>
+                      </span>
+                      {{ review.updated_ts | localtime }}
+                    </span>
+                  </ng-template>
+                </div>
+                <div>
+                  <div class="font-size-13 text-muted float-end edit-delete" *ngIf="
+                 flAccess || supervisorAccess || ownProfile
+                ">
+                    <span *ngIf="review.approval_status != 1">
+                      <i class="fa fa-trash text-danger ml-2 delete_icon_top" style="padding: 10px; cursor: pointer"
+                        data-toggle="tooltip" (click)="openDeleteModal(i)"></i>
+                    </span>
+                    <span *ngIf="review.approval_status != 1">
+                      <a class="text-decoration-underline Edit" style="cursor: pointer"
+                        (click)="editCareer(i, strongAreaModel)">
+                        <i class="fas fa-pencil-alt"></i>
+                        Edit
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-end pagination-rounded">
+      <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2" [collectionSize]="totalCount"
+        [(page)]="page" [pageSize]="limit" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"
+        (pageChange)="loadPage(page)">
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

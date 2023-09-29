@@ -1,0 +1,103 @@
+<span class="font-size-12 badge btn-outline-light page-breadcrumb-bg btn-rounded p-2">Function Skill Gap Matrix/ <a
+    routerLink="/functional-skill-gap-matrix/view-general-comments"> Employee Comments
+</a></span>
+
+<h5 class="heading-black" style="margin-left: -25px;"><button class="btn" onclick="history.back()"><i
+        class="fas fa-arrow-left p-2"></i></button> Employee Comments </h5>
+
+<div class="pt-4">
+<h6 class="body-black font-size-18">General Comments</h6>
+</div>
+<form name="generalCommentForm" (ngSubmit)="fs.form.valid && updateComment(fs);" #fs="ngForm" role="form" class="form"
+novalidate>
+<div class="card rounded_card shadow-lg">
+    <div class="card-body">
+        <div class="col-lg-12">
+            <label for="floatingTextarea2" class="details-definition font-size-16" style=" color:#051436;">Comments
+                (Optional) </label>
+            <div class="custom_enter_text">(The entered text cannot exceed more than 500 characters)</div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" name="general_comment_history"
+                    id="general_comment_history" style="height: 100px"
+                    [(ngModel)]="comments.general_comment_history" maxlength="500"
+                    [readonly]="!(this.currentUserId.role == 'FL' && this.currentUserId.tempRole == 'FL')"> </textarea>
+                <label for="floatingTextarea2" class="font-size-16 details-definition">Comments</label>
+            </div>
+            <input type="hidden" name="generalCommentId" id="generalCommentId" value="{{skillGapMatrixId}}">
+        </div>
+    </div>
+</div>
+
+<div class="pt-4">
+    <h6 class="body-black font-size-18" style="color: #051436;">
+        {{comments?.skill_mappings_aggregate?.aggregate?.count}} Employees
+    </h6>
+</div>
+
+<div class="card rounded_card shadow-lg" *ngFor="let comment of comments.skill_mappings; let i=index">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 border-end" style="width: 20%;">
+                <span *ngIf="comment.emp_info.emp_image; elseBlock">
+                    <img src="{{comment.emp_info.emp_image}}" alt="" class="rounded-circle avatar">
+                </span>
+                <ng-template #elseBlock>
+                    <img src="assets/images/profile-pic2.png" alt="" class="rounded-circle avatar">
+                </ng-template>
+
+                <div class="pt-4 text-capitalize">
+                    <h6> {{comment.emp_info?.emp_nm}} </h6>
+                </div>
+                <p class="pb-0 mb-1"> {{comment.technical_depth?.technical_depth_nm}} </p>
+                <div class="progress gap-1 my-1">
+                    <div class="progress-bar tech-depth-static-bar "
+                        *ngFor="let level of counter(comment.technical_depth.level_no);let i = index"
+                        role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                        [ngClass]="{
+                            'progress-bg1': (comment.technical_depth.level_no == -1) || (comments.team_skill_target_proficiency.level_no -comment.technical_depth.level_no) == 4,
+                            'progress-bg2': (comments.team_skill_target_proficiency.level_no - comment.technical_depth.level_no) == 3,
+                            'progress-bg3': (comments.team_skill_target_proficiency.level_no - comment.technical_depth.level_no) == 2,
+                            'progress-bg4': (comments.team_skill_target_proficiency.level_no - comment.technical_depth.level_no) == 1,
+                            'progress-bg5': (comment.technical_depth.level_no != -1 && comment.technical_depth.level_no >= comments.team_skill_target_proficiency.level_no)}"></div>
+
+                </div>
+                <p class="pb-0 mb-1"><span
+                        *ngIf="comments.team_skill_target_proficiency.technical_depth_nm != undefined">
+                        {{comments.team_skill_target_proficiency?.technical_depth_nm}}</span> <span
+                        class="px-3 text-muted"><i class="fas fa-crosshairs"></i></span> </p>
+                <div class="progress gap-1">
+                    <div class="progress-bar tech-depth-static-bar"
+                        *ngFor="let level of counter(comments.team_skill_target_proficiency.level_no);let i = index"
+                        role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+            </div>
+            <div class="col-lg-9" style="margin-left: 30px;">
+                <label for="floatingTextarea2" class="details-definition font-size-16"
+                    style=" color: #051436;">Comments (Optional) </label>
+                <div class="custom_enter_text">(The entered text cannot exceed more than 500 characters)</div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" name="comment.{{i}}.skill_matrix_comment"
+                        id="skill_matrix_comment" style="height: 150px" maxlength="500"
+                        [readonly]="!(this.currentUserId.role == 'FL' && this.currentUserId.tempRole == 'FL')"
+                        [(ngModel)]="comment.skill_matrix_comment">
+                    </textarea>
+                    <label for="skill_matrix_comment" class="font-size-16 details-definition">
+                        Comments</label>
+                    <!-- <input type="hidden" name="skillMapId" id="skillMapId" value="{{comment.skill_mapping_id}}"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 text-end pt-2"
+        *ngIf="(this.currentUserId.role == 'FL' && this.currentUserId.tempRole == 'FL')">
+        <button class="btn custom_btn_danger me-2" [routerLink]="['/functional-skill-gap-matrix']"> Close</button>
+        <button type="submit" class="btn custom_btn ms-2">
+            Save and create</button>
+    </div>
+</div>
+
+</form>

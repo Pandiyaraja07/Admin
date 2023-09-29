@@ -1,0 +1,232 @@
+@media (min-width: 992px) {
+    .col-lg-2 {
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
+
+.theme-title-text {
+    font-family: Ubuntu;
+    font-weight: bold;
+    font-size: 23px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: -0.07px;
+    text-align: left;
+    color: #191d23;
+}
+
+.theme-text {
+    font-family: Ubuntu;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.accordion-header-text {
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23;
+}
+
+.general_faq .collapsed .accordion-button {
+    border: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background: #fff;
+} 
+
+.theme-desc-text-bold {
+    font-family: Ubuntu;
+}
+
+.count-employees {
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.1;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--night-blue);
+}
+
+.pbackground {
+    margin-top: 1px;
+    margin-left: 0.5px;
+    width: 96.5%;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 9px;
+}
+
+.profile-name {
+    font-family: Ubuntu;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--night-blue);
+}
+
+.theme-desc-text-light {
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: center;
+    color: #64748b;
+}
+
+.badge {
+    white-space: pre-wrap;
+}
+
+.card-bottom-text {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+.badgename {
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #4b5768;
+    border-radius: 4px;
+    border: solid 1px #ddddea;
+    align-items: center;
+}
+
+.ng-custom .ng-select .ng-select-custom{
+    height: 40px !important;
+    // margin-left: 145px !important;
+}
+
+.ng-custom .ng-select {
+    top: 8px !important;
+    // left: 7rem;
+}
+
+.settings{
+    margin-top: 8px;
+    margin-left: 40px;
+}
+
+.sample-file{
+    position: relative;
+    right: 58px;
+}
+
+.upload-btn{
+    position: relative;
+    left: 17px;
+}
+
+.bulk-close-btn{
+    position: relative;
+    right: -16px;
+    height: 42px;
+}
+
+.modal-body{
+    margin: 10px;
+    padding: 10px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    margin: 0px 10px 10px 10px;
+    margin-left: 30px;
+    width: 50px;
+    height: 24px;
+}
+
+.modalSetting div{
+    margin-top:5px;
+}
+
+.date{
+    margin-top: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.flex{
+    display: flex;
+}

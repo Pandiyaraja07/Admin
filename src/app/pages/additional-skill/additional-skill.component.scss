@@ -1,0 +1,118 @@
+.card {
+    margin-bottom: 0px;
+    box-shadow: 0 2px 3px #eaedf2 !important;
+}
+
+.custom-tab-head {
+    background: #fff !important;
+}
+
+.blockquote {
+    border-left: none;
+}
+
+.custom-file-badge {
+    white-space: break-spaces !important;
+}
+
+.custom_title { text-transform: lowercase; }
+
+.custom_title:first-letter {
+  text-transform: uppercase;
+} 
+.addbutton{
+   
+        width: 102px;
+        height: 46px;
+        padding: 7px;
+        font-size: 18px;
+        margin-top: 8px;
+        font-weight: 500;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px 0 rgba(78, 176, 179, 0.16), inset -6px -4px 6px 0 rgba(0, 0, 0, 0.16);
+        background-image: linear-gradient(129deg, #4db0a6 -7%, #1f8e91 101%);
+      }
+
+
+.fa-paperclip{
+    width: 16px;
+    height: 16px;
+}
+
+.approvebtn{
+    margin-right: 10px;
+}
+   
+.custom-tab-head {
+    width:99.8%;
+    margin-left: 1.3px;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+}
+
+.bg-wrap{
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+}
+
+.card-text-wrap{
+    white-space: nowrap; 
+    width: 178px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+   
+}
+
+.dwonload-button{
+    background-color: #55a9db;
+    color: white;
+    width: 100%;
+    display: none;
+
+
+}
+
+.attachment-card:hover .dwonload-button{
+    display: block;
+
+}
+
+  
+.d-block{
+    margin-top: 25px;
+}
+
+.headalign{
+    margin-top: 20px;
+}
+
+.badge-soft-custom1{
+    background-color: #fff;
+    color: #4b5768;
+    width: 75px;
+    font-weight: var(--bs-badge-font-weight);
+}
+
+.approved{
+    font-size: 13px !important;
+    font-weight: normal !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    line-height: 1.23 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    color: #64748b !important;
+    margin-bottom: 33px !important;
+}
+
+.approved1{
+    font-size: 13px !important;
+    font-weight: normal !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    line-height: 1.23 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    color: #64748b !important;
+    margin-bottom: 33px !important;
+}

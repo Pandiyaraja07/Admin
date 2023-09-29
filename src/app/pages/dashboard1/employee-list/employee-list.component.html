@@ -1,0 +1,186 @@
+<span class="badge theme-desc-text-light btn-outline-light font-size-13 page-breadcrumb-bg btn-rounded p-2">Dashboard /
+    <span class="text-capitalize">
+        {{selectedDomainName | lowercase }} </span> /
+    <span class="text-capitalize"> {{selectSubdomainName | lowercase}} / </span> <a
+        routerLink="/dashboard1/dashboard1/approval-list" style="color: #00448a;">
+        Select The Level
+    </a></span>
+
+<h5 class=" font-size-23 heading-black" style="margin-left:3px;padding-top:-0.5rem"><a class="btn pointer"
+        onclick="history.back()"><i class="fas fa-arrow-left pe-2 "></i></a> Level of Skills </h5>
+
+<div class="card shadow-lg">
+    <div class="card-body">
+
+        <div class="row py-2">
+            <h6> <label for="choices-multiple-remove-button" class="form-label font-size-13  domain1 ps-2"
+                    style="color: #34393f;font-family:Ubuntu">Level1 : Key Areas</label>
+            </h6>
+            <div class="d-flex flex-wrap gap-2">
+                <span *ngFor="let level1 of getLevel1;let i = index">
+                    <div class="form-check form-radio-border text-center pb-2"
+                        [ngClass]="getSelectedLevel1 == level1.tech_skill_id ? 'radio-on' : '' ">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="level1{{i}}"
+                            id="level1{{i}}" (change)='selectedLevel1(level1.tech_skill_id,i , false)'
+                            [checked]="level1.selected" [value]="level1.tech_skill_id">
+                        <label class="form-check-label font-size-13 text-muted px-2" for="level1{{i}}">
+                            {{level1.skill_nm}}
+                        </label>
+                        <!--p class="text muted font-size-11">12 employees</p-->
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class="row py-2">
+            <h6> <label for="choices-multiple-remove-button" class="form-label font-size-13  domain1 ps-2"
+                    style="color: #34393f;font-family:Ubuntu">Level2 : Specialisation</label>
+            </h6>
+            <div class="d-flex flex-wrap gap-2">
+                <span *ngFor="let level2 of getLevel2;let i = index">
+                    <div class="form-check form-radio-border text-center pb-2"
+                        [ngClass]="getSelectedLevel2 == level2.tech_skill_id ? 'radio-on' : '' ">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="level2{{i}}"
+                            id="level2{{i}}" (change)='selectedLevel2(level2.tech_skill_id,i ,false)'
+                            [checked]="level2.selected" [value]="level2.tech_skill_id">
+                        <label class="form-check-label font-size-13 text-muted px-2" for="level2{{i}}">
+                            {{level2.skill_nm}}
+                        </label>
+                        <!--p class="text muted font-size-11">12 employees</p-->
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <div class="row py-2"
+            *ngIf="getLevel3?.length > 0 && ((getSelectedLevel1 && getSelectedLevel2) || (!getSelectedLevel1 && !getSelectedLevel2)  ) ">
+            <h6 *ngIf="getLevel3?.length > 0"> <label for="choices-multiple-remove-button"
+                    class="form-label font-size-13  domain1 ps-2" style="color: #34393f;font-family:Ubuntu">Level3 :
+                    core Specialisation</label>
+            </h6>
+            <div class="d-flex flex-wrap gap-2">
+
+                <span *ngFor="let level3 of getLevel3;let i = index">
+                    <div class="form-check form-radio-border text-center pb-2"
+                        [ngClass]="getSelectedLevel3 == level3.tech_skill_id ? 'radio-on' : '' ">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="level3{{i}}"
+                            id="level3{{i}}" (change)='selectedLevel3(level3.tech_skill_id,i ,false)'
+                            [checked]="level3.selected" [value]="level3.tech_skill_id">
+                        <label class="form-check-label font-size-13 text-muted px-2" for="level3{{i}}">
+                            {{level3.skill_nm}}
+                        </label>
+                        <!--p class="text muted font-size-11">12 employees</p-->
+                    </div>
+                </span>
+
+                <!--div class="col p-2" *ngFor="let level3 of getLevel3; let i = index">
+                    <div class="form-check form-radio-border text-center pb-0">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="level3{{i}}"
+                            id="level3{{i}}" (change)='selectedLevel3(level3.tech_skill_id,i)'
+                            [checked]="level3.selected" [value]="level3.tech_skill_id">
+                        <label class="form-check-label font-size-13 text-muted px-2 pb-3" for="level3{{i}}">
+                            {{level3.skill_nm}}
+                        </label>
+                    </div>
+                </div-->
+
+
+            </div>
+        </div>
+        <hr>
+        <div class="row py-2">
+            <h6> <label for="choices-multiple-remove-button" class="form-label font-size-13 "
+                    style="color: #34393f;font-family:Ubuntu">Technical
+                    Depth</label>
+            </h6>
+            <div class="d-flex flex-wrap gap-3">
+
+                <!--div class="col-lg-3 p-2" *ngFor="let depth of targetProf; let i = index">
+                    <div class="form-check form-radio-border text-center pb-0">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="depth" id="depth{{i}}"
+                            (change)='targetProficiency(depth.technical_depth_id,i)' [checked]="depth.selected"
+                            [value]="depth.technical_depth_id" formControlName="depth">
+                        <label class="form-check-label font-size-13 text-muted px-2 pb-3" for="depth{{i}}">
+                            {{depth.technical_depth_nm}}
+                        </label>
+                    </div>
+                </div-->
+
+                <span *ngFor="let depth of targetProf; let i = index">
+                    <div class="form-check form-radio-border text-center pb-0"
+                        [ngClass]="selectedLevelDepth == depth.technical_depth_id ? 'radio-on' : '' ">
+                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="depth" id="depth{{i}}"
+                            (change)='targetProficiency(depth.technical_depth_id,i)' [checked]="depth.selected"
+                            [value]="depth.technical_depth_id" [(ngModel)]="selectedLevelDepth">
+                        <label class="form-check-label font-size-13 text-muted px-2 pb-3" for="depth{{i}}">
+                            {{depth.technical_depth_nm}}
+                        </label>
+                    </div>
+                </span>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<label for="floatingInput" class="font-size-20 pt-2" style="color: #191d23;">{{totalCount}} Employee found</label>
+<div class="row">
+
+    <div class="col-lg-2 mb-4" *ngFor="let employee of employeeSkill; let i = index">
+        <div class="card shadow-lg h-100">
+            <div class="card-body p-0 pb-4">
+                <div class="position-relative overflow-hidden rounded-top" style="height: 50px;">
+                    <div class="bg-overlay bg-gradient" [ngClass]="cardBg[i]"></div>
+                </div>
+                <div class="text-center">
+                    <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                        <div class="avatar-lg">
+                            <span *ngIf="employee?.emp_image">
+                                <img class="rounded-circle img-thumbnail" style="margin-bottom: 30px;"
+                                    src="{{employee?.emp_image}}" alt="">
+                            </span>
+                            <span *ngIf="!employee?.emp_image">
+                                <img class="rounded-circle img-thumbnail" style="margin-bottom: 30px;"
+                                    src="assets/images/profile-pic2.png" alt="">
+                            </span>
+                            <!-- <img src="assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail"> -->
+                        </div>
+                        <a href="javascript:void(0);" class="d-block position-absolute bottom-0 end-0">
+                            <div class="avatar-sm">
+
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-12">
+                        <h6 class="text-capitalize box-title-text font-size-18 text-center">
+                            {{employee?.emp_nm | lowercase}}
+                        </h6>
+                        <p class="font-size-14">Emp No : {{employee?.emp_id}}</p>
+                        <p class="font-size-14">Dept : <span class="text-capitalize">
+                                {{employee?.level2_dept | lowercase}} </span></p>
+                        <p class="badge badge-soft-secondary bg-light m-0 py-2 me-2 text-capitalize ">
+                            {{employee?.designation_nm | lowercase}}
+                        </p>
+
+                        <!--div class="badge bg-light mt-4 py-1 pb-2 w-100 p-4 ">
+                                <div class="row">
+                                    <div class="py-2 col-lg-12 px-0"> <span class="domain1 pe-3"> </span> Depth -
+                                        {{employee.tech_depth_nm}}
+                                    </div>
+                                    <div class="progress gap-1 badge-soft-secondary p-0 ms-4 w-75 text-center">
+                                        <div class="progress-bar tech-depth-static-bar"
+                                            *ngFor="let level of counter(employee.tech_depth_level)" role="progressbar"
+                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

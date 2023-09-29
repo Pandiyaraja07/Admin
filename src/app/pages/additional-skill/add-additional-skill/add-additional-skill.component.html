@@ -1,0 +1,204 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize"> Profile / {{basicInfo?.emp_nm | lowercase}} / Additonal Details / <a
+        routerLink="/emp-add-additional-skill" style="color: #00448a;"> 
+        {{ShowsButon}} 
+            <span *ngIf="skillType == 'Training'; else elseBlock ">
+                Training / Certificates
+               </span>
+               <ng-template #elseBlock>
+                {{skillType}}
+               </ng-template>
+    </a></span>
+
+<h5 class="mb-0  heading-black " style="margin-left:-10px;padding-top:-0.5rem"><a class="btn pointer" onclick="history.back()"><i
+    class="fas fa-arrow-left p-2"></i></a> {{ShowsButon}}
+    <span *ngIf="skillType == 'Training'; else elseBlock ">
+        Training / Certificates
+       </span>
+       <ng-template #elseBlock>
+        {{skillType}}
+       </ng-template>
+    for <a class="text-capitalize heading-black">{{basicInfo?.emp_nm | lowercase}}</a> </h5>
+
+<div class="row pt-3">
+    <div class="col-xl-12">
+        <form name="additionalSkillForm" (ngSubmit)="fs.form.valid && onSubmit(fs);clicked=true" #fs="ngForm" role="form"
+            class="form" novalidate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-lg-6">
+                        <div class="mb-3 font-size-16 body-black">
+                            <label for="title" class="form-label font-size-16 body-black addaditional">Title</label>
+                            <span style="color:red">*</span>
+                            <input type="text" class="form-control font-size-14 body-grey addaditional" id="title" name="title"
+                                placeholder="Enter Title" [(ngModel)]="additionalSkillObj.title" #title="ngModel"
+                                [ngClass]="{ 'is-invalid': fs.submitted && title.invalid }" required />
+                            <span style="color:red" *ngIf="fs.submitted && title.invalid">
+                                <span *ngIf="title?.errors?.required">title is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="skillType == 'Patents'">
+                        <div class="col-lg-6">
+                            <label for="basicpill-projectType-input" class="form-label body-black font-size-16 addaditional">Status</label>
+                            <span style="color:red">*</span>
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <div class="form-check form-radio-border text-center addaditional">
+                                        <input class="form-check-input radio-btn-resize addaditional" type="radio" value="Filed"
+                                            name="status"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            id="status1" [(ngModel)]="additionalSkillObj.status"
+                                            #status="ngModel"
+                                            [ngClass]="{ 'is-invalid': fs.submitted && status.invalid }" required />
+                                        <label class="form-check-label font-size-13 text-muted addaditional" for="status1">
+                                            Filed
+                                        </label>
+                                    </div>
+                                    <span style="color:red" *ngIf="fs.submitted && status.invalid">
+                                        <span *ngIf="status?.errors?.required">status is required</span>
+                                    </span>
+                                </div>
+
+                                <div class="mb-3 col-lg-6">
+                                    <div class="form-check form-radio-border text-center addaditional">
+                                        <input class="form-check-input radio-btn-resize addaditional" type="radio" value="Granted"
+                                            name="status" [(ngModel)]="additionalSkillObj.status" id="status2"
+                                            #status="ngModel"
+                                            [ngClass]="{ 'is-invalid': fs.submitted && status.invalid }" required />
+                                        <label class="form-check-label text-center font-size-13 text-muted addaditional"
+                                            for="status2">
+                                            Granted
+                                        </label>
+                                    </div>
+                                    <span style="color:red" *ngIf="fs.submitted && status.invalid">
+                                        <span *ngIf="status?.errors?.required">status is required</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="basicpill-location-input" class="form-label body-black font-size-16 addaditional">Scope</label>
+                            <span style="color:red">*</span>
+                            <div class="row">
+                                <div class="mb-3 col-lg-6">
+                                    <div class="form-check form-radio-border text-center addaditional">
+                                        <input class="form-check-input radio-btn-resize" type="radio" value="Global"
+                                            name="scope" [(ngModel)]="additionalSkillObj.scope" id="scope1"
+                                            #scope="ngModel" [ngClass]="{ 'is-invalid': fs.submitted && scope.invalid }"
+                                            required />
+                                        <label class="form-check-label font-size-13 text-muted" for="scope1">
+                                            <i class="fas fa-globe pe-2"></i> Global
+                                        </label>
+                                    </div>
+                                    <span style="color:red" *ngIf="fs.submitted && scope.invalid">
+                                        <span *ngIf="scope?.errors?.required">scope is required</span>
+                                    </span>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <div class="form-check form-radio-border text-center addaditional">
+                                        <input class="form-check-input radio-btn-resize" type="radio" value="Local"
+                                            name="scope" [(ngModel)]="additionalSkillObj.scope" id="scope2"
+                                            #scope="ngModel" [ngClass]="{ 'is-invalid': fs.submitted && scope.invalid }"
+                                            required />
+                                        <label class="form-check-label font-size-13 text-muted" for="scope2">
+                                            <i class="fas fa-building pe-2"></i> Local
+                                        </label>
+                                    </div>
+                                    <span style="color:red" *ngIf="fs.submitted && scope.invalid">
+                                        <span *ngIf="scope?.errors?.required">scope is required</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label for="description" class="font-size-16 body-black addaditional">Description</label>
+                        <span style="color:red">*</span>
+                        <div class="custom_enter_text addaditional">(The entered text cannot exceed more than 500 characters)</div>
+                        <textarea class="form-control addaditional" placeholder="" id="description" name="description" maxlength="500"
+                            [(ngModel)]="additionalSkillObj.description" style="height: 100px" #description="ngModel"
+                            [ngClass]="{ 'is-invalid': fs.submitted && description.invalid }" required></textarea>
+                        <span style="color:red" *ngIf="fs.submitted && description.invalid">
+                            <span *ngIf="description?.errors?.required">description is required</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="card rounded_card">
+                    <div class="card-body">
+                        <h5 class="mb-4 font-size-20 body-black addaditional" style="font-weight: normal ;"> Upload Files </h5>
+                        <!-- <p class="font-size-16 details-definition" style="margin-top:-15px;"> Lorem Ipsum is simply dummy text of the printing and typesetting
+                    industry </p> -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <dropzone class="dropzone font-size-18" [config]="config"></dropzone>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="center pt-4 pb-4">
+                            <ngx-file-drop class="p-4" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                    <button class="form-control p-5 addaditional" type="button" (click)="openFileSelector()">
+                                        <span class="p-2"> <i class="fas fa-cloud-upload-alt"></i> </span> <br />
+                                        <span class="p-2"> Drag and Drop or Browse files </span> <br />
+                                        <span class="p-2"> .pdf, .xlsx,.doc, .png, jpg (max.5MB) </span> </button>
+                                </ng-template>
+                            </ngx-file-drop>
+                            <div class="upload-table pt-4 mt-2">
+            
+                                    <div class="upload-name-style">
+                                        <div class="row">
+                                            <div class="col-md-2 mt-4"  *ngFor="let item of files; let i=index">
+                                                   <div class="container">
+                                                    <div class="text-overflow-img" *ngIf="item.name.includes('.jpeg') ||item.name.includes('.png') || item.name.includes('.jpg')"  >
+                                                        <img height="99px"  width="132px" [src]=item.url alt={{item}} (click)="openNewTab(item)"><br>
+                                                        <span class=" mt-2 text-center">{{item.name}}</span>
+                                                    </div>
+                                                    <div class="text-overflow-img" *ngIf="item.name.includes('.pdf')">
+                                                        <i class="fas fa-file-pdf"  style="font-size:5rem;color:#f15642;padding: 13px;"></i><br>
+                                                        <span class=" mt-2 text-center">{{item.name}}</span>
+                                                    </div>
+                                                    <div class="text-overflow-img" *ngIf="item.name.includes('.doc')">
+                                                        <i class="fas fa-file-word"  style="font-size:5rem;color:#7a9bdc;padding: 13px;"></i><br>
+                                                        <span class=" mt-2 text-center">{{item.name}}</span>
+                                                    </div>
+                                                    <div class="text-overflow-img" *ngIf="item.name.includes('.xl') || item.name.includes('.csv')">
+                                                        <i class="far fa-file-excel" style="font-size:5rem;color:#05b85e;padding: 13px;"></i><br>
+                                                        <span class=" mt-2 text-center">{{item.name}}</span>
+                                                    </div>
+                                                    <button type="submit" (click)="delelteImg(i)" class="close img-close">
+                                                        <span>&times;</span>
+                                                      </button>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row pb-4">
+                <div class="col-lg-12 text-end">
+                    <span class="px-2">
+                        <button class="btn  font-weight-bold" style=" border: solid 1px #ddddea;
+                        background-color: #fff; color: #ce1431; box-shadow: inset -6px -4px 6px 0 rgba(8, 46, 47, 0.16);"
+                            (click)="onCancal()">Cancel</button>
+                    </span>
+                    <span class="px-2">
+                        <button class="btn custom_btn" [disabled]="!fs.form.valid || clicked"  >{{button}}</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

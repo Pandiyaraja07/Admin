@@ -1,0 +1,117 @@
+.blockquote {
+    border-left: none;
+}
+
+.table thead {
+    background: #fff;
+    padding: 10px 0px;
+
+}
+
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+}
+
+td,
+th {
+    padding: 5px;
+    box-shadow: 2px 2px 0 rgb(27 128 191 / 5%),
+        0 -1px 0 rgb(13 97 153 / 5%);
+}
+
+.d-block{
+    margin-top: 10px;
+}
+
+
+.title{
+    margin: 0 384px 8px 0;
+    font-size: 23px;
+    font-weight: bold;
+    font-family:'Ubuntu', sans-serif;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: -0.07px;
+    text-align: left;
+    color: #191d23;
+}
+
+.sub-title{
+    width: 240px;
+    font-family:'Ubuntu', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23; 
+}
+
+.heading{
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23;
+}
+
+.light-text{
+color:#64748b;
+}
+
+.paragraph{
+    width: 550px;
+    height: 17px;
+    margin: 8px 0 0;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height:0.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64748b;
+}
+
+.box-card{
+    border-radius: 10px;
+    box-shadow: 0 6px 16px 0 rgb(112 130 180 / 10%);
+    background-color: #fff;
+}
+
+.approve-date{
+    margin-right: -5px;
+    margin-left: -22px;
+    
+}
+
+.chatcount{
+    font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--night-blue);
+}
+
+.approvebtn{
+    margin-right: 10px;
+}
+
+.date1{
+    margin-left: -28px;
+}
+
+.date2{
+    margin-left: -129px;
+}

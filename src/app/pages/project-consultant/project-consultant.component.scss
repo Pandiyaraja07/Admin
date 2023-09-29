@@ -1,0 +1,140 @@
+input[type="search"] {
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 7px 30px !important;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-top: -10px;
+}
+
+input[type="search"]::placeholder {
+    color: #bbb;
+}
+
+button[type="submit"]:focus,
+input[type="search"]:focus {
+    box-shadow: 0 0 3px 0 #67b9b0;
+    border-color: #67b9b0;
+    outline: none;
+}
+
+.accordion-header-text {
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23;
+}
+
+.d-block{
+    margin-top: 37px;
+}
+
+
+.general_faq .collapsed .accordion-button {
+    border: none !important;
+}
+
+.box-title-text {
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--night-blue);
+}
+
+.icon {
+    position: relative !important;
+    top: 25px !important;
+    padding: 10px;
+    min-width: 40px;
+    left: 30px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 30px !important;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .col-lg-2 {
+        flex: 0 0 auto;
+        width: 20% !important;
+    }
+}
+
+.badge {
+    white-space: pre-wrap;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background: #fff;
+}
+
+.theme-title-text {
+    font-family: Ubuntu;
+    font-weight: bold;
+    font-size: 23px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: -0.07px;
+    text-align: left;
+    color: #191d23;
+}
+
+.theme-text {
+    font-family: Ubuntu;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.theme-desc-text-bold {
+    font-family: Ubuntu;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--night-blue);
+}
+
+.theme-desc-text-light {
+    font-family: Ubuntu;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: center;
+    color: #64748b;
+}
+
+.card-bottom-text {
+    position: relative;
+    top: 20px;
+    text-align: center;
+}
+
+.desibadge{
+    margin-left: 9px;
+}

@@ -1,0 +1,373 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2">Function Skill Map/ <a
+        routerLink="/functional-skill-map/add-skill-map" style="color: #00448a;"> Create Skill Map
+    </a></span>
+
+
+<h5 class="heading-black " style="margin-bottom: 12px !important;"><a class="btn pointer" onclick="history.back()"><i
+            class="fas fa-arrow-left p-2"></i></a> {{skillText}} </h5>
+<form (ngSubmit)="addSkillMap()" [formGroup]="addSkillMapForm">
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="card-body general_faq accordion_exp">
+                <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds" [closeOthers]="false">
+                    <ngb-panel id="static-1" class="testimonial">
+                        <ng-template ngbPanelTitle class="accordion-header">
+                            <h2 class="accordion-header" id="gen-ques-headingOne">
+                                <button class="accordion-button shadow-lg accordion-header-text" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne"
+                                    aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                    Choose Department & Sub Department
+                                </button>
+                            </h2>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Department<span
+                                                class="text-danger">*</span></label> </h6>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span *ngFor="let dept of getDept; let i = index">
+                                        <div class="form-check form-radio-border pb-0  "
+                                            [ngClass]="(dept?.selected  ==true ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input  radio-btn-resize pe-2" type="radio"
+                                                name="dept" (change)='selectedDept(dept.dept_id,i)'
+                                                [checked]="dept.selected" [value]="dept.dept_id" formControlName="dept"
+                                                id="dept{{i}}" [ngClass]="{'is-invalid': submitted && form.dept.errors}"
+                                                [(ngModel)]="teamSkillEditValue.dept_id">
+                                            <label class="form-check-label radio-btn-text text-capitalize  px-2 pb-3"
+                                                for="dept{{i}}">
+                                                {{dept.name}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+                                <span *ngIf="submitted && form?.dept?.errors" class="invalid-feedback">
+                                    <span *ngIf="form.dept?.errors?.required">department is required.</span>
+                                </span>
+                                <div class="col-lg-12 pt-4" *ngIf="isSubdept">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Sub
+                                            Department<span class="text-danger">*</span></label> </h6>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span *ngFor="let subdept of getSubDept ; let i=index">
+
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="(subdept?.selected ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                name="subdept" id="subdept{{i}}"
+                                                (change)='selectedSubdept(subdept.subdept_id,i)'
+                                                [(ngModel)]="teamSkillEditValue.subdept_id"
+                                                [ngClass]="{'is-invalid': submitted && form.subdept.errors}"
+                                                [checked]="subdept.selected" [value]="subdept.subdept_id"
+                                                formControlName="subdept">
+                                            <label class="form-check-label radio-btn-text text-capitalize  px-2 pb-3"
+                                                for="subdept{{i}}">
+                                                {{subdept.name}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div *ngIf="submitted && form?.subdept?.errors" class="invalid-feedback">
+                                    <span *ngIf="form.subdept?.errors?.required">subdepartment is required.</span>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                    <ngb-panel id="static-2">
+                        <ng-template ngbPanelTitle class="accordion-header">
+                            <h2 class="accordion-header" id="gen-ques-headingOne">
+                                <button class="accordion-button shadow-lg accordion-header-text" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne"
+                                    aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                    Choose Domain & Subdomain
+                                </button>
+                            </h2>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="row">
+                                <div class="col-lg-12" *ngIf="getDomain">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Domain<span
+                                                class="text-danger">*</span></label>
+                                    </h6>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span *ngFor="let domain of getDomain; let i = index ">
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="[domain?.selected ==true ? 'radio-on':'' ,onEdit ? 'disabled-div': '' ]">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                name="domain" (change)='selectedDomain(domain.domain_id,i)'
+                                                [checked]="domain.selected" [value]="domain.domain_id"
+                                                formControlName="domain" id="domain{{i}}"
+                                                [ngClass]="{'is-invalid': submitted && form.domain.errors}"
+                                                [(ngModel)]="teamSkillEditValue.domain">
+                                            <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                for="domain{{i}}">
+                                                {{domain.domain_nm | lowercase}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+
+                                <div *ngIf="submitted && form?.domain?.errors" class="invalid-feedback">
+                                    <span *ngIf="form?.domain?.errors?.required">domain is required.</span>
+                                </div>
+
+                                <div class="col-lg-12 pt-4" *ngIf="getSubDomain">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Sub
+                                            Domain<span class="text-danger">*</span></label> </h6>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span *ngFor="let subdomain of getSubDomain ; let i=index">
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="(subdomain?.selected ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                name="subdomain" id="subdomain"
+                                                (change)='selectedSubDomain(subdomain.subdomain_id,i)'
+                                                [checked]="subdomain.selected" [value]="subdomain.subdomain_id"
+                                                formControlName="subdomain" id="subdomain{{i}}"
+                                                [ngClass]="{'is-invalid': submitted && form.subdomain.errors}"
+                                                [(ngModel)]="teamSkillEditValue.sub_domain">
+                                            <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                for="subdomain{{i}}">
+                                                {{subdomain.subdomain_nm | lowercase}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+
+                                <div *ngIf="submitted && form?.subdomain?.errors" class="invalid-feedback">
+                                    <span *ngIf="form.subdomain?.errors?.required">subdomain is required.</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                    <ngb-panel id="static-3">
+                        <ng-template ngbPanelTitle class="accordion-header">
+                            <h2 class="accordion-header" id="gen-ques-headingOne">
+                                <button class="accordion-button shadow-lg accordion-header-text" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne"
+                                    aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                    Choose Level Skills
+                                </button>
+                            </h2>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Level 1 : Key Areas<span
+                                                class="text-danger">*</span></label>
+                                    </h6>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span *ngFor="let level1 of getLevel1; let i = index">
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="(level1?.selected ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                name="level1" id="level1{{i}}"
+                                                (change)='selectedLevel1(level1.tech_skill_id,i)'
+                                                [checked]="level1.selected" [value]="level1.tech_skill_id"
+                                                formControlName="level1"
+                                                [ngClass]="{'is-invalid': submitted && form?.level1?.errors}"
+                                                [(ngModel)]="teamSkillEditValue.tech_skill_level1_id">
+                                            <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                for="level1{{i}}">
+                                                {{level1.skill_nm | lowercase}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+
+                                <div *ngIf="submitted && form?.level1?.errors" class="invalid-feedback">
+                                    <span *ngIf="form.level1.errors.required">level1 is required.</span>
+                                </div>
+
+                                <div class="col-lg-12 pt-4" *ngIf="getLevel2.length > 0">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Level 2 : Specialisation<span
+                                                class="text-danger">*</span></label> </h6>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2"
+                                    *ngIf="getLevel3.length > 0 || onEdit  ; else elseBlackLevel1">
+                                    <span *ngFor="let level2 of getLevel2; let i = index">
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="(level2?.selected ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                name="level2" id="level2{{i}}"
+                                                (change)='selectedLevel2(level2.tech_skill_id,i)'
+                                                [checked]="level2.selected" [value]="level2.tech_skill_id"
+                                                formControlName="level2"
+                                                [ngClass]="{'is-invalid': submitted && form?.level2?.errors}">
+                                            <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                for="level2{{i}}">
+                                                {{level2.skill_nm | lowercase}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                </div>
+                                <ng-template #elseBlackLevel1>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span *ngFor="let levelMulti2 of getLevel2; let j = index">
+                                            <div class="form-check form-radio-border pb-0"
+                                                [ngClass]="(levelMulti2?.checked == true ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                                <input class="form-check-input radio-btn-resize pe-2" type="checkbox"
+                                                    name="level2Multiple" id="level2Multiple{{j}}"
+                                                    (change)='onChangeLevel2(levelMulti2.tech_skill_id)'
+                                                    [checked]="isSelectedLevel2(levelMulti2)" [value]="levelMulti2.tech_skill_id"
+                                                    formControlName="level2Multiple"
+                                                    [ngClass]="{'is-invalid': submitted && form?.level2Multiple?.errors}">
+                                                <label class="form-check-label radio-btn-text sentenceCase text-capitalize  px-2 pb-3"
+                                                    for="level2Multiple{{j}}">
+                                                    {{levelMulti2.skill_nm | lowercase}}
+                                                </label>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </ng-template>
+
+                                <!-- <span *ngFor="let level3 of getLevel3; let i = index">
+                                        <div class="form-check form-radio-border pb-0"
+                                            [ngClass]="(level3?.checked == true ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                            <input class="form-check-input radio-btn-resize pe-2" type="checkbox" name="level3" id="level3{{i}}"
+                                                (change)='onChangeLevel(level3.tech_skill_id)' [checked]="isSelectedLevel(level3)"
+                                                [value]="level3.tech_skill_id" formControlName="level3"
+                                                [ngClass]="{'is-invalid': submitted && form?.level3?.errors}">
+                                            <label class="form-check-label radio-btn-text sentenceCase px-2 pb-3" for="level3{{i}}">
+                                                {{level3.skill_nm}}
+                                            </label>
+                                        </div>
+                                    </span> -->
+
+
+                                <!-- <div *ngIf="submitted && (form?.level2?.errors || form?.level2Multiple?.errors)"
+                                    class="invalid-feedback">
+                                    <span
+                                        *ngIf="form.level2.errors.required || form.level2Multiple.errors.required">level2
+                                        is required.</span>
+                                </div> -->
+
+
+
+                                <div class="row" *ngIf=" getLevel3.length > 0 && !onEdit; else elseBlack">
+                                    <div class="col-lg-12 pt-4">
+                                        <h6> <label for="choices-multiple-remove-button"
+                                                class="form-label box-title-text">Level
+                                                3 : Core Specialisation<span class="text-danger">*</span></label> </h6>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span *ngFor="let level3 of getLevel3; let i = index">
+                                            <div class="form-check form-radio-border pb-0"
+                                                [ngClass]="(level3?.checked == true ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                                <input class="form-check-input radio-btn-resize pe-2" type="checkbox"
+                                                    id="level3_{{i}}" (change)='onChangeLevel(level3.tech_skill_id)'
+                                                    [checked]="isSelectedLevel(level3)" [value]="level3.tech_skill_id"
+                                                    formControlName="level3"
+                                                    [ngClass]="{'is-invalid': submitted && form?.level3?.errors}">
+                                                <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                    for="level3_{{i}}">
+                                                    {{level3.skill_nm | lowercase}}
+                                                </label>
+                                            </div>
+                                        </span>
+                                    </div>
+
+                                    <div *ngIf="submitted && form?.level3?.errors" class="invalid-feedback">
+                                        <span *ngIf="form.level3.errors.required">level3 is required.</span>
+                                    </div>
+                                </div>
+                                <ng-template #elseBlack>
+                                    <div class="col-lg-12 pt-4" *ngIf="onEdit && getLevel3.length > 0">
+                                        <h6> <label for="choices-multiple-remove-button"
+                                                class="form-label box-title-text">Level
+                                                3 : Core
+                                                Specialisation<span class="text-danger">*</span></label> </h6>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span *ngFor="let level3 of getLevel3; let i = index">
+                                            <div class="form-check form-radio-border pb-0"
+                                                [ngClass]="(level3?.checked == true ? 'radio-on':'')+' '+(onEdit ? 'disabled-div': '') ">
+                                                <input class="form-check-input radio-btn-resize pe-2" type="radio"
+                                                    id="level3_{{i}}" (change)='onChangeLevel(level3.tech_skill_id)'
+                                                    [checked]="isSelectedLevel(level3)" [value]="level3.tech_skill_id"
+                                                    formControlName="level3"
+                                                    [ngClass]="{'is-invalid': submitted && form?.level3?.errors}">
+                                                <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                                    for="level3_{{i}}">
+                                                    {{level3.skill_nm | lowercase}}
+                                                </label>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="static-4">
+                        <ng-template ngbPanelTitle class="accordion-header">
+                            <h2 class="accordion-header" id="gen-ques-headingOne">
+                                <button class="accordion-button shadow-lg accordion-header-text" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne"
+                                    aria-expanded="false" aria-controls="gen-ques-collapseOne">
+                                    Target Proficiency Level
+                                </button>
+                            </h2>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h6> <label for="choices-multiple-remove-button"
+                                            class="form-label box-title-text">Set a
+                                            Depth<span class="text-danger">*</span></label>
+                                    </h6>
+                                </div>
+
+                                <div class="col-lg-3 p-2" *ngFor="let depth of targetProf; let i = index">
+                                    <div class="form-check form-radio-border pb-0"
+                                        [ngClass]="depth.selected == true? 'radio-on':''">
+                                        <input class="form-check-input radio-btn-resize pe-2" type="radio" name="depth"
+                                            id="depth{{i}}" (change)='targetProficiency(depth.technical_depth_id,i)'
+                                            [checked]="depth.selected" [value]="depth.technical_depth_id"
+                                            formControlName="depth"
+                                            [ngClass]="{'is-invalid': submitted && form.depth.errors}"
+                                            [(ngModel)]="teamSkillEditValue.target_proficiency">
+                                        <label class="form-check-label radio-btn-text sentenceCase text-capitalize px-2 pb-3"
+                                            for="depth{{i}}">
+                                            {{depth.technical_depth_nm | lowercase}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div *ngIf="submitted && form.depth.errors" class="invalid-feedback">
+                                    <span *ngIf="form.depth.errors.required">depth is required.</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+            </div><!-- end card body -->
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 text-end pt-2">
+            <button class="btn custom_btn_danger me-2" [routerLink]="['/functional-skill-map']"> Close</button>
+            <button type="submit" class="btn custom_btn ms-2" 
+            [disabled]="(!portSubmit && checkValidLevel3) ? form.dept.errors || form.domain.errors || form.subdomain.errors || form.level1.errors || form.level2.errors || form.level3.errors || form.depth.errors 
+                  : (!portSubmit && !checkValidLevel3) ? form.dept.errors || form.domain.errors || form.subdomain.errors || form.level1.errors || form.level2Multiple.errors || form.depth.errors : portSubmit">
+                  <i *ngIf="portSubmit" class="fa fa-spinner fa-spin"></i>
+                   {{submitButton}}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,686 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2"
+  >Dashboard /
+  <a routerLink="/dashboard1/dashboard1/approval-list" style="color: #00448a">
+    Latest Updates
+  </a></span
+>
+
+<h5 class="heading-black" style="padding-top: -0.5rem; margin-left: 3px">
+  <a class="btn pointer" onclick="history.back()"
+    ><i class="fas fa-arrow-left pe-2"></i
+  ></a>
+  Latest Updates
+</h5>
+
+<!--label for="floatingInput" class="font-size-13 pt-2">20 Employees</label-->
+
+<div class="row mb-2">
+  <div class="col-lg-8 col-sm-12 pt-4">
+    <label for="floatingInput" class="font-size-16">
+      {{ totalCount }} Pending Approvals</label
+    >
+  </div>
+  <div class="col-lg-4 text-end col-sm-12">
+    <div class="row">
+      <span class="col pt-2"
+        ><label for="floatingInput" class="font-size-16">Sort By: </label></span
+      >
+      <span class="col">
+        <select
+          class="form-control font-size-14"
+          name="selectedSortOp"
+          [(ngModel)]="selectedSortOp"
+          (change)="selectedSortFn($event)"
+        >
+          <option value="project" selected>Project Details</option>
+          <option value="additionalSkill">Additional Skill Details</option>
+          <option value="jobChat">Job Chat</option>
+        </select>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <ul class="list-group list-group-flush p-4">
+    <span>
+      <li
+        class="list-group-item"
+        *ngFor="let pendingVal of pendingApprovalDetails"
+      >
+        <div class="row p-0 m-0">
+          <div class="col-lg-1 p-0 m-0 text-left">
+            <span *ngIf="pendingVal?.emp_image">
+              <img
+                class="rounded-circle avatar"
+                src="{{ pendingVal.emp_info?.emp_image }}"
+                alt=""
+              />
+            </span>
+            <span *ngIf="!pendingVal?.emp_image">
+              <img
+                class="rounded-circle avatar"
+                src="assets/images/profile-pic2.png"
+                alt=""
+              />
+            </span>
+            <!-- <img src="assets/images/users/avatar-2.jpg" alt="" class="rounded-circle avatar"> -->
+          </div>
+          <!-- end col -->
+          <div class="col-lg-9 pt-2">
+            <div class="text-dark fs-normal">
+              <b class="text-capitalize">
+                {{ pendingVal?.emp_nm | lowercase }}</b
+              >
+              has updated the
+              <b *ngIf="pendingVal?.cat == 'PJT'"> Project Details </b>
+              <b *ngIf="pendingVal?.cat == 'JC'"> Job Chat </b>
+              <b *ngIf="pendingVal?.cat == 'ADSK'"> Additional Skill</b>
+              section, please review
+            </div>
+            <div class="text-secondary">
+              <i class="fas fa-calendar-alt"></i>
+              {{ pendingVal?.create_ts | localtime }}
+            </div>
+          </div>
+          <div class="col-lg-2 pt-2 text-end font-size-13">
+            <button
+              *ngIf="pendingVal?.cat == 'PJT'"
+              data-bs-toggle="modal"
+              data-bs-target="#projectApprovalModel"
+              class="btn text-decoration-underline font-size-12"
+              style="color: #00448a"
+              (click)="
+                projectApprovalModelFn(projectApprovalModel, pendingVal.id)
+              "
+            >
+              View Details
+            </button>
+            <button
+              *ngIf="pendingVal?.cat == 'ADSK'"
+              data-bs-toggle="modal"
+              data-bs-target="#additioanalSkillModel"
+              class="btn text-decoration-underline font-size-12"
+              style="color: #00448a"
+              (click)="
+                additioanalSkillModelFn(additioanalSkillModel, pendingVal.id)
+              "
+            >
+              View Details
+            </button>
+            <button
+              *ngIf="pendingVal?.cat == 'JC'"
+              data-bs-toggle="modal"
+              class="btn text-decoration-underline font-size-13"
+              style="color: #00448a"
+              data-bs-target="#jobChatModel"
+              (click)="jobChatModelFn(jobChatModel, pendingVal.id)"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+      </li>
+    </span>
+  </ul>
+</div>
+<div class="col-sm-12 col-md-12">
+  <div class="text-md-right float-md-end pagination-rounded">
+    <ngb-pagination
+      class="d-flex justify-content-end mr-auto pagination mt-2"
+      [collectionSize]="totalCount"
+      [(page)]="page"
+      [pageSize]="limit"
+      [maxSize]="5"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage(page)"
+    >
+    </ngb-pagination>
+  </div>
+</div>
+
+<!-- Scrollable modal -->
+<ng-template #projectApprovalModel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="projectApprovalModelTitle">Project Info</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row" *ngIf="projectPopContent">
+      <blockquote class="blockquote mb-0 bg-light">
+        <h6 class="body-black">{{ projectPopContent.title }}</h6>
+        <p class="badge badge-soft-custom m-0 py-2 me-2">
+          {{ projectPopContent.role }}
+        </p>
+        <p class="badge badge-soft-custom m-0 py-2">
+          <i class="fas fa-globe pe-2"></i>{{ projectPopContent.significance }}
+        </p>
+        <p class="col-sm-12 font-size-13 mb-0 mt-2">
+          <i class="fas fa-calendar-alt pe-2"></i
+          ><cite title="Source Title"
+            >{{ projectPopContent.start_date | localtime }} -
+            {{ projectPopContent.end_date | localtime }}</cite
+          >
+        </p>
+      </blockquote>
+      <div>
+        <h6 class="pt-4 body-black">Details</h6>
+        <p class="details-definition">{{ projectPopContent.description }}</p>
+      </div>
+      <div>
+        <h6 class="body-black">Skills</h6>
+        <div>
+          <span *ngFor="let proj_skills of projectPopContent.project_skills">
+            <p
+              [ngClass]="
+                proj_skills.tech_skills_info.domain_id == 1
+                  ? 'badge-soft-custom-purple'
+                  : proj_skills.tech_skills_info.domain_id == 2
+                  ? 'badge-soft-custom-primary'
+                  : proj_skills.tech_skills_info.domain_id == 3
+                  ? 'badge-soft-custom-warning'
+                  : 'badge-soft-custom-green'
+              "
+              class="badge py-2 me-2 font-size-11 text-capitalize"
+            >
+              {{ proj_skills.tech_skills_info.skill_nm | lowercase }}
+            </p>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-6" *ngIf="projectPopContent?.approval_status == 0">
+          <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+            <span class="text-warning font-size-13 pr-2"
+              ><i class="fas fa-hourglass-half"></i
+            ></span>
+            Pending
+          </span>
+        </div>
+        <div class="col-md-6" *ngIf="projectPopContent?.approval_status == 1">
+          <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+            <span class="text-success font-size-13 pr-2"
+              ><i class="fas fa-check-circle"></i
+            ></span>
+            Approved on {{ projectPopContent?.approval_date | localtime }}
+          </span>
+        </div>
+        <div class="col-md-6" *ngIf="projectPopContent?.approval_status == 2">
+          <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+            <span class="text-danger font-size-13 pr-2"
+              ><i class="fas fa-window-close"></i
+            ></span>
+            Recheck
+          </span>
+        </div>
+        <div class="col-md-6 text-end" *ngIf="projectPopContent?.created_ts">
+          <span class="pe-0" style="margin-left: -10px">
+            <i class="fas fa-clock"></i>Updated on
+            {{ projectPopContent?.created_ts | localtime }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn custom_btn_danger me-2"
+      style="margin-top: 17px; height: 36px"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <div
+      *ngIf="
+        currentUserId.role == this.appRoles.roles[2] ||
+        currentUserId.role == this.appRoles.roles[0] || 
+        currentUserId.role == this.appRoles.roles[3]
+      "
+    >
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="projectApproveAction(1, projectPopContent.project_id)"
+            class="btn badge badge-soft-secondary py-2 me-2 font-size-16 approvebtn"
+          >
+            <i class="far fa-check-circle text-success"></i>
+            Approve
+          </a>
+        </div>
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="projectApproveAction(2, projectPopContent.project_id)"
+            class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16 rejectbtn"
+            ><i class="far fa-times-circle text-danger"></i>
+            Reject
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> </ng-template
+><!-- /.modal -->
+
+<!-- Scrollable modal -->
+<ng-template #additioanalSkillModel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="additionalSkillTitle">Additional Skills</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="modal-body">
+        <div class="row">
+          <blockquote class="blockquote mb-0 badge-soft-purple rounded_card">
+            <div class="card bg-light p-0 shadow-lg rounded_card">
+              <div class="card-body custom-space" style="height: 50px">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <h6 class="body-black" style="margin-top: -3px">
+                      {{ additionalSkillPopContent?.additional_skill_type }}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h6>{{ additionalSkillPopContent?.title }}</h6>
+            <!-- <div class="row">
+                            <div class="col-lg-12">
+                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                    {{additionalSkillPopContent?.status}}
+                                </p>
+                                <div class=" badge badge-soft-custom m-0 py-2">
+                                    <div *ngIf="additionalSkillPopContent?.scope === 'Global'"><i
+                                            class="fas fa-globe pe-2"></i>{{additionalSkillPopContent?.scope}}
+                                    </div>
+                                    <div *ngIf="additionalSkillPopContent?.scope === 'Local'"><i
+                                            class="fas fa-building pe-2"></i>{{additionalSkillPopContent?.scope}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+          </blockquote>
+          <div>
+            <h6 class="pt-4 body-black">Details</h6>
+            <p class="details-definition">
+              {{ additionalSkillPopContent?.description }}
+            </p>
+          </div>
+          <div>
+            <h6 class="body-black">
+              <i class="fas fa-paperclip"></i> Attachments
+            </h6>
+            <div class="row">
+              <div
+                class="col-md-4 attachment-card"
+                style="margin: -0.7rem; padding-left: 28px"
+                *ngFor="
+                  let media of additionalSkillPopContent.additional_skill_attachments
+                "
+              >
+                <a href="{{ media.src }}" download>
+                  <div
+                    class="card attachment-card text-center"
+                    style="width: 7rem"
+                  >
+                    <img
+                      *ngIf="
+                        media.name.includes('.jpeg') ||
+                        media.name.includes('.png') ||
+                        media.name.includes('.jpg')
+                      "
+                      class="card-img-top"
+                      style="height: 51px; width: 125px"
+                      src="{{ media.src }}"
+                      alt="image"
+                    />
+                    <i
+                      *ngIf="media.name.includes('.pdf')"
+                      class="fas fa-file-pdf"
+                      style="
+                        font-size: 50px;
+                        color: #f15642;
+                        padding: -11px;
+                        margin-left: 46px;
+                      "
+                    ></i>
+                    <i
+                      *ngIf="media.name.includes('.doc')"
+                      class="fas fa-file-word"
+                      style="
+                        font-size: 50px;
+                        color: #7a9bdc;
+                        padding: -11px;
+                        margin-left: 46px;
+                      "
+                    ></i>
+
+                    <i
+                      *ngIf="
+                        media.name.includes('.xl') ||
+                        media.name.includes('.csv')
+                      "
+                      class="far fa-file-excel"
+                      style="
+                        font-size: 50px;
+                        color: #05b85e;
+                        padding: -11px;
+                        margin-left: 46px;
+                      "
+                    ></i>
+                    <i
+                      *ngIf="
+                        media.name.includes('.jpg') === false &&
+                        media.name.includes('.xl') === false &&
+                        media.name.includes('.csv') === false &&
+                        media.name.includes('.jpeg') === false &&
+                        media.name.includes('.png') === false &&
+                        media.name.includes('.pdf') === false &&
+                        media.name.includes('.doc') === false
+                      "
+                      class="fa fa-file"
+                      style="
+                        font-size: 50px;
+                        color: #0564b8;
+                        padding: -11px;
+                        margin-left: 46px;
+                      "
+                    ></i>
+
+                    <div class="card-body">
+                      <p class="card-text card-text-wrap">{{ media.name }}</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div
+              class="col-md-6"
+              *ngIf="additionalSkillPopContent?.approval_status == 0"
+            >
+              <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                <span class="text-warning font-size-13 pr-2"
+                  ><i class="fas fa-hourglass-half"></i
+                ></span>
+                Pending
+              </span>
+            </div>
+            <div
+              class="col-md-6"
+              *ngIf="additionalSkillPopContent?.approval_status == 1"
+            >
+              <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                <span class="text-success font-size-13 pr-2"
+                  ><i class="fas fa-check-circle"></i
+                ></span>
+                Approved on
+                {{ additionalSkillPopContent?.approval_date | localtime }}
+              </span>
+            </div>
+            <div
+              class="col-md-6"
+              *ngIf="additionalSkillPopContent?.approval_status == 2"
+            >
+              <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                <span class="text-danger font-size-13 pr-2"
+                  ><i class="fas fa-window-close"></i
+                ></span>
+                Recheck
+              </span>
+            </div>
+            <div
+              class="col-md-6 text-end"
+              *ngIf="additionalSkillPopContent?.create_ts"
+            >
+              <span class="pe-0" style="margin-left: -25px">
+                <i class="fas fa-clock"></i>Updated on
+                {{ additionalSkillPopContent?.create_ts | localtime }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn custom_btn_danger me-2"
+      style="margin-top: 17px; height: 36px"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <div
+      *ngIf="
+        currentUserId.role == this.appRoles.roles[2] ||
+        currentUserId.role == this.appRoles.roles[0] ||
+        currentUserId.role == this.appRoles.roles [3]
+      "
+    >
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="
+              additionalSkillApproveAction(
+                1,
+                additionalSkillPopContent.additional_skills_id
+              )
+            "
+            class="btn badge badge-soft-secondary py-2 me-2 font-size-16 approvebtn"
+          >
+            <i class="far fa-check-circle text-success"></i>
+            Approve
+          </a>
+        </div>
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="
+              additionalSkillApproveAction(
+                2,
+                additionalSkillPopContent.additional_skills_id
+              )
+            "
+            class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16 rejectbtn"
+            ><i class="far fa-times-circle text-danger"></i>
+            Reject
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #jobChatModel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="jobChatModelTitle">Job Chat</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    ></button>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <h6 class="body-black">Career Aspiration statement</h6>
+            <p class="font-size-13 details-definition">
+              {{ jobChatPopContent?.aspiration_stmt }}
+            </p>
+          </div>
+          <h6 class="">Career Milestones</h6>
+          <div
+            class="col-lg-12 py-2"
+            *ngFor="
+              let term of jobChatPopContent?.career_plan_infos;
+              let i = index
+            "
+          >
+            <span class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2">
+              <span class="font-size-12 pr-4"
+                ><i class="fas fa-check-circle"></i> {{ term?.time_frame }}
+              </span>
+            </span>
+            <blockquote
+              class="blockquote mb-0"
+              [ngClass]="
+                i == 0
+                  ? 'bg-light'
+                  : i == 1
+                  ? 'badge-soft-primary'
+                  : 'badge-soft-danger'
+              "
+            >
+              <h6 class="font-size-13 text-muted">Aspired Role</h6>
+
+              <div class="row">
+                <div class="card mb-2 pt-1">
+                  <div class="row mb-2">
+                    <div class="col font-size-13">
+                      <span class="text-dark font-weight-bold"> Company </span>
+                    </div>
+                    <div class="col font-size-13 text-muted text-end">
+                      {{ term?.aspired_role.company }}
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-2 pt-1" *ngIf="term?.aspired_role.category">
+                  <div class="row mb-2">
+                    <div class="col font-size-13">
+                      <span class="text-dark font-weight-bold"> Category </span>
+                    </div>
+                    <div class="col font-size-13 text-muted text-end">
+                      {{ term?.aspired_role.category }}
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-2 pt-1" *ngIf="term?.aspired_role.unit">
+                  <div class="row mb-2">
+                    <div class="col font-size-13">
+                      <span class="text-dark font-weight-bold">
+                        {{ term?.aspired_role.unit.name }}
+                      </span>
+                    </div>
+                    <div class="col font-size-13 text-muted text-end">
+                      {{ term?.aspired_role.unit.value }}
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-2 pt-1" *ngIf="term?.aspired_role.location">
+                  <div class="row mb-2">
+                    <div class="col font-size-13">
+                      <span class="text-dark font-weight-bold"> Location </span>
+                    </div>
+                    <div class="col font-size-13 text-muted text-end">
+                      {{ term?.aspired_role.location }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <h6 class="my-2">Comments</h6>
+                <p class="font-size-13 text-muted">
+                  {{ term?.comments_nm }}
+                </p>
+              </div>
+            </blockquote>
+          </div>
+          <blockquote class="blockquote mt-4 mb-0 bg-light">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="col-lg-12 font-size-13">
+                  <span>
+                    Career Path Preference :
+                    <b> {{ jobChatPopContent?.path_preference }} </b>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </blockquote>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <span
+                class="badge rounded-pill badge-outline-secondary ms-1 p-1 font-size-13"
+                style="color: #64748b"
+              >
+                <span class="text-warning font-size-13 pr-2"
+                  ><i class="fas fa-hourglass-half"></i
+                ></span>
+                Pending
+              </span>
+            </div>
+            <div class="col-md-6 text-end" *ngIf="jobChatPopContent?.create_ts">
+              <span class="pe-0" style="margin-left: -25px">
+                <i class="fas fa-clock"></i>Updated on
+                {{ jobChatPopContent?.create_ts | localtime }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn custom_btn_danger me-2"
+      style="margin-top: 17px; height: 36px"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <div
+      *ngIf="
+        currentUserId.role == this.appRoles.roles[2] ||
+        currentUserId.role == this.appRoles.roles[0] || 
+        currentUserId.role == this.appRoles.roles[3]
+      "
+    >
+      <div class="row">
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="jobChatApproveAction(1, jobChatPopContent.job_chat_id)"
+            class="btn badge badge-soft-secondary py-2 me-2 font-size-16 approvebtn"
+          >
+            <i class="far fa-check-circle text-success"></i>
+            Approve
+          </a>
+        </div>
+        <div class="col-md-6" style="margin-top: 13px">
+          <a
+            (click)="jobChatApproveAction(2, jobChatPopContent.job_chat_id)"
+            class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16 rejectbtn"
+            ><i class="far fa-times-circle text-danger"></i>
+            Reject
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

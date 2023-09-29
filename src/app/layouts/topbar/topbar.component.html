@@ -1,0 +1,390 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box shadow-none">
+        <a routerLink="/" class="logo logo-dark">
+          <span class="logo-sm">
+            <!--img src="assets/images/logo-sm.png" alt="" height="22"-->
+            SGRI
+          </span>
+          <span class="logo-lg">
+            <!--img src="assets/images/logo-dark.png" alt="" height="22"-->
+            SGRI
+          </span>
+        </a>
+
+        <a routerLink="/" class="logo logo-light">
+          <span class="logo-sm">
+            <!--img src="assets/images/logo-sm.png" alt="" height="22"-->
+            SGRI
+          </span>
+          <span class="logo-lg">
+            <!--img src="assets/images/logo-light.png" alt="" height="22"-->
+            SGRI
+          </span>
+        </a>
+      </div>
+
+      <div>
+        <img
+          src="assets/images/SYNAPSE LOGO.png"
+          style="height: 100%; width: 140px"
+        />
+      </div>
+      <!--button type="button" class="btn btn-sm px-3 font-size-16 header-item vertical-menu-btn"
+                (click)="toggleMobileMenu($event)">
+                <i class="fa fa-fw fa-bars"></i>
+            </button-->
+
+      <!-- <div class="col-md-6">
+                <i class="fa fa-search icon" aria-hidden="true"></i>
+                 <input class="form-control" type="search" name="generalSearch" placeholder="Type the skills..."
+                    id="generalSearch">  
+            </div> -->
+            
+      <div
+        *ngIf="
+          currentUser.role != this.appRoles.roles[4] &&
+          currentUser.tempRole != this.appRoles.roles[4]
+        "
+        class="col-md-6 fl-search"
+      >   
+        <ng-select
+          (clear)="clearonNavigate()"
+          name="dept"
+          placeholder="Type the skills..."
+          [(ngModel)]="searchTerm"
+          (change)="searchFn($event)"
+          [clearable]="false"
+          class="text-capitalize ng-select-custom global-search"
+          (keypress)="onKeypressEvent($event)"
+          [multiple]="false"
+          [maxSelectedItems]="1"
+          #selectDropdown
+        >
+          <ng-option *ngFor="let skill of searchList" [value]="skill">
+                        {{ skill.skill_nm }}
+                             
+            <div class="font-size-11">
+              {{ 
+              skill.domain_info.domain_nm + " → " +  
+              skill.subdomain_info.subdomain_nm + " → " +
+              skill.levels
+              }}
+          </div>
+            
+          </ng-option>
+        </ng-select>
+        <div>
+          <span class="fa fa-search icon" aria-hidden="true"></span>
+          <span
+            *ngIf="searchTerm?.skill_nm != null"
+            class="fa fa-times clear-btn"
+            (click)="selectDropdown.handleClearClick()"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <div class="dropdown d-inline-block" ngbDropdown placement="bottom-right">
+        <!---button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" ngbDropdownToggle>
+                    <i-feather class="icon-sm" name="search"></i-feather>
+                </button-->
+        <div class="dropdown-menu dropdown-menu-lg p-0" ngbDropdownMenu>
+          <form class="p-2">
+            <div class="search-box">
+              <div class="position-relative">
+                <input
+                  type="text"
+                  class="form-control rounded bg-light border-0"
+                  placeholder="Search..."
+                />
+                <i class="mdi mdi-magnify search-icon"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          currentUser.role != this.appRoles.roles[1] &&
+          currentUser.role != this.appRoles.roles[4] &&
+          currentUser.tempRole != this.appRoles.roles[4]
+        "
+        class="dropdown d-inline-block"
+        ngbDropdown
+      >
+        <button
+          *ngIf="pendingApprovalLs"
+          type="button"
+          class="btn header-item noti-icon"
+          id="page-header-notifications-dropdown"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="true"
+          ngbDropdownToggle
+        >
+          <!--i-feather class="icon-sm" name="bell"></i-feather-->
+          <img src="assets/images/icons/notification.png" />
+          <span class="noti-dot bg-danger"></span>
+        </button>
+
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+          aria-labelledby="page-header-notifications-dropdown"
+          ngbDropdownMenu
+        >
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <h5 class="m-0 font-size-15">
+                  {{ "HEADER.NOTIFICATIONS.TITLE" | translate }}
+                </h5>
+              </div>
+              <!-- <div class="col-auto">
+                                <a href="javascript:void(0);" class="small"> {{
+                                    'HEADER.NOTIFICATIONS.VIEW_ALL' | translate}}</a>
+                            </div> -->
+            </div>
+          </div>
+          <ngx-simplebar style="max-height: 250px">
+            <h6 class="dropdown-header bg-light" style="width: 100%">
+              <span *ngIf="pendingApprovalLs">
+                <div class="col-md-12">
+                  <li
+                    class="list-group-item"
+                    *ngFor="let pendingDetail of pendingApprovalLs"
+                  >
+                    <a
+                      style="cursor: pointer"
+                      routerLink="/team/profile/additional-skill/"
+                      [queryParams]="{ id: pendingDetail?.emp_id }"
+                      *ngIf="pendingDetail?.cat == 'ADSK'"
+                      class="row p-0 m-0"
+                    >
+                      <div class="col-lg-2 pt-2 p-0 m-0 text-left">
+                        <span *ngIf="pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="{{ pendingDetail?.emp_image }}"
+                            alt=""
+                          />
+                        </span>
+                        <span *ngIf="!pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="assets/images/profile-pic2.png"
+                            alt=""
+                          />
+                        </span>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-lg-10 pt-2">
+                        <div
+                          class="text-dark fs-normal text-capitalize notification-scroll"
+                        >
+                          <b>{{ pendingDetail?.emp_nm.split(" ")[0] }}</b
+                          >'s <b>Additional Skill</b>, pending for review
+                        </div>
+                        <div class="text-secondary">
+                          <i class="fas fa-calendar-alt"></i>
+                          {{ pendingDetail?.create_ts | date: "mediumDate" }}
+                        </div>
+                      </div>
+                    </a>
+                    <a
+                      style="cursor: pointer"
+                      routerLink="/team/profile/project-info/{{
+                        pendingDetail?.emp_id
+                      }}"
+                      *ngIf="pendingDetail?.cat == 'PJT'"
+                      class="row p-0 m-0"
+                    >
+                      <div class="col-lg-2 pt-2 p-0 m-0 text-left">
+                        <span *ngIf="pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="{{ pendingDetail?.emp_image }}"
+                            alt=""
+                          />
+                        </span>
+                        <span *ngIf="!pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="assets/images/profile-pic2.png"
+                            alt=""
+                          />
+                        </span>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-lg-10 pt-2">
+                        <div
+                          class="text-dark fs-normal text-capitalize notification-scroll"
+                        >
+                          <b>{{ pendingDetail?.emp_nm.split(" ")[0] }}</b
+                          >'s <b> Project Details </b>, pending for review
+                        </div>
+                        <div class="text-secondary">
+                          <i class="fas fa-calendar-alt"></i>
+                          {{ pendingDetail?.create_ts | date: "mediumDate" }}
+                        </div>
+                      </div>
+                    </a>
+                    <a
+                      style="cursor: pointer"
+                      routerLink="/team/profile/job-chat/{{
+                        pendingDetail?.emp_id
+                      }}"
+                      *ngIf="pendingDetail?.cat == 'JC'"
+                      class="row p-0 m-0"
+                    >
+                      <div class="col-lg-2 pt-2 p-0 m-0 text-left">
+                        <span *ngIf="pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="{{ pendingDetail?.emp_image }}"
+                            alt=""
+                          />
+                        </span>
+                        <span *ngIf="!pendingDetail?.emp_image">
+                          <img
+                            class="rounded-circle img-thumbnail"
+                            src="assets/images/profile-pic2.png"
+                            alt=""
+                          />
+                        </span>
+                      </div>
+                      <!-- end col -->
+                      <div class="col-lg-10 pt-2">
+                        <div
+                          class="text-dark fs-normal text-capitalize notification-scroll"
+                        >
+                          <b>{{ pendingDetail?.emp_nm.split(" ")[0] }}</b
+                          >'s <b> Job Chat </b>, pending for review
+                        </div>
+                        <div class="text-secondary">
+                          <i class="fas fa-calendar-alt"></i>
+                          {{ pendingDetail?.create_ts | date: "mediumDate" }}
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </div>
+              </span>
+            </h6>
+          </ngx-simplebar>
+          <!-- <div class="p-2 border-top d-grid">
+                        <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
+                            <i class="uil-arrow-circle-right me-1"></i> <span>{{
+                                'HEADER.NOTIFICATIONS.LOAD_MORE' | translate}}</span>
+                        </a>
+                    </div> -->
+        </div>
+      </div>
+
+      <!--div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item noti-icon right-bar-toggle" id="right-bar-toggle"
+                    (click)="toggleRightSidebar()">
+                    <i-feather class="icon-sm" name="settings"></i-feather>
+                </button>
+            </div-->
+
+      <div class="dropdown d-inline-block" ngbDropdown>
+        <button
+          type="button"
+          class="btn header-item user text-start d-flex align-items-center"
+          id="page-header-user-dropdown"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ngbDropdownToggle
+        >
+          <span *ngIf="empInfo?.emp_image">
+            <img
+              class="rounded-circle header-profile-user"
+              src="{{ empInfo?.emp_image }}"
+              alt=""
+            />
+          </span>
+          <span *ngIf="!empInfo?.emp_image">
+            <img
+              class="rounded-circle header-profile-user"
+              src="assets/images/profile-pic2.png"
+              alt=""
+            />
+          </span>
+          <span class="ms-2 d-none d-sm-block user-item-desc">
+            <span class="user-name text-capitalize">
+              {{ empInfo?.emp_nm }}
+            </span>
+            <span class="user-sub-title">{{ empInfo?.designation_nm }}</span>
+          </span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end pt-0" ngbDropdownMenu>
+          <div class="p-3 theme-custom-color border-bottom">
+            <h6 class="mb-0 text-white text-capitalize">
+              {{ empInfo?.emp_nm }}
+            </h6>
+            <p class="mb-0 font-size-11 text-white-50 fw-semibold">
+              {{ empInfo?.designation }}
+            </p>
+          </div>
+
+          <a
+            *ngIf="
+              currentUser.role == this.appRoles.roles[2] ||
+              currentUser.role == this.appRoles.roles[3]
+            "
+            class="dropdown-item pointer"
+            (click)="switchRole(currentUser.tempRole)"
+            ><i
+              class="mdi mdi-refresh text-muted font-size-16 align-middle me-1"
+            ></i>
+            <span
+              *ngIf="
+                currentUser.tempRole == this.appRoles.roles[2] ||
+                currentUser.tempRole == this.appRoles.roles[3]
+              "
+              class="align-middle"
+              >Switch to Employee</span
+            >
+            <span
+              *ngIf="
+                currentUser.tempRole == this.appRoles.roles[4] &&
+                currentUser.role == this.appRoles.roles[2]
+              "
+              class="align-middle"
+              >Switch to FL</span
+            >
+            <span
+              *ngIf="
+                currentUser.tempRole == this.appRoles.roles[4] &&
+                currentUser.role == this.appRoles.roles[3]
+              "
+              class="align-middle"
+              >Switch to Supervisor</span
+            >
+          </a>
+
+          <a class="dropdown-item pointer" routerLink="/account/change-password"
+            ><i
+              class="uil uil-padlock text-muted font-size-16 align-middle me-1"
+            ></i>
+            <span class="align-middle">Change Password</span></a
+          >
+
+          <a class="dropdown-item pointer" (click)="logout()"
+            ><i
+              class="mdi mdi-logout text-muted font-size-16 align-middle me-1"
+            ></i>
+            <span class="align-middle">Logout</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

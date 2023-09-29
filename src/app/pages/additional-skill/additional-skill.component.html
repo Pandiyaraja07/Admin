@@ -1,0 +1,534 @@
+<div *ngIf="!employeeRole">
+  <span
+    class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize"
+    >Profile / {{ basicInfo?.emp_nm | lowercase }} /
+    <a style="color: #00448a">Additional Details </a></span
+  >
+
+  <h5
+    class="mb-0 font-size-23 heading-black"
+    style="margin-left: -10px; padding-top: -0.5rem"
+  >
+    <a class="btn pointer" onclick="history.back()"
+      ><i class="fas fa-arrow-left p-2"></i
+    ></a>
+    Additional Details of
+    <a class="text-capitalize heading-black"
+      >{{ basicInfo?.emp_nm | lowercase }}
+    </a>
+  </h5>
+</div>
+<div class="row">
+  <div class="card mt-2 rounded_card shadow-lg bg-wrap" style="height: 120px">
+    <div class="card-body bg-content">
+      <div class="row">
+        <div class="col-lg-8 col-md-9 col-12">
+          <div class="row">
+            <div class="col-lg-1">
+              <img
+                _ngcontent-ado-c113=""
+                src="assets/images/menu-icon/AdditionalSkill.png"
+                alt=""
+                class="d-block"
+              />
+            </div>
+            <div class="col-lg-11 pt-2">
+              <h5 class="heading-black headalign">Additional Details</h5>
+              <!-- <p class="heading-grey">Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor</p> -->
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-lg-4"
+          *ngIf="
+            employeeRole|| flRole || supervisorRole || basicInfo.fl_emp_mapping.designation_nm == 'R&D DIRECTOR'">
+          <!-- <div class="text-end pt-2" *ngFor="let additionalskill of additionalSkills; let i = index">
+                        <div *ngIf="i == 0">
+                            <a [routerLink]="['/additional-skill/add-additional-skill/'+ additionalskill.additional_skill_type]"
+                                class="btn custom_btn addbtnadditional"> <i class="fas fa-plus"></i> Add
+                            </a>
+                        </div>
+                    </div> -->
+          <div class="text-end pt-2">
+            <a
+              [routerLink]="[
+                '/additional-skill/add-additional-skill/' + skillType
+              ]"
+              [queryParams]="{ empId: empSgId }"
+              class="btn custom_btn addbtnadditional"
+            >
+              <i class="fas fa-plus"></i> Add
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <!-- Nav tabs -->
+    <ul
+      ngbNav
+      #justifyNav="ngbNav"
+      [activeId]="active"
+      class="nav nav-tabs nav-tabs-custom pt-4 custom-tab-head shadow-lg"
+    >
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Additional Skills')"
+            >Additional Skills</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Training')"
+            >Training/ Certificates</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Patents')"
+            >Patents</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="4">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Product Launches')"
+            >Product Launches</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="5">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Consultation')"
+            >Consultation</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="6">
+        <a ngbNavLink>
+          <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+          <span
+            class="d-none d-sm-block body-black"
+            style="font-size: 18px; margin-top: -18px"
+            (click)="loadPage(1, 'Conferences')"
+            >Conferences</span
+          >
+        </a>
+        <ng-template ngbNavContent>
+          <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+        </ng-template>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content p-3 text-muted">
+      <div [ngbNavOutlet]="justifyNav"></div>
+    </div>
+    <!-- end tab content -->
+  </div>
+  <!-- end card body -->
+
+  <ng-template #TabContent>
+    <div class="row">
+      <div class="col-lg-8 col-sm-12">
+        <label
+          for="floatingInput"
+          class="body-black ms-0 ps-0"
+          style="
+            margin-top: 10px;
+            font-family: Ubuntu;
+            font-weight: normal;
+            font-size: 18px;
+          "
+          >No. of.
+          <span *ngIf="SkillTypeName == 'Training'; else elseBlock">
+            Training / Certificates
+          </span>
+          <ng-template #elseBlock>
+            {{ SkillTypeName }}
+          </ng-template>
+          : {{ totalCount }}
+        </label>
+      </div>
+      <div class="col-lg-4 text-end col-sm-12">
+        <div class="row">
+          <span class="col pt-2 me-0 pe-0"
+            ><label
+              for="floatingInput"
+              class=""
+              style="
+                font-family: Ubuntu;
+                font-weight: normal;
+                font-size: 16px;
+                margin-top: -5px;
+              "
+              >Sort by:
+            </label></span
+          >
+          <span class="col-md-4">
+            <ng-select
+              [(ngModel)]="selectedSortOp"
+              name="selectedSortOp"
+              id="selectedSortOp"
+              [searchable]="false"
+              [clearable]="false"
+              (change)="selectedSortFn()"
+            >
+              <ng-option *ngFor="let list of selectValue" [value]="list">{{
+                list
+              }}</ng-option>
+            </ng-select>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let additional_skill of additionalSkills; let i = index">
+      <div class="row pt-2">
+        <div class="col-xl-12 m-0 p-0">
+          <div class="card rounded_card shadow-lg">
+            <div class="card-body">
+              <blockquote
+                class="blockquote mb-0 rounded_card"
+                [ngClass]="bgRandom[i]"
+              >
+                <h6
+                  class="custom_title body-black"
+                  style="font-size: 18px; font-weight: 500"
+                >
+                  {{ additional_skill.title }}
+                </h6>
+                <div class="row" *ngIf="SkillTypeName == 'Patents'">
+                  <div class="col-lg-6">
+                    <div class="badge badge-soft-custom1 m-0 py-2 me-2">
+                      {{ additional_skill.status }}
+                    </div>
+                    <div class="badge badge-soft-custom1 m-0 py-2 me-2">
+                      <div *ngIf="additional_skill.scope === 'Global'">
+                        <i class="fas fa-globe pe-2"></i
+                        >{{ additional_skill.scope }}
+                      </div>
+                      <div *ngIf="additional_skill.scope === 'Local'">
+                        <i class="fas fa-building pe-2"></i
+                        >{{ additional_skill.scope }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </blockquote>
+              <div>
+                <h6 class="pt-4 body-black" style="font: size 14px">Details</h6>
+                <p class="body-grey font-size-14">
+                  {{ additional_skill.description }}
+                </p>
+              </div>
+              <div>
+                <h6 class="body-black" style="font-size: 14px">
+                  <i class="fas fa-paperclip"></i> Attachments
+                </h6>
+                <div class="row">
+                  <div
+                    class="col-md-2"
+                    style="margin: 0.3rem"
+                    *ngFor="
+                      let media of additional_skill.additional_skill_attachments
+                    "
+                  >
+                    <a href="{{ media.src }}" download="{{ media.name }}">
+                      <div
+                        class="card shadow-lg attachment-card text-center"
+                        style="width: 12rem"
+                      >
+                        <img
+                          *ngIf="
+                            media.name.includes('.jpeg') ||
+                            media.name.includes('.png') ||
+                            media.name.includes('.jpg')
+                          "
+                          class="card-img-top"
+                          style="height: 121px"
+                          src="{{ media.src }}"
+                          alt="image"
+                        />
+                        <i
+                          *ngIf="media.name.includes('.pdf')"
+                          class="fas fa-file-pdf"
+                          style="font-size: 6rem; color: #f15642; padding: 13px"
+                        ></i>
+                        <i
+                          *ngIf="
+                            media.name.includes('.xl') ||
+                            media.name.includes('.csv')
+                          "
+                          class="far fa-file-excel"
+                          style="font-size: 6rem; color: #05b85e; padding: 13px"
+                        ></i>
+                        <i
+                          *ngIf="media.name.includes('.doc')"
+                          class="fas fa-file-word"
+                          style="font-size: 6rem; color: #7a9bdc; padding: 13px"
+                        ></i>
+
+                        <i
+                          *ngIf="
+                            media.name.includes('.jpg') === false &&
+                            media.name.includes('.xl') === false &&
+                            media.name.includes('.csv') === false &&
+                            media.name.includes('.jpeg') === false &&
+                            media.name.includes('.png') === false &&
+                            media.name.includes('.pdf') === false &&
+                            media.name.includes('.doc') === false
+                          "
+                          class="fa fa-file"
+                          style="font-size: 6rem; color: #0564b8; padding: 13px"
+                        ></i>
+
+                        <div class="card-body" style="margin: -12px">
+                          <p class="card-text card-text-wrap">
+                            {{ media.name }}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div
+                  class="col-md-6"
+                  *ngIf="additional_skill.approval_status == 0"
+                >
+                  <div
+                    *ngIf="flAccess || supervisorAccess
+                    "
+                  >
+                    <span>
+                      <a
+                        (click)="
+                          additionalSkillApproveAction(
+                            1,
+                            additional_skill.additional_skills_id
+                          )
+                        "
+                        class="btn badge badge-soft-secondary py-2 me-2 font-size-16"
+                        ><i class="far fa-check-circle text-success"></i>
+                        Approve
+                      </a>
+                      <a
+                        (click)="
+                          additionalSkillApproveAction(
+                            2,
+                            additional_skill.additional_skills_id
+                          )
+                        "
+                        class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16"
+                        ><i class="far fa-times-circle text-danger"></i>
+                        Reject
+                      </a>
+                    </span>
+                  </div>
+                  <div *ngIf="!flAccess && !supervisorAccess">
+                  <span  class="badge rounded-pill badge-outline-secondary ms-1 p-1 approved" style="margin-top: 10px">
+                    <span class="text-warning font-size-14 pr-2"><i class="fas fa-hourglass-half pr-4"></i></span>
+                    Pending
+                  </span>
+                  </div>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="additional_skill.approval_status == 1"
+                >
+                  <span
+                    class="badge rounded-pill badge-outline-secondary ms-1 p-1 font-size-13 approved1"
+                  >
+                    <span class="text-success font-size-13 pr-2"
+                      ><i class="fas fa-check-circle"></i
+                    ></span>
+                    Approved
+                  </span>
+                  <span style="padding-left: 10px;"
+                  *ngIf="(additional_skill.approval_status == 1 &&  
+                   additional_skill.approved_by_supervisor == true) && flAccess && FlSupervisorAccess" 
+                   (click)="
+                  additionalSkillApproveAction(
+                    2,
+                    additional_skill.additional_skills_id
+                  )
+                ">
+                  <span class=" btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16 approved">
+                <i class="far fa-times-circle text-danger"></i>
+                          Reject</span>
+                </span>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="additional_skill.approval_status == 2"
+                >
+                  <span
+                    class="badge rounded-pill badge-outline-secondary ms-1 p-1 font-size-13 approved"
+                  >
+                    <span class="text-danger font-size-13 pr-2"
+                      ><i class="fas fa-window-close"></i
+                    ></span>
+                    Recheck
+                  </span>
+                </div>
+               
+                <div
+                  class="col-md-6 text-end"
+                  *ngIf="
+                    additional_skill.create_ts &&
+                      additional_skill.updated_ts == null;
+                    else elseBlock
+                  "
+                >
+                  <span
+                    class="pe-2 details-definition font-size-14"
+                    style="color: #64748b"
+                  >
+                    <i class="fas fa-clock"></i>
+                    <span class="details-definition font-size-14 ml-1"
+                      >updated on
+                    </span>
+                    {{ additional_skill.create_ts | localtime }}
+                  </span>
+
+                  <span
+                    *ngIf="
+                      additional_skill.approval_status != 1 &&
+                      (flAccess || supervisorAccess || ownProfile)">
+                    <span>
+                      <i
+                        class="fa fa-trash text-danger ml-2 delete_icon_top"
+                        (click)="
+                          deleteAdditinalSkill(
+                            additional_skill.additional_skills_id
+                          )
+                        "
+                        style="padding: 10px; cursor: pointer"
+                        data-toggle="tooltip"
+                      ></i>
+                    </span>
+                    <span>
+                      <a
+                        class="text-decoration-underline Edit"
+                        style="font-size: 14px"
+                        [routerLink]="[
+                          '/additional-skill/add-additional-skill-edit/' +
+                            additional_skill.additional_skills_id
+                        ]"
+                        [queryParams]="{ empId: empSgId }"
+                      >
+                        <i class="fas fa-pencil-alt"></i>
+                        Edit
+                      </a>
+                    </span>
+                  </span>
+                </div>
+                <ng-template #elseBlock>
+                  <div
+                    class="col-md-6 text-end"
+                    *ngIf="additional_skill.updated_ts != null"
+                  >
+                    <span class="pe-2" style="color: #64748b">
+                      <i class="fas fa-clock"></i>
+                      <span class="details-definition font-size-14 ml-1"
+                        >updated on
+                      </span>
+                      {{ additional_skill.updated_ts | localtime }}
+                    </span>
+
+                    <span
+                      *ngIf="
+                        additional_skill.approval_status != 1 &&
+                        (flAccess || supervisorAccess || ownProfile)">
+                      <span>
+                        <i
+                          class="fa fa-trash text-danger ml-2 delete_icon_top"
+                          (click)="
+                            deleteAdditinalSkill(
+                              additional_skill.additional_skills_id
+                            )
+                          "
+                          style="padding: 10px; cursor: pointer"
+                          data-toggle="tooltip"
+                        ></i>
+                      </span>
+                      <span>
+                        <a
+                          class="text-decoration-underline Edit"
+                          [routerLink]="[
+                            '/additional-skill/add-additional-skill-edit/' +
+                              additional_skill.additional_skills_id
+                          ]"
+                          [queryParams]="{ empId: empSgId }"
+                        >
+                          <i class="fas fa-pencil-alt"></i>
+                          Edit
+                        </a>
+                      </span>
+                    </span>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12">
+      <div class="text-md-right float-md-end pagination-rounded">
+        <ngb-pagination
+          class="d-flex justify-content-end mr-auto pagination mt-2"
+          [collectionSize]="totalCount"
+          [(page)]="page"
+          [pageSize]="limit"
+          [maxSize]="5"
+          [ellipses]="false"
+          [boundaryLinks]="true"
+          (pageChange)="loadPage(page, SkillTypeName)"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </ng-template>
+</div>

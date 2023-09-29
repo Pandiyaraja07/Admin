@@ -1,0 +1,300 @@
+<div class="row">
+
+    <div class="card rounded_card bg-wrap shadow-lg">
+        <div class="card-body bg-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img _ngcontent-ado-c113="" src="assets/images/menu-icon/ProjectConsultant.png" alt=""
+                                class="d-block">
+
+                        </div>
+                        <div class="col-lg-11 pt-3 paragraph">
+                            <h5 style="width:100%; font-family: Ubuntu; font-size: 23px; font-weight: bold;
+                            margin-left: -17px;color: #454545;margin-top: 22px;">Project Consultant</h5>
+                            <!-- <p class="text-muted" style="font-family:Ubuntu; font-size: 12px;">Find internal
+                                subject-matter experts to consult with and collaborate with</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <i class="fa fa-search icon" aria-hidden="true"></i>
+                    <ng-select name="search" [(ngModel)]="searchTerm" (change)="searchFn($event)"
+                        class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms" [multiple]="false"
+                        [maxSelectedItems]="1" [clearable]="false" placeholder="Search Skills">
+                        <ng-option *ngFor="let skill of searchList" [value]="skill">
+                            {{skill.skill_nm}}
+                            <div class="font-size-11">
+                                {{ 
+                                skill.domain_info.domain_nm + " → " +  
+                                skill.subdomain_info.subdomain_nm + " → " +
+                                skill.levelShortForm
+                                }}
+                            </div>
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="general_faq m-0 p-0 pb-0">
+            <ngb-accordion #acc="ngbAccordion" [closeOthers]="true">
+                <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle class="accordion-header">
+                        <h2 class="accordion-header" id="gen-ques-headingOne">
+                            <button class="accordion-button accordion-header-text border-0" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#gen-ques-collapseOne" aria-expanded="true"
+                                aria-controls="gen-ques-collapseOne" (click)="collapseBtn()">
+                                <img src="assets/images/icons/Filterby.png" class="pe-2" alt=""> Filter by
+                            </button>
+                        </h2>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="row">
+                            <!-- <form (ngSubmit)="filterProjectConsultant()" [formGroup]="filterProjectConsultantForm"> -->
+                            <div class="row m-0 p-0">
+                                <div class="col-lg-3 pb-3">
+                                    <label class="form-label box-title-text">Department</label>
+                                    <ng-select name="dept" [(ngModel)]="selectedDept" [clearable]="false"
+                                        (change)="getSelectedDept()"
+                                        class="ng-select ng-select-searchable ng-select-bottoms text-capitalize"
+                                        [multiple]="false" [maxSelectedItems]="1">
+                                        <ng-option *ngFor="let department of dept" [value]="department.dept_id">
+                                            {{ department.name }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3 pb-3">
+                                    <label class="form-label box-title-text">Sub
+                                        Department</label>
+                                    <ng-select name="subDept" [(ngModel)]="selectedSubdept" [clearable]="false"
+                                        (change)="getSelectedSubdept()"
+                                        class="ng-select ng-select-searchable  ng-select-bottoms text-capitalize" [multiple]="false"
+                                        [maxSelectedItems]="1">
+                                        <ng-option *ngFor="let sdept of subDept" [value]="sdept.subdept_id">
+                                            {{sdept.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <!-- <div class="col-lg-3 pb-3">
+                                    <span class="col"><label for="floatingInput" class="box-title-text">Domain
+                                        </label></span>
+                                    <span class="col">
+                                        <ng-select name="domain" [(ngModel)]="selectedDomain" [clearable]="true"
+                                            (change)="getSelectedDomain()"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [ngClass]="selectedDomain == 1 ? 'ng-select-multiple1' : (selectedDomain == 2 ? 'ng-select-multiple2' : (selectedDomain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            [multiple]="true" [maxSelectedItems]="1">
+                                            <ng-option *ngFor="let domain of domainList" [value]="domain.domain_id">
+                                                {{domain.domain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select>
+
+                                    </span>
+                                </div> -->
+
+                                <div class="col-lg-3 pb-3">
+                                    <span class="col"><label for="floatingInput" class="box-title-text">Domain</label></span>
+                                    <span class="col">
+                                        <ng-select name="domain" [(ngModel)]="selectedDomain" [clearable]="true"
+                                            (change)="getSelectedDomain()"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [ngClass]="selectedDomain == 1 ? 'ng-select-multiple1' : (selectedDomain == 2 ? 'ng-select-multiple2' : (selectedDomain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            [multiple]="true" [maxSelectedItems]="1" [disabled]="isDropdownDisabled">
+                                            <ng-option *ngFor="let domain of domainList" [value]="domain.domain_id">
+                                                {{ domain.domain_nm | lowercase }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </span>
+                                </div>
+                                
+                                <div class="col-lg-3 pb-3">
+                                    <span class="col"><label for="floatingInput" class="box-title-text">Sub
+                                            Domain
+                                        </label></span>
+                                    <span class="col">
+                                        <ng-select name="subdomain" [clearable]="false" [(ngModel)]="selectedSubDomain"
+                                            (change)="getSelectedSubDomain()"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [multiple]="false" [maxSelectedItems]="1">
+                                            <ng-option *ngFor="let subdomain of subdomainList"
+                                                [value]="subdomain.subdomain_id">
+                                                {{subdomain.subdomain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </span>
+                                </div>
+                                <div class="col-lg-3 pb-3">
+                                    <span class="col"><label for="floatingInput" class="box-title-text"> Level
+                                            1 : Key Areas
+                                        </label></span>
+                                    <span class="col">
+                                        <ng-select name="level1" [clearable]="false" [(ngModel)]="selectedLevel1"
+                                            (change)="getSelectedLevel1()"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                            [multiple]="false" [maxSelectedItems]="1">
+                                            <ng-option *ngFor="let level1 of level1List" [value]="level1.tech_skill_id">
+                                                {{level1.skill_nm}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </span>
+                                </div>
+                                <div class="col-lg-3 pb-3" *ngIf="level2List && selectedLevel1">
+                                    <span class="col"><label for="floatingInput" class="box-title-text">Level
+                                            2 : Specialisation
+                                        </label></span>
+                                    <span class="col">
+                                        <ng-select name="level2" [clearable]="false" [(ngModel)]="selectedLevel2"
+                                            (change)="getSelectedLevel2()"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                            [multiple]="false" [maxSelectedItems]="1">
+                                            <ng-option *ngFor="let level2 of level2List" [value]="level2.tech_skill_id">
+                                                {{level2.skill_nm}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </span>
+                                </div>
+                                <div class="col-lg-3 pb-3" *ngIf="level3List && selectedLevel2 && (level3List.length > 0)">
+                                    <span class="col"><label for="floatingInput" class="box-title-text">Level
+                                            3 : Core Specialisation
+                                        </label></span>
+                                    <span class="col">
+                                        <ng-select name="level3" [clearable]="false" [(ngModel)]="selectedLevel3"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                            [multiple]="false" [maxSelectedItems]="1" (change)="getSelectedLevel3()">
+                                            <ng-option *ngFor="let level3 of level3List" [value]="level3.tech_skill_id">
+                                                {{level3.skill_nm}}
+                                            </ng-option>
+                                        </ng-select>
+                                    </span>
+                                </div>
+                                <!-- <div class="col-lg-3 pt-1">
+                                    <span class="col pt-2">
+                                        <label for="floatingInput" class="font-size-13"> </label></span>
+                                    <br />
+                                    <span class="col pt-4">
+                                        <input class="btn custom_btn" type="submit" value="Apply">
+                                    </span>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+
+            </ngb-accordion>
+        </div>
+    </div>
+</div>
+
+<br>
+<!-- Nav tabs -->
+<div class="card rounded-pill px-4 mx-0 py-0 my-0">
+    <ul ngbNav #justifyNav="ngbNav" [activeId]="0"
+        class="nav nav-tabs nav-tabs-custom nav-justified pt-4 custom-tab-head">
+
+        <li [ngbNavItem]="0" [attr.data-index]="0" (click)=selectedTechDepth(0)>
+            <a ngbNavLink [ngClass]="submitted ? '' : 'disabled' ">
+                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                <span class="d-none d-sm-block box-title-text">All</span>
+            </a>
+            <ng-template ngbNavContent>
+                <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </ng-template>
+        </li>
+
+        <li [ngbNavItem]="i+1" [attr.data-index]="i+1" *ngFor="let level of techDepthLevels; let i = index">
+            <a ngbNavLink (click)=selectedTechDepth(level.technical_depth_id) [ngClass]="submitted ? '' : 'disabled' ">
+                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                <span class="d-none d-sm-block box-title-text">{{level.technical_depth_nm}}</span>
+            </a>
+            <ng-template ngbNavContent>
+                <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </ng-template>
+        </li>
+    </ul>
+</div>
+
+<!-- Tab panes -->
+<div class="tab-content text-muted m-0 p-0">
+    <div [ngbNavOutlet]="justifyNav"></div>
+</div><!-- end tab content -->
+
+<ng-template #TabContent>
+    <div class="row px-0 py-4 m-0">
+        <div class="col-lg-8 col-sm-12">
+            <label for="floatingInput" class="font-size-18 ">{{totalCount}} Employees</label>
+        </div>
+        <div class="col-lg-4 text-end col-sm-12">
+            <!--div class="row">
+                <span class="col"><label for="floatingInput" class="font-size-13">Sort By
+                    </label></span>
+                <span class="col">
+                    <ng-select [multiple]="false">
+                        <ng-option>TEst</ng-option>
+                    </ng-select>
+                </span>
+            </div-->
+        </div>
+    </div>
+
+    <div class="row pt-2 p-0 m-0">
+
+        <div class="col-lg-2 mb-4" *ngFor="let employee of employeeSkill ; let i = index">
+            <div class="card shadow-lg h-100">
+                <div class="card-body p-0 pb-4 mb-2">
+                    <div class="position-relative overflow-hidden rounded-top" style="height: 50px;">
+                        <div class="bg-overlay bg-gradient" [ngClass]="cardBg[i]"></div>
+                    </div>
+                    <div class="text-center">
+                        <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                            <div class="avatar-lg">
+
+                                <span *ngIf="employee?.emp_image">
+                                    <img class="rounded-circle img-thumbnail" src="{{employee?.emp_image}}" alt="">
+                                </span>
+                                <span *ngIf="!employee?.emp_image">
+                                    <img class="rounded-circle img-thumbnail" src="assets/images/profile-pic2.png"
+                                        alt="">
+                                </span>
+                                <!-- <img src="assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail"> -->
+                            </div>
+                            <a href="javascript:void(0);" class="d-block position-absolute bottom-0 end-0">
+                                <div class="avatar-sm">
+
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6 class="box-title-text font-size-18 text-center text-capitalize">
+                                {{employee?.emp_nm | lowercase}}
+                            </h6>
+                            <p class="font-size-14 theme-desc-text-light">Emp No : {{employee?.emp_id}}</p>
+                            <p class="font-size-14 theme-desc-text-light"> Dept :
+                                <span class="text-capitalize"> {{employee?.level2_dept | lowercase}} </span>
+                            </p>
+                            <p
+                                class="desibadge badge badge-soft-secondary  py-2 me-2 font-size-14 text-center text-capitalize">
+                                {{employee?.designation_nm | lowercase}}
+                            </p>
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</ng-template>
+
+<div class="col-sm-12 col-md-12">
+    <div class="text-md-right float-md-end pagination-rounded">
+        <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2" [collectionSize]="totalCount"
+            [(page)]="page" [pageSize]="limit" [maxSize]="5" [ellipses]="false" [boundaryLinks]="true"
+            (pageChange)="loadPage(page)">
+        </ngb-pagination>
+    </div>
+</div>

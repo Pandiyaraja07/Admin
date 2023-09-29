@@ -1,0 +1,483 @@
+<div
+  *ngIf="
+    !employeeRole
+  "
+>
+  <span
+    class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize"
+    >Profile / {{ basicInfo?.emp_nm | lowercase }} /
+    <a style="color: #00448a">Job Chat </a></span
+  >
+
+  <h5
+    class="mb-0 font-size-23 heading-black"
+    style="margin-left: -10px; padding-top: -0.5rem"
+  >
+    <a class="btn pointer" onclick="history.back()"
+      ><i class="fas fa-arrow-left p-2"></i
+    ></a>
+    Job Chat of
+    <a class="text-capitalize heading-black"
+      >{{ basicInfo?.emp_nm | lowercase }}
+    </a>
+  </h5>
+</div>
+
+<div class="row">
+  <div class="card mt-2 rounded_card bg-wrap shadow-lg">
+    <div class="card-body bg-content">
+      <div class="row">
+        <div class="col-lg-8 col-md-9 col-12">
+          <div class="d-flex">
+            <div>
+              <img
+                _ngcontent-ado-c113=""
+                src="assets/images/menu-icon/Jobchat.png"
+                alt=""
+                class="d-block"
+              />
+            </div>
+            <div style="margin-left: 15px">
+              <h5 class="heading-black">Job Chat</h5>
+              <!-- <p class="heading-grey">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting
+                                industry</p> -->
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-lg-4 col-md-3 text-end col-12"
+          *ngIf="
+            supervisorRole ||
+            employeeRole ||
+            flRole || basicInfo.fl_emp_mapping.designation_nm == 'R&D DIRECTOR'
+          "
+        >
+          <a
+            [routerLink]="['/job-chat/add-job-chat']"
+            [queryParams]="{ empId: profileId }"
+            class="btn custom_btn addbtnjobchat"
+          >
+            <i class="fas fa-plus"></i> Job Chats</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-md-6">
+      <label class="chatcount" for="floatingInput"
+        >Job Chat : {{ totalCount }}</label
+      >
+    </div>
+    <div class="col-lg-4 col-md-6 text-end">
+      <div class="row">
+        <span tyle="color:#051436" class="col pt-2"
+          ><label class="chatcount font-size-16" for="floatingInput"
+            >Sort by:
+          </label></span
+        >
+        <span
+          class="col-md-4"
+          style="width: 109px; height: 42px; margin-left: 8px"
+        >
+          <ng-select
+            style="width: 109px; height: 42px"
+            [(ngModel)]="selectedSortOp"
+            name="selectedSortOp"
+            id="selectedSortOp"
+            [searchable]="false"
+            [clearable]="false"
+            (change)="selectedSortFn()"
+          >
+            <ng-option
+              style="margin-left: 10px"
+              *ngFor="let list of selectValue"
+              [value]="list"
+              >{{ list }}
+            </ng-option>
+          </ng-select>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let jobChatData1 of jobChatInfo; let i = index">
+    <div class="row" style="margin-top: -17px">
+      <div class="card rounded_card mt-4 shadow-lg">
+        <div class="card-body">
+          <h6 class="font-size-18 body-black">Career Aspiration statement</h6>
+          <p class="font-size-14 details-definition">
+            {{ jobChatData1.aspiration_stmt }}
+          </p>
+          <blockquote
+            class="blockquote mb-0 badge-soft-secondary rounded_card"
+            style="
+              margin-left: -12px;
+              background-color: #f7f8f9;
+              border-radius: 8px;
+            "
+          >
+            <h6 class="py-2 body-black font-size-18">Career Milestones</h6>
+
+            <div class="row">
+              <div
+                class="col-lg-4 col-md-3 col-12"
+                style="margin-bottom: 15px"
+                *ngFor="
+                  let jobChatData2 of jobChatData1.career_plan_infos;
+                  let j = index
+                "
+              >
+                <div
+                  class="card rounded_card h-100 shadow-lg"
+                  style="width: 100%"
+                >
+                  <div class="card-body">
+                    <span
+                      class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-14"
+                      style="font-weight: normal; color: #191d23"
+                    >
+                      <span class="font-size-14 body-black pr-2"
+                        ><img src="assets/images/users/Time.png"
+                      /></span>
+                      {{ jobChatData2.time_frame }}
+                    </span>
+                    <blockquote
+                      class="blockquote mb-0 rounded_card"
+                      style="border-radius: 8px"
+                      [style.background-color]="
+                        jobChatData2.time_frame === 'Long Term'
+                          ? '#ddddea'
+                          : jobChatData2.time_frame === 'Mid Term'
+                          ? '#dff1f2'
+                          : '#edecfc'
+                      "
+                    >
+                      <span
+                        class="heading"
+                        style="font-size: 14px; font-weight: normal"
+                      >
+                        Aspired Role
+                      </span>
+                      <div class="row">
+                        <div class="card rounded_card mb-2 pt-1 shadow-lg">
+                          <div class="row mb-2">
+                            <div class="col font-size-14">
+                              <span class="light-text font-weight-bold">
+                                Company
+                              </span>
+                            </div>
+                            <div class="col font-size-14 text-dark text-end">
+                              {{ jobChatData2.aspired_role.company }}
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="card rounded_card mb-2 pt-1 shadow-lg"
+                          *ngIf="jobChatData2.aspired_role.category"
+                        >
+                          <div class="row mb-2">
+                            <div class="col font-size-14">
+                              <span class="light-text font-weight-bold">
+                                Category
+                              </span>
+                            </div>
+                            <div class="col font-size-14 text-dark text-end">
+                              {{ jobChatData2.aspired_role.category }}
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="card rounded_card mb-2 pt-1 shadow-lg"
+                          *ngIf="jobChatData2.aspired_role?.unit"
+                        >
+                          <div class="row mb-2">
+                            <div class="col font-size-14">
+                              <span class="light-text font-weight-bold">
+                                {{ jobChatData2.aspired_role.unit.name }}
+                              </span>
+                            </div>
+                            <div class="col font-size-14 text-dark text-end">
+                              {{ jobChatData2.aspired_role.unit.value }}
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="card rounded_card mb-2 pt-1 shadow-lg"
+                          *ngIf="jobChatData2.aspired_role?.location"
+                        >
+                          <div class="row mb-2">
+                            <div class="col font-size-14">
+                              <span class="light-text font-weight-bold">
+                                Location
+                              </span>
+                            </div>
+                            <div class="col font-size-14 text-dark text-end">
+                              {{ jobChatData2.aspired_role.location }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </blockquote>
+                    <!--<span class="mt-4 heading font-size-14"> Comments </span>
+                                        <p class="font-size-14 details-definition" style="margin-bottom:50px;">
+                                            {{jobChatData2.comments_nm}}
+                                        </p>-->
+                    <span class="mt-4 heading font-size-14"> Comments </span>
+                    <p
+                      class="font-size-14 details-definition"
+                      style="margin-bottom: 50px"
+                    >
+                      <span class="collapsable float-left">
+                        {{
+                          readMore
+                            ? jobChatData2.comments_nm
+                            : (jobChatData2.comments_nm | slice: 0:100)
+                        }}
+                        <span *ngIf="jobChatData2.comments_nm.length > 100">
+                          <div class="dropdown" ngbDropdown>
+                            <a
+                              class="btn btn-link text-dark dropdown-toggle shadow-none"
+                              role="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              href="javascript:;"
+                              ngbDropdownToggle
+                              ><span class="blueTxt" style="color: #00448a"
+                                >...{{ showTxt }}</span
+                              >
+                            </a>
+                            <ul
+                              class="dropdown-menu dropdown-menu-end"
+                              ngbDropdownMenu
+                            >
+                              <li class="custom_li">
+                                {{ jobChatData2.comments_nm }}
+                              </li>
+                            </ul>
+                          </div>
+                        </span>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </blockquote>
+        </div>
+
+        <blockquote
+          class="blockquote mt-4 mb-0 badge-soft-secondary rounded_card"
+          style="margin-right: 17px; margin-left: 8px"
+        >
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="col-lg-6 font-size-14 details-definition">
+                <span>
+                  Career Path Preference :
+                  <span class="body-black font-size-16">{{
+                    jobChatData1?.path_preference
+                  }}</span></span
+                >
+              </div>
+            </div>
+          </div>
+        </blockquote>
+        <!-- <div class="row mt-4">
+                    <div class="col-md-6 mb-2">
+                        <span class="badge rounded-pill badge-outline-secondary ms-1 p-1"> <span
+                                class="text-success font-size-13 pr-2"><i class="fas fa-check-circle"></i></span>
+                            Approved on {{jobChatData1.approval_date | date:'mediumDate'}}
+                        </span>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <span class="pe-4"> <i class="fas fa-clock"></i> Last modified o
+                            {{jobChatData1.updated_ts | date:'mediumDate'}}</span>
+                        <span><a class="text-decoration-underline"
+                                [routerLink]="['/edit-job-chat/'+jobChatData1.job_chat_id]"> <i
+                                    class="fas fa-pencil-alt"></i>
+                                Edit
+                            </a></span>
+                    </div>
+                </div> -->
+
+        <div class="row mt-4">
+          <div class="col-md-6 mb-2" style="margin-left: 8px; margin-top: -10px" *ngIf="jobChatData1.approval_status == 0">
+            <div *ngIf="flAccess || supervisorAccess">
+              <span>
+                <a (click)="jobChatApproveAction(1, jobChatData1.job_chat_id)"
+                  class="btn badge badge-soft-secondary py-2 me-2 font-size-16"><i class="far fa-check-circle text-success"></i>
+                  Approve
+                </a>
+          
+                <a (click)="jobChatApproveAction(2, jobChatData1.job_chat_id)"
+                  class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16"><i
+                    class="far fa-times-circle text-danger"></i>
+                  Reject
+                </a>
+              </span>
+            </div>
+            <div *ngIf="!flAccess && !supervisorAccess" class="badge rounded-pill badge-outline-secondary mt-2 font-size-13"
+              style="color: #64748b">
+              <span class="text-warning font-size-13 pr-2"><i class="fas fa-hourglass-half"></i></span>
+              Pending
+            </div>
+           
+          </div>
+          <div
+            class="col-md-6 mb-2"
+            style="margin-left: 5px"
+            *ngIf="jobChatData1.approval_status == 1"
+          >
+            <span
+              class="badge rounded-pill badge-outline-secondary ms-1 p-1 font-size-13"
+              style="color: #64748b"
+            >
+              <span class="text-success font-size-13 pr-2"
+                ><i class="fas fa-check-circle"></i
+              ></span>
+              Approved
+            </span>
+            <span style="padding-left: 10px;">
+              <a  *ngIf="(jobChatData1.approval_status == 1 &&
+              jobChatData1.approved_by_supervisor == true) && flAccess && FlSupervisorAccess" (click)="jobChatApproveAction(2, jobChatData1.job_chat_id)"
+                    class="btn badge badge-soft-secondary py-2  mb-0 me-2 font-size-16"><i
+                      class="far fa-times-circle text-danger"></i>
+                    Reject
+                  </a>
+                </span>
+          </div>
+          <div class="col-md-6 mb-2" *ngIf="jobChatData1.approval_status == 2">
+            <span
+              class="badge rounded-pill badge-outline-secondary ms-2 p-1 font-size-13"
+              style="color: #64748b"
+            >
+              <span class="text-danger font-size-13 pr-2"
+                ><i class="fas fa-window-close"></i
+              ></span>
+              Recheck
+            </span>
+          </div>
+          <span
+            class="col-md-7 text-end date2"
+            *ngIf="jobChatData1.update_ts == null; else elseBlock"
+          >
+            <span
+              class="pe-4 details-definition font-size-14"
+              style="color: #64748b; margin-right: -28px"
+            >
+              <i class="fas fa-clock"></i>
+              <span class="details-definition font-size-14 ml-1"
+                >updated on
+              </span>
+              {{ jobChatData1.create_ts | localtime }}
+            </span>
+            <span
+              *ngIf="
+                jobChatData1.approval_status != 1 &&
+                (flAccess || supervisorAccess || ownProfile)">
+              <span class="col-md-4 text-end editbutton">
+                <i
+                  class="fa fa-trash text-danger ml-2 delete_icon_top"
+                  style="padding: 10px; cursor: pointer"
+                  data-toggle="tooltip"
+                  (click)="openDeleteAllJobChat(i)"
+                ></i>
+              </span>
+              <span>
+                <a
+                  class="text-decoration-underline Edit"
+                  [routerLink]="[
+                    '/job-chat/edit-job-chat/' + jobChatData1.job_chat_id
+                  ]"
+                  [queryParams]="{ empId: profileId }"
+                >
+                  <i class="fas fa-pencil-alt"></i> Edit
+                </a>
+              </span>
+            </span>
+          </span>
+          <ng-template #elseBlock>
+            <div
+              class="col-md-6 text-end date1"
+              *ngIf="jobChatData1.update_ts != null"
+            >
+              <span style="color: #64748b">
+                <i class="fas fa-clock"></i>
+                <span class="details-definition font-size-14 ml-1"
+                  >updated on
+                </span>
+                {{ jobChatData1.update_ts | localtime }}
+              </span>
+              <span
+                *ngIf="
+                  jobChatData1.approval_status != 1 &&
+                  (flAccess || supervisorAccess || ownProfile)">
+                <span class="col-md-4 text-end editbutton">
+                  <i
+                    class="fa fa-trash text-danger ml-2 delete_icon_top"
+                    style="padding: 10px; cursor: pointer"
+                    data-toggle="tooltip"
+                    (click)="openDeleteAllJobChat(i)"
+                  ></i>
+                </span>
+                <span>
+                  <a
+                    class="text-decoration-underline Edit"
+                    [routerLink]="[
+                      '/job-chat/edit-job-chat/' + jobChatData1.job_chat_id
+                    ]"
+                    [queryParams]="{ empId: profileId }"
+                  >
+                    <i class="fas fa-pencil-alt"></i> Edit
+                  </a>
+                </span>
+              </span>
+            </div>
+          </ng-template>
+        </div>
+        <!-- <ng-template #elseBlock>
+                    <div class='col-md-6 text-end ' *ngIf="jobChatData1.update_ts != null">
+                        <span class="pe-4" style="color: #64748b;"> <i class="fas fa-clock"></i>
+                            <span class="text-muted ml-1 font-size-14">updated on </span><span
+                                class="text-dark">{{jobChatData1.update_ts | localtime }}</span>
+                        </span>
+                        <span *ngIf="(jobChatData1.approval_status != 1 && !isShowButton  && currentUserId.role != 'HR')">
+                            <span *ngIf="(currentUserId.role == 'CD' ? basicInfo?.fl_emp_mapping.designation_nm == 'R&D DIRECTOR' ? true : false : true )">
+                            <a class="text-decoration-underline Edit" style="cursor: pointer;font-size:14px; color: #00448a;"
+                                [routerLink]="['/job-chat/edit-job-chat/'+jobChatData1.job_chat_id]">
+                                <i class="fas fa-pencil-alt"> Edit</i>
+                            </a>
+                        </span></span>
+                        <span *ngIf="(jobChatData1.approval_status != 1  && currentUserId.role != 'HR') ">
+                            <span *ngIf="(currentUserId.role == 'CD' ? basicInfo?.fl_emp_mapping.designation_nm == 'R&D DIRECTOR' ? true : false : true )">
+                            <i class="fa fa-trash text-danger ml-2 delete_icon_top" (click)="openDeleteAllJobChat(i)"
+                                style="padding:10px;cursor: pointer;" data-toggle="tooltip"></i>
+                        </span></span>
+
+                    </div>
+                </ng-template> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-md-12">
+  <div
+    class="text-md-right float-md-end pagination-rounded"
+    style="margin-top: 25px"
+  >
+    <ngb-pagination
+      class="d-flex justify-content-end mr-auto pagination mt-2"
+      [collectionSize]="totalCount"
+      [(page)]="page"
+      [pageSize]="limit"
+      [maxSize]="5"
+      [ellipses]="false"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage(page)"
+    >
+    </ngb-pagination>
+  </div>
+</div>

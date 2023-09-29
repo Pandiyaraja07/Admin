@@ -1,0 +1,70 @@
+.general_faq .collapsed .accordion-button {
+    background-color: transparent;
+    color: #495057;
+    border-bottom: 1px solid #eff0f2;
+    border-left: 2px solid #00448a;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #f5f7fc;
+    border-left: 2px solid #00448a;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg) !important;
+}
+
+.accordion-header-text {
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23;
+}
+
+.box-title-text {
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.19;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--night-blue);
+}
+
+.accordion-button::after {
+    transition: transform 0.2s ease-in-out;
+}
+
+.invalid-feedback {
+    display: flow-root;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 87.5%;
+    color: #f34e4e;
+}
+
+.disabled-div{
+    pointer-events: none;
+    background-color: #c7caca;
+}
+
+.disabled-radio{
+    background-color: rgb(180, 179, 179);
+}
+
+.selected-radio{
+    background-color: #008366 !important;
+}
+
+.btn-outline-light {
+    color: black;
+}
+

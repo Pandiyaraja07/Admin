@@ -1,0 +1,472 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize">Profile / {{basicInfo?.emp_nm | lowercase}} / Study / Project Details / <a
+    routerLink="/emp-add-project" class="text-decoration-undeline"  style="color: #00448a;"> {{editOrAddButton}} Project
+</a></span>
+
+<h5 class="mb-0  font-size-23 heading-black "
+style="margin-left: -10px;padding-top:-0.5rem"><a class="btn pointer" onclick="history.back()"><i
+        class="fas fa-arrow-left p-2 "></i></a>{{editOrAddButton}}
+Project for <a class="text-capitalize heading-black">{{basicInfo?.emp_nm | lowercase}}</a>  </h5>
+
+<form [formGroup]="addProjectForm">
+<div class="row pt-3">
+    <div class="col-xl-12">
+        <div class="card mt-2 rounded_card">
+            <div class="card-body" style="margin-left:15px;">
+                <div class="col-lg-6 rounded_card">
+                    <label for="basicpill-projectType-input" class="form-label font-size-16 body-black">Project Name</label>
+                    <span class="text-danger">*</span>
+                    <div class="mb-3">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" placeholder="Enter Project Name"
+                                [(ngModel)]="projectObj.title" formControlName="title" name="title"
+                                [ngClass]="{'is-invalid': submitted && form.title.errors}">
+                            <label for="title" class="font-size-16 innerlabel">Enter Project Name</label>
+                        </div>
+                        <div *ngIf="submitted && form.title.errors" class="invalid-feedback">
+                            <span *ngIf="form.title.errors.required">Project Name is required.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="basicpill-projectType-input" class="form-label font-size-16  body-black">Contributions</label>
+                    <span class="text-danger">*</span>
+                    <div class="row">
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <div class="form-check form-radio-border text-center" [ngClass]="projectObj.role == 'Project Lead' ? 'radio-on' : '' ">
+                                    <input type="radio" class="form-check-input radio-btn-resize" id="projectType1"
+                                        [(ngModel)]="projectObj.role" name="role" formControlName="role"
+                                        value="Project Lead"
+                                        [ngClass]="{'is-invalid': submitted && form.role.errors}">
+                                    <label class="form-check-label text-center font-size-16 projectlead"
+                                        for="projectType1">
+                                        Project Lead
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && form.role.errors" class="invalid-feedback">
+                                    <span *ngIf="form.role.errors.required">Contributions is required.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <div class="form-check form-radio-border text-center" [ngClass]="projectObj.role == 'Member' ? 'radio-on'  : '' " >
+                                    <input type="radio" class="form-check-input radio-btn-resize" id="projectType2"
+                                        [(ngModel)]="projectObj.role" name="role" formControlName="role"
+                                        value="Member" [ngClass]="{'is-invalid': submitted && form.role.errors}">
+                                    <label class="form-check-label text-center font-size-16 projectlead"
+                                        for="projectType2">
+                                        Member
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && form.role.errors" class="invalid-feedback">
+                                    <span *ngIf="form.role.errors.required">Contributions is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <label for="basicpill-location-input" class="form-label font-size-16 body-black">Portfolio</label>
+                    <span class="text-danger">*</span>
+                    <div class="row">
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <div class="form-check form-radio-border text-center" [ngClass]="projectObj.significance == 'Global' ? 'radio-on' : '' ">
+                                    <input type="radio" class="form-check-input radio-btn-resize"
+                                        id="projectLocation1" name="significance" formControlName="significance"
+                                        [(ngModel)]="projectObj.significance" value="Global"
+                                        [ngClass]="{'is-invalid': submitted && form.significance.errors}">
+                                    <label class="form-check-label text-center font-size-16 projectlead"
+                                        for="projectLocation1">
+                                        <i class="fas fa-globe pe-2"></i> Global
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && form.significance.errors" class="invalid-feedback">
+                                    <span *ngIf="form.significance.errors.required">Portfolio is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <div class="form-check form-radio-border text-center" [ngClass]="projectObj.significance == 'Local' ? 'radio-on' : '' ">
+                                    <input type="radio" class="form-check-input radio-btn-resize"
+                                        id="projectLocation2" name="significance" formControlName="significance"
+                                        [(ngModel)]="projectObj.significance" value="Local"
+                                        [ngClass]="{'is-invalid': submitted && form.significance.errors}">
+                                    <label class="form-check-label text-center font-size-16 projectlead"
+                                        for="projectLocation2">
+                                        <i class="fas fa-building pe-2"></i> Local
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && form.significance.errors" class="invalid-feedback">
+                                    <span *ngIf="form.significance.errors.required">Portfolio is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 rounded_card">
+                    <div class="row rounded_card">
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <label for="basicpill-startDate-input" class="form-label font-size-16 body-black">Project
+                                    Start Date</label>
+                                    <span class="text-danger">*</span>
+                                <div class="input-group mb-3 rounded_card">
+                                    <input class="form-control flatpickr-input" id="start_date"
+                                        formControlName="start_date" type="date" mwlFlatpickr [altInput]="true"
+                                        [convertModelValue]="true" name="start_date"
+                                        (change)="onSelectedStart($event)" [(ngModel)]="projectObj.start_date"
+                                        [ngClass]="{'is-invalid': submitted && form.start_date.errors}">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fas fa-calendar-alt pe-2"></i></span>
+                                </div>
+                                <div *ngIf="submitted && form.start_date.errors" class="invalid-feedback">
+                                    <span *ngIf="form.start_date.errors.required">Project Start Date is
+                                        required.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-lg-6">
+                            <div class="mb-3">
+                                <label for="basicpill-endDate-input" class="form-label font-size-16 body-black">Project
+                                    End Date
+                                </label>
+                                <span class="text-danger">*</span>
+                                <div class="input-group mb-3">
+                                    <input class="form-control flatpickr-input" id="end_date"
+                                        [(ngModel)]="projectObj.end_date" formControlName="end_date" type="date"
+                                        mwlFlatpickr [altInput]="true" [convertModelValue]="true" name="end_date"
+                                        bsDatepicker [minDate]="minDate"
+                                        [ngClass]="{'is-invalid': submitted && form.end_date.errors}">
+                                      <span class="input-group-text" id="basic-addon1"><i
+                                            class="fas fa-calendar-alt pe-2" color="blue"></i></span> 
+                                </div>
+                                <div *ngIf="submitted && form.end_date.errors" class="invalid-feedback">
+                                    <span *ngIf="form.end_date.errors.required">Project End Date is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="basicpill-endDate-input" class="form-label font-size-16 body-black">Project
+                        Details</label>
+                        <span class="text-danger">*</span>
+                        <div class="custom_enter_text font-size-14">(The entered text cannot exceed more than 500 characters)</div>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" name="description"
+                            [(ngModel)]="projectObj.description" id="floatingTextarea2" style="height: 100px"
+                            formControlName="description" maxlength="500"
+                            [ngClass]="{'is-invalid': submitted && form.description.errors}"></textarea>
+                        <label for="floatingTextarea2" class="font-size-16 innerlabel">Enter Project Details</label>
+                        <div *ngIf="submitted && form.description.errors" class="invalid-feedback">
+                            <span *ngIf="form?.description?.errors?.required">Project Details is required.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card rounded_card">
+            <div class="card-header justify-content-between d-flex align-items-center rounded_card">
+
+                <h4 class="form-label font-size-20 selectskill">Select Skills</h4>
+				<!-- <ng-select [items]="searchSkills"
+						bindLabel="skill_nm"
+						bindValue="tech_skill_id"
+						placeholder="Search for Skills"
+						[multiple]="true"
+						class="w-50"
+						[(ngModel)]="selectedSkills"
+						[ngModelOptions]="{standalone: true}" 
+						(add)="onSkillAdd($event)"
+						(remove)="onSkillRemove($event)">
+						<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+							<div class="ng-value" *ngFor='let item of $any(items | slice:0:2)'>
+								<span class="ng-value-label">{{item.skill_nm}}</span>
+								<span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+							</div>
+							<div class="ng-value" *ngIf="items.length > 2">
+								<span class="ng-value-label">{{items.length - 2}} more...</span>
+							</div>
+						</ng-template>
+				</ng-select> -->
+                <div class="col-lg-4">
+                <ng-select name="search" [(ngModel)]="selectedSkills" 
+                placeholder="Search for Skills"
+                class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms" 
+                [multiple]="true"
+                [ngModelOptions]="{standalone: true}" 
+                (add)="onSkillAdd($event)"
+                (remove)="onSkillRemove($event)" 
+                placeholder="Search Skills">
+            <ng-option *ngFor="let item of searchSkills" [value]="item">
+                {{item.skill_nm}}
+                <div class="font-size-11">
+                    {{ 
+                        item.domain_info.domain_nm + " → " +  
+                        item.subdomain_info.subdomain_nm + " → " +
+                        item.Levels
+                    }}
+                </div>
+            </ng-option>
+        </ng-select>
+         </div>     
+          </div>
+            <div class="card-body" style="margin-left: 13px;">
+                <div class="grey-bg-layout-section row overflow-auto m-0" style="position: relative;margin-top: 0px;height:310px;">
+                    <div class="col-xl-3 p-0">
+                        <div class="card rounded_card"
+                        style="margin-top:5px;margin-left:5px; width: 105%;">
+                            <div class="card-body">
+                                <div class=" col-md-12">
+                                    <div class="mb-3">
+                                        <label for="choices-multiple-remove-button"
+                                            class="form-label font-size-16 body-black">Domain</label>
+                                        <ng-select name="domain" formControlName="domain"
+                                            [(ngModel)]="projectObj.domain"
+                                            (change)="getSelectedDomain($event)"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [ngClass]="projectObj.domain == 1 ? 'ng-select-multiple1' : (projectObj.domain == 2 ? 'ng-select-multiple2' : (projectObj.domain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            [maxSelectedItems]="1" [clearable]="true">
+                                            <ng-option *ngFor="let domain of techDomain" [value]="domain.domain_id">
+                                                {{domain.domain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select>
+                                        <!-- <ng-select name="domain" formControlName="domain"
+                                            [(ngModel)]="projectObj.domain"
+                                            (change)="getSelectedDomain($event)"
+                                            class="ng-select ng-select-multiple ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [ngClass]="projectObj.domain == 1 ? 'ng-select-multiple1' : (projectObj.domain == 2 ? 'ng-select-multiple2' : (projectObj.domain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            [multiple]="true" [maxSelectedItems]="1" [clearable]="false">
+                                            <ng-option *ngFor="let domain of techDomain" [value]="domain.domain_id">
+                                                {{domain.domain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select> -->
+                                    </div>
+                                </div>
+                                <div class=" col-md-12">
+                                    <div class="mb-3">
+                                        <label for="choices-multiple-remove-button"
+                                            class="form-label font-size-16 body-black domain1 ps-2">Sub Domain</label>
+                                            <ng-select name="subdomain" formControlName="subdomain"
+                                            [(ngModel)]="projectObj.subdomain"
+                                     
+                                            [ngClass]="projectObj.domain == 1 ? 'ng-select-multiple1' : (projectObj.domain == 2 ? 'ng-select-multiple2' : (projectObj.domain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            (change)="getSelectedSubDomain($event)" 
+                                            class="ng-select ng-select-multiple ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                            [multiple]="true" [maxSelectedItems]="1" [clearable]="false">
+                                            <ng-option *ngFor="let subdomain of techSubDomain" class="custom_select_text"
+                                                [value]="subdomain.subdomain_id">
+                                                {{subdomain.subdomain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select>
+                                        <!-- <ng-select name="subdomain" formControlName="subdomain"
+                                            [(ngModel)]="projectObj.subdomain"
+                                            [ngClass]="projectObj.domain == 1 ? 'ng-select-multiple1' : (projectObj.domain == 2 ? 'ng-select-multiple2' : (projectObj.domain == 3 ? 'ng-select-multiple3' : 'ng-select-multiple'))"
+                                            (change)="getSelectedSubDomain($event)" 
+                                            class="ng-select  ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                             [maxSelectedItems]="1" [clearable]="true">
+                                            <ng-option *ngFor="let subdomain of techSubDomain" class="custom_select_text"
+                                                [value]="subdomain.subdomain_id">
+                                                {{subdomain.subdomain_nm | lowercase}}
+                                            </ng-option>
+                                        </ng-select> -->
+                                    </div>
+                                </div>
+                                 
+                                <div class=" col-md-12" *ngIf="isLevel1length" >
+                                   <div class="mb-3">
+                                    <div class="form-check form-radio-border text-center" *ngIf="isDisableButton">
+                                        <input class="form-check-input radio-btn-resize width-auto" type="radio"
+                                            name="levels" id="level1" (change)="onSelectlevel1()">
+                                            <label class="form-check-label text-center font-size-16"
+                                        for="level1">Level1
+                                    </label>
+                                      </div>
+                                   </div> 
+                                </div>
+                                <div class=" col-md-12"*ngIf="isLevel2length">
+                                    <div class="mb-3">
+                                     <div class="form-check form-radio-border text-center" *ngIf="isDisableButton">
+                                         <input class="form-check-input radio-btn-resize width-auto" type="radio"
+                                             name="levels" id="level2" (change)="onSelectlevel2()">
+                                             <label class="form-check-label text-center font-size-16 "
+                                            for="level2">Level2
+                                    </label>
+                                       </div>
+                                    </div> 
+                                 </div>
+                                 <div class=" col-md-12" *ngIf="isLevel3length">
+                                    <div class="mb-3">
+                                     <div class="form-check form-radio-border text-center" *ngIf="isDisableButton">
+                                         <input class="form-check-input radio-btn-resize width-auto" type="radio"
+                                             name="levels" id="level3" (change)="onSelectlevel3()">
+                                             <label class="form-check-label text-center font-size-16"
+                                                  for="level3"> Level3
+                                            </label>
+                                       </div>
+                                    </div> 
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+             
+                <div class="col-xl-8 ms-4 me-4">
+                    <div class="m-2">
+                        <label class="form-label font-size-16 chooseoneormultiple">Choose One Or Multiple Skills</label>
+                    </div>
+                    <div class="row m-2">
+                        <span *ngIf="!islevel2">
+                            <span *ngIf="!islevel3">
+                                <div class="row">
+                                    <div *ngFor="let level1 of techLevel1 let i=index" style="width:50%;">
+                                        <span class="col form-check form-checkbox-border checkbox-bg-info">
+                                            <input class="form-check-input checkbox-resize" type="checkbox"
+                                                id="level1_{{i}}" formArrayName="level1" [readonly]="!isDisableButton"
+                                                [checked]="isSelectedLevel1(level1)"  [ngClass]="{'is-invalid': submitted && form.level1.errors}"
+                                                (change)="onChangeLevel1(level1, $event)" [value]="level1.tech_skill_id">
+                                            <label class="form-check-label font-size-13 text-muted ps-2 text-capitalize"
+                                                for="level1_{{i}}">
+                                                {{level1.skill_nm | lowercase}}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                    </div>
+                     <div class="row m-2">
+                        <span *ngIf="!islevel1">
+                            <span *ngIf="!islevel3">
+                                <div class="row">
+                                    <div *ngFor="let level2 of techLevel2 let i=index" style="width:50%;">
+                                        <span class="col form-check form-checkbox-border checkbox-bg-info">
+                                            <input class="form-check-input checkbox-resize" type="checkbox"
+                                                id="level2_{{i}}" formArrayName="level2" [readonly]="!isDisableButton"
+                                                [checked]="isSelectedLevel2(level2)"
+                                                (change)="onChangeLevel2(level2, $event)" [value]="level2.tech_skill_id">
+                                            <label class="form-check-label font-size-13 text-muted ps-2 text-capitalize"
+                                                for="level2_{{i}}">
+                                                {{level2.skill_nm | lowercase}}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                    </div>
+                     <div class="row m-2">
+                        <span *ngIf="!islevel1">
+                            <span *ngIf="!islevel2">
+                                <div class="row">
+                                    <div *ngFor="let level3 of techLevel3 let i=index" style="width:50%;">
+                                        <span class="col form-check form-checkbox-border checkbox-bg-info">
+                                            <input class="form-check-input checkbox-resize" type="checkbox"
+                                                id="level3_{{i}}" formArrayName="level3" [readonly]="!isDisableButton"
+                                                [checked]="isSelectedLevel3(level3)"
+                                                (change)="onChangeLevel3(level3, $event)" [value]="level3.tech_skill_id">
+                                            <label class="form-check-label font-size-13 text-muted ps-2 text-capitalize"
+                                                for="level3_{{i}}">
+                                                {{level3.skill_nm | lowercase}}
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                    </div> 
+                </div>
+            </div>
+                 <div class="col-xl-12 pt-4">
+                    <div class="m-0 col-lg-12">
+                        <label class="form-label font-size-16 body-black">Selected skills</label>
+                    </div>
+                    <div *ngIf="selectedTopics1.length > 0" class="m-0">
+                    <label class="form-label font-size-13 text-muted">Level1:</label>
+                    <span *ngFor="let proj_skills of selectedTopics1; let i = index " class="ms-3">
+                        <p [ngClass]="proj_skills?.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills?.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills?.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="selectedClose1(i)"> </i>
+                        </p>
+                    </span>
+                   </div>
+                   <div *ngIf="selectedTopics2.length > 0" class="m-0">
+                    <label class="form-label font-size-13 text-muted">Level2:</label>
+                    <span *ngFor="let proj_skills of selectedTopics2; let i = index " class="ms-3">
+                        <p [ngClass]="proj_skills?.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills?.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills?.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="selectedClose2(i)"> </i>
+                        </p>
+                    </span>
+                   </div>
+                    <div *ngIf="selectedTopics3.length > 0" class="m-0">
+                    <label class="form-label font-size-13 text-muted">Level3:</label>
+                    <span *ngFor="let proj_skills of selectedTopics3; let i = index " class="ms-3">
+                        <p [ngClass]="proj_skills?.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills?.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills?.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="selectedClose3(i)"> </i>
+                        </p>
+                    </span>
+                   </div>
+                </div> 
+                <div class="col-xl-12 pt-4" *ngIf="editOrAddButton == 'Edit'">
+                    <div class="m-0 col-lg-12">
+                        <label class="form-label font-size-16 body-black"
+                        style="margin-left:15px;">Update selected skills</label>
+                    </div>
+                	<label class="form-label font-size-13 text-muted">Level1:</label>
+                   	<span *ngFor="let proj_skills of  updateLevel1; let i=index">
+                        <p [ngClass]="proj_skills.skillLevel3.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills.skillLevel3.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills.skillLevel3.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skillLevel3.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="UpdateselectedClose1(proj_skills.skill_id,i)"> </i>
+                        </p>
+                    </span>
+                   <br/>
+                   <label class="form-label font-size-13 text-muted">Level2:</label>
+                   <span *ngFor="let proj_skills of updateLevel2; let i=index">
+                        <p [ngClass]="proj_skills.skillLevel3.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills.skillLevel3.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills.skillLevel3.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skillLevel3.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="UpdateselectedClose2(proj_skills.skill_id,i)"> </i>
+                        </p>
+                    </span>
+                    <br/>
+                	<label class="form-label font-size-13 text-muted">Level3:</label>
+                   	<span *ngFor="let proj_skills of updateLevel3; let i=index">
+                        <p [ngClass]="proj_skills.skillLevel3.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills.skillLevel3.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills.skillLevel3.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                            class="badge py-2 me-2 font-size-15 text-capitalize">
+                            {{proj_skills.skillLevel3.skill_nm | lowercase}}
+                            <i class='far fa-times-circle' (click)="UpdateselectedClose3(proj_skills.skill_id,i)"> </i>
+                        </p>
+                    </span>
+                </div> 
+            </div>
+            </div>
+       </div>
+   </div>
+<div class="row pb-4">
+    <div class="col-lg-12 text-end">
+        <span class="px-2">
+            <button class="btn custom_btn_danger" (click)="onCancel()">Cancel</button>
+        </span>
+        <span class="px-2">
+            <button class="btn custom_btn" type="submit" (click)="addProject()">{{button}}</button>
+        </span>
+    </div>
+</div>
+</form>
+
+
+

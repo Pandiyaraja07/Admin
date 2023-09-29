@@ -1,0 +1,1359 @@
+<div class="row custom-text">
+
+    <div class="card rounded_card bg-wrap shadow-lg">
+        <div class="card-body bg-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 avatar me-3 d-sm-block d-none">
+                                    <img _ngcontent-ado-c113="" src="assets/images/menu-icon/Dashboard.png" alt=""
+                                        class=" d-block">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 style="width:100%; font-family: Ubuntu; font-size: 23px; font-weight: bold;
+										text-align: left;color: #454545;margin-top: 5px;">Dashboard</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row px-0 mx-0 py-2">
+        <div class="col-lg-3 p-0 m-0" style="height:744px;">
+            <div class="card p-1 m-1 h-100 rounded_card shadow-lg">
+                <div class="card-body m-0 p-0">
+                    <div class="profile-bg position-relative rounded-top" style="height: 80px;">
+                        <div class="bg-overlay1">
+                            <img src="assets/images/users/Shape.png">
+                        </div>
+                    </div>
+
+                    <div class="text-center p-2">
+                        <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                            <div class="avatar-lg">
+                                <span *ngIf="currentUser?.emp_image">
+                                    <img class="rounded-circle img-thumbnail" src="{{currentUser?.emp_image}}" alt="">
+                                </span>
+                                <span *ngIf="!currentUser?.emp_image">
+                                    <img class="rounded-circle img-thumbnail" src="assets/images/profile-pic2.png"
+                                        alt="">
+                                </span>
+                                <!-- <img src="assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail"> -->
+                            </div>
+                            <a href="javascript:void(0);" class="d-block position-absolute bottom-0 end-0">
+                                <div class="avatar-sm">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5 class="font-size-18 heading-black mb-1 text-center text-capitalize"
+                                style="margin-top:-18px;margin-left:13px;">{{currentUser?.emp_nm | lowercase}}</h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <p class=" badge badge-soft-secondary m-0 py-2 me-2 text-capitalize">
+                                {{currentUser.designation_nm | lowercase}}
+                            </p>
+                            <p class=" badge badge-soft-secondary m-0 py-2"> Emp No : {{currentUser.emp_id}}
+                            </p>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="card shadow-lg  mt-4 rounded_card">
+                                <div class="card-body pb-2" style="background-color: #f8f0ef;">
+                                    <div class="row text-start">
+                                        <div class="col-lg-8">
+                                            <h6 class="body-black font-size-18">{{currentUser.sg_id}}</h6>
+                                            <p class="font-size-14 details-definition">SGID</p>
+                                        </div>
+                                        <div class="col-lg-4 ">
+                                            <div class="sidebar1">
+                                                <img src="assets/images/users/SG ID.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" *ngIf="currentUser.grade_cd">
+                            <div class="card shadow-lg bg-soft-purple mt-2 rounded_card ">
+                                <div class="card-body pb-2" style="background-color:  #dff1f2;">
+                                    <div class="row text-start">
+                                        <div class="col-lg-8">
+                                            <h6 class="body-black font-size-18">{{currentUser.grade_cd}}</h6>
+                                            <p class="font-size-14 details-definition">Grade</p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="sidebar2">
+                                                <img src="assets/images/users/Grade.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" *ngIf="currentUser.doj_ts">
+                            <div class="card shadow-lg bg-soft-primary mt-2 rounded_card">
+                                <div class="card-body pb-2" style="background-color:#faf4e0">
+                                    <div class="row text-start">
+                                        <div class="col-lg-8">
+                                            <h6 class="body-black font-size-18">
+                                                {{currentUser.doj_ts | date:'mediumDate'}}
+                                            </h6>
+                                            <p class="font-size-14 details-definition">Date of Joining</p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="sidebar3">
+                                                <img src="assets/images/users/Date of Joining.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" *ngIf="currentUser.group_doj">
+                            <div class="card shadow-lg bg-soft-warning mt-2 rounded_card">
+                                <div class="card-body pb-2" style="background-color:#e9eff8">
+                                    <div class="row text-start">
+                                        <div class="col-lg-8">
+                                            <h6 class="body-black font-size-18">
+                                                {{currentUser.group_doj | date:'mediumDate'}}
+                                            </h6>
+                                            <p class="font-size-14 details-definition">Group DOJ</p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="sidebar4">
+                                                <img src="assets/images/users/Date of Joining.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9 pe-0 me-0">
+            <div class="card rounded_card shadow-lg " style="margin-top:5px;">
+                <div class="card-body">
+                    <div class="">
+                        <span
+                            class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-13 organo dashbadge">
+                            <span class="font-size-16 pr-2"> <img src="assets/images/users/Qualifications.png"></span>
+                            SGRI Organogram
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row ps-3 pe-3">
+                    <div class="col-lg-4" *ngIf="currentUser.level1_business_competency">
+                        <div class="card shadow-none rounded_card">
+                            <div class="p-2">
+                                <div class="row text-start">
+                                    <div class="col-lg-4 shadow-md">
+                                        <i class="fas fa-landmark w-100 h-100 custom-qual-icon1"></i>
+                                    </div>
+                                    <div class="col-lg-8 pt-2 text-left">
+                                        <h6 class="font-size-18 body-black text-capitalize"
+                                            style="font-weight: normal;">
+                                            {{currentUser.level1_business_competency | lowercase}}
+
+                                        </h6>
+                                        <p class="font-size-14 details-definition">Business/Competency</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" *ngIf="currentUser.level2_dept">
+                        <div class="card rounded_card shadow-none">
+                            <div class="p-2">
+                                <div class="row text-start">
+                                    <div class="col-lg-4 shadow-md">
+                                        <i class="fas fa-briefcase w-100 h-100 custom-qual-icon2"></i>
+                                    </div>
+                                    <div class="col-lg-8 pt-2 text-left">
+                                        <h6 class="font-size-18 body-black text-capitalize"
+                                            style="font-weight: normal;">
+                                            {{currentUser.level2_dept | lowercase}}
+                                        </h6>
+                                        <p class="font-size-14 details-definition">Department</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" *ngIf="currentUser.level3_subdept">
+                        <div class="card shadow-none rounded_card">
+                            <div class="p-2">
+                                <div class="row text-start">
+                                    <div class="col-lg-4 shadow-md">
+                                        <i class="fas fa-sitemap w-60 h-60 custom-qual-icon3"></i>
+                                    </div>
+                                    <div class="col-lg-8 pt-2 text-left">
+                                        <h6 class="font-size-16 body-black text-capitalize"
+                                            style="font-weight: normal;">
+                                            {{currentUser.level3_subdept | lowercase}}
+                                        </h6>
+                                        <p class="font-size-14 details-definition">Sub Department</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-lg-6">
+                    <div class="card h-100 rounded_card shadow-lg">
+                        <div class="row p-3">
+                            <div class="col-md-4">
+                                <span
+                                    class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-13 organo dashbadge">
+                                    <span class="font-size-16 pr-2"> <img
+                                            src="assets/images/users/Experience.png"></span>
+                                    Experience (in Yrs)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row ps-2 pe-2">
+                            <div class="col-lg-5" style="margin-bottom:-15px;">
+                                <div class="card shadow-lg exp-box-danger p-2 rounded_card"
+                                    style="background-color: #f7f8f9">
+
+                                    <h6 class=" font-size-20 body-black" style="margin-top:15px;">
+                                        {{currentUser.external_exp}}
+                                    </h6>
+                                    <p class="font-size-14 details-definition">External Experience</p>
+                                </div>
+                                <div class="card shadow-lg exp-box-info p-2 rounded_card"
+                                    style="background-color: #f7f8f9">
+                                    <h6 class=" font-size-20 body-black" style="margin-top:15px;">
+                                        {{currentUser.internal_exp}}
+                                    </h6>
+                                    <p class="font-size-14 details-definition">Internal Experience</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <div echarts [options]="donutChart" style="height: 222px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card rounded_card h-100 shadow-lg">
+                        <div class="row p-3">
+                            <div class="col-md-4">
+                                <span
+                                    class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-13 organo dashbadge2">
+                                    <span class="font-size-16 pr-2"><img src="assets/images/users/Managers.png"></span>
+                                    People Leaders
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row ps-3 pe-3">
+                            <div class="col-lg-6" *ngIf="currentUser.supervisor_name">
+                                <p class="font-size-14 body-black">Supervisor</p>
+                                <div class="card shadow-lg rounded_card">
+                                    <div class="card-body p-0">
+                                        <div class="profile-bg position-relative overflow-hidden rounded-top"
+                                            style="height: 50px;">
+                                            <div class="bg-overlay bg-dark bg-gradient"></div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                                                <div class="avatar-md">
+                                                    <span *ngIf="currentUser.supervisor_emp_mapping?.emp_image">
+                                                        <img class="rounded-circle img-thumbnail"
+                                                            src="{{currentUser.supervisor_emp_mapping?.emp_image}}"
+                                                            alt="">
+                                                    </span>
+                                                    <span *ngIf="!currentUser.supervisor_emp_mapping?.emp_image">
+                                                        <img class="rounded-circle img-thumbnail"
+                                                            src="assets/images/profile-pic2.png" alt="">
+                                                    </span>
+                                                    <!-- <img src="assets/images/users/avatar-1.jpg" alt=""
+                                                        class="rounded-circle img-thumbnail"> -->
+                                                </div>
+                                                <a href="javascript:void(0);"
+                                                    class="d-block position-absolute bottom-0 end-0">
+                                                    <div class="avatar-sm">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <h6 class="font-size-14 text-capitalize">
+                                                    {{currentUser.supervisor_name | lowercase}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6" *ngIf="currentUser.fl_name">
+                                <p class="font-size-14 body-black">Functional Lead</p>
+                                <div class="card shadow-md rounded_card">
+                                    <div class="card-body p-0">
+                                        <div class="profile-bg position-relative overflow-hidden rounded-top"
+                                            style="height: 50px;">
+                                            <div class="bg-overlay bg-dark bg-gradient"></div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                                                <div class="avatar-md">
+                                                    <span *ngIf="currentUser.fl_emp_mapping?.emp_image">
+                                                        <img class="rounded-circle img-thumbnail"
+                                                            src="{{currentUser.fl_emp_mapping?.emp_image}}" alt="">
+                                                    </span>
+                                                    <span *ngIf="!currentUser.fl_emp_mapping?.emp_image">
+                                                        <img class="rounded-circle img-thumbnail"
+                                                            src="assets/images/profile-pic2.png" alt="">
+                                                    </span>
+                                                    <!-- <img src="assets/images/users/avatar-1.jpg" alt=""
+                                                        class="rounded-circle img-thumbnail"> -->
+                                                </div>
+                                                <a href="javascript:void(0);"
+                                                    class="d-block position-absolute bottom-0 end-0">
+                                                    <div class="avatar-sm">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <h6 class=" font-size-14 text-capitalize" style="margin-left:20px;">
+                                                    {{currentUser.fl_name | lowercase}}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card rounded_card py-2 shadow-lg" style="margin-top: 16px;height: 193px;">
+                <div class="card-body" style="margin-bottom:20px;">
+                    <span class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-13 organo dashbadge1">
+                        <span class="font-size-16 pr-2"> <img src="assets/images/users/Qualifications.png"></span>
+                        Qualifications
+                    </span>
+                    <div class="row ps-2 pe-2">
+                        <div class="timeline-steps aos-init aos-animate col-lg-12" data-aos="fade-up">
+                            <div class="timeline-step col-lg-3 mb-0" *ngIf="currentUser?.qual_level1_nm">
+                                <div class="timeline-content">
+                                    <i class="fas fa-dot-circle text-warning"></i>
+                                    <div class="text-center mx-auto my-auto total-exp">
+                                        <p class="font-size-11">{{currentUser?.qual_level1_nm}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-step col-lg-3 mb-0" *ngIf="currentUser?.qual_level2_nm">
+                                <div class="timeline-content">
+                                    <i class="fas fa-dot-circle text-warning"></i>
+                                    <div class="text-center mx-auto my-auto total-exp">
+                                        <p class="font-size-11">{{currentUser?.qual_level2_nm}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-step col-lg-3 mb-0" *ngIf="currentUser?.qual_level3_nm">
+                                <div class="timeline-content">
+                                    <i class="fas fa-dot-circle text-warning"></i>
+                                    <div class="text-center mx-auto my-auto total-exp">
+                                        <p class="font-size-11">{{currentUser?.qual_level3_nm}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- <div class="row px-0 mx-0">
+        <div class="card">
+            <div class="card-body">
+
+                <blockquote class="card mb-0 pt-1 bg-light">
+                    <h6> <img src="assets/images/menu-icon/StrengthImprovement.png">
+                        Behavioural Success Factors | <span class="text-end font-size-13"><a
+                                routerLink="/strength-improvement">
+                                See
+                                All
+                            </a></span></h6>
+                </blockquote>
+                <div class="hori-timeline pt-4">
+                    <div class="swiper-container slider mb-2">
+
+                        <div class="hori-timeline">
+                            <div class="swiper-container slider">
+                                <div class="d-flex align-items-start">
+                                    <div class="flex-grow-1">
+                                        <span class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2"> <span
+                                                class="font-size-13 pr-2"><i class="fas fa-star"></i></span>
+                                            Accelerators
+                                        </span>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <div class="swiper-arrow d-flex gap-2 justify-content-end arrow-sm">
+                                            <div class="swiper-button-prev position-relative rounded-start"
+                                                (click)="previousSlide()"></div>
+                                            <div class="swiper-button-next position-relative rounded-end"
+                                                (click)="nextSlide()"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-container " [swiper]="config">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide pt-2 me-4 h-100" *ngFor="let reviews of peopleReview;">
+                                            <div class=" card shadow-sm ">
+                                                <div class="card-body event-list-item">
+                                                    <blockquote class="blockquote text-dark mb-4 badge-soft-info">
+                                                        <h6>{{reviews.strong_area_desc}} </h6>
+                                                    </blockquote>
+                                                    <p class="font-size-13 text-muted">
+                                                        {{reviews.strong_area_review }}
+                                                    </p>
+                                                    <div class="col-md-12 text-left font-size-13 text-muted">
+                                                        <span class=" pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                            {{reviews.created_ts | date:'mediumDate'}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hori-timeline">
+                            <div class="swiper-container" id="timeline-card-slider">
+                                <div class="d-flex align-items-start">
+                                    <div class="flex-grow-1">
+                                        <span class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2"> <span
+                                                class="font-size-13 pr-2"><i class="fas fa-star"></i></span>
+                                            Decelerators
+                                        </span>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <div class="swiper-arrow d-flex gap-2 justify-content-end arrow-sm">
+                                            <div class="swiper-button-prev position-relative rounded-start"
+                                                (click)="previousSlideComp()"></div>
+                                            <div class="swiper-button-next position-relative rounded-end"
+                                                (click)="nextSlideComp()"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <swiper class="swiper-container" [config]="cardConfig">
+
+                                    <div class="swiper-slide pt-2 me-4" *ngFor="let reviews of peopleReview;">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body event-list-item">
+                                                <blockquote class="blockquote mb-4 badge-soft-danger">
+                                                    <h6>{{reviews.improve_area_desc}} </h6>
+                                                </blockquote>
+                                                <p class="font-size-13">{{reviews.improve_area_review }}</p>
+                                                <div class="col-md-12 text-left font-size-13 text-muted">
+                                                    <span class=" pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                        {{reviews.created_ts | date:'mediumDate'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </swiper>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  -->
+
+    <!-- <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <blockquote class="card mb-0 pt-1 bg-light">
+                    <h6> <img src="assets/images/menu-icon/ApprovalRequired.png">
+                        Study / Project Details | <span class="text-end font-size-13"><a routerLink="project-info">
+                                See
+                                All
+                            </a></span></h6>
+                </blockquote>
+
+                <div class="row">
+                    <div class="col-lg-4 pt-4" *ngIf="projectInfo.length == 0">
+                        <div class="card" style="height: 370px; width: 400px;">
+                            <div class="card-body">
+                                <div class="card-text-center text-center" style="width:350px;">
+                                    <img src="assets/images/icons/Create.png" alt="">
+
+                                    <h6 class="pt-2">
+                                        <a routerLink="project-info/add-project"> Add
+                                            Career Milestones </a>
+                                    </h6>
+                                    <p>Lorem Ipsum is simply dummy text</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-4 pt-4" *ngIf="projectInfo.lenght != 0">
+                    <div class="card h-100">
+                        <div class="card-body card-text-center text-center w-100">
+                            <img src="assets/images/icons/Create.png" alt="">
+                            <h6 class="pt-2"><a routerLink="/project-info/add-project"> Add Study / Project </a></h6>
+                            <p>Lorem Ipsum is simply dummy text</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 pt-4" *ngFor="let project of projectInfo; let i = index">
+                    <div class="card  h-100">
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0" [ngClass]="bgRandom[i]">
+                                <h6>{{project.title}}</h6>
+                                <p class=" badge badge-soft-custom m-0 py-2 me-2"> {{project.role}} </p>
+                                <div class=" badge badge-soft-custom m-0 py-2">
+                                    <div *ngIf="project.significance === 'Global'"><i
+                                            class="fas fa-globe pe-2"></i>{{project.significance}}</div>
+                                    <div *ngIf="project.significance === 'Local'"><i
+                                            class="fas fa-building pe-2"></i>{{project.significance}}</div>
+                                </div>
+                                <p class="col-sm-12 font-size-13 mb-0 mt-2"><i
+                                        class="fas fa-calendar-alt pe-2"></i><cite
+                                        title="Source Title">{{project.start_date | date:'mediumDate'}}
+                                        - {{project.end_date | date:'mediumDate'}}</cite>
+                                </p>
+                            </blockquote>
+                            <div>
+                                <h6 class="pt-4">Details</h6>
+                                <p>{{project.description}}</p>
+                            </div>
+                            <div class="overflow-scroll" style="height:200px;">
+                                <h6>Skills</h6>
+                                <div>
+                                    <span *ngFor="let proj_skills of project.project_skills">
+                                        <p [ngClass]="proj_skills.skillLevel1.domain_id == 1 ? 'badge-soft-custom-purple' : (proj_skills.skillLevel1.domain_id == 2 ? 'badge-soft-custom-primary' : (proj_skills.skillLevel1.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green')) "
+                                            class="badge py-2 me-2 font-size-11">
+                                            {{proj_skills.skillLevel1.skill_nm}}
+                                        </p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-5 mb-2" *ngIf="project.approval_status == 0">
+                                    <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                        <span class="text-warning font-size-13 pr-2"><i
+                                                class="fas fa-hourglass-half"></i></span>
+                                        Waiting for approval
+                                    </span>
+                                </div>
+                                <div class="col-md-5 mb-2" *ngIf="project.approval_status == 1">
+                                    <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                        <span class="text-success font-size-13 pr-2"><i
+                                                class="fas fa-check-circle"></i></span>
+                                        Approved on {{project.approval_date | date:'mediumDate' }}
+                                    </span>
+                                </div>
+                                <div class="col-md-5 mb-2" *ngIf="project.approval_status == 2">
+                                    <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                        <span class="text-danger font-size-13 pr-2"><i
+                                                class="fas fa-window-close"></i></span>
+                                        Recheck
+                                    </span>
+                                </div>
+                                <div class='col-md-6 text-end' *ngIf="project.created_ts">
+                                    <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                        {{project.created_ts | date:'mediumDate'}} </span>
+                                   
+                                </div>
+                            </div>
+                        </div>                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  -->
+
+    <!-- <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <blockquote class="card mb-0 pt-1 bg-light">
+                    <h6> <img src="assets/images/menu-icon/TechnicalSkill.png">
+                        Technical Skill | <span class="text-end font-size-13"><a routerLink="/technical-skill">
+                                See All
+                            </a></span></h6>
+
+                </blockquote>
+                <div class="card my-4 p-2 shadow-none">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-theme table-row v-middle">
+                                <thead class="table-light mt-2 shadow-lg">
+                                    <tr class="table-th-tr">
+                                        <th>Domain</th>
+                                        <th>Sub Domain</th>
+                                        <th>Level1 : Key Areas</th>
+                                        <th>Level2 : Specialisation</th>
+                                        <th>Level3 : Core Specialisation</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    <tr class="v-middle shadow-sm" *ngFor=" let techSkill of techSkillInfo">
+                                        <td
+                                            [ngClass]="techSkill.domain_id == 1 ? 'domain1' : (techSkill.domain_id == 2 ? 'domain2' : (techSkill.domain_id == 3 ? 'domain3' : 'border-left-success'))">
+                                            <span
+                                                [ngClass]="techSkill.domain_id == 1 ? 'badge-soft-custom-purple' : (techSkill.domain_id == 2 ? 'badge-soft-custom-primary' : (techSkill.domain_id == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green'))"
+                                                class="font-size-11 badge">
+
+                                                {{techSkill.team_skills_info.domain_info.domain_nm}}
+                                            </span>
+                                        </td>
+                                        <td class="flex">
+                                            {{techSkill.team_skills_info.subdomain_info?.subdomain_nm}}
+                                        </td>
+                                        <td>{{techSkill.team_skills_info.level1.skill_nm}}</td>
+                                        <td><span>{{techSkill.team_skills_info.level2?.skill_nm}}</span></td>
+                                        <td><span>{{techSkill.team_skills_info.level3?.skill_nm}}</span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>  -->
+
+    <!-- <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <blockquote class="card mb-0 pt-1 bg-light">
+                    <h6> <img src="assets/images/menu-icon/BehaviouralSkill.png">
+                        Behavioural Skill | <span class="text-end font-size-13"><a routerLink="/behavior-skill">
+                                See
+                                All
+                            </a></span></h6>
+
+                </blockquote>
+                <div class="card my-4 p-2 shadow-none">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-theme table-row v-middle">
+                                <thead class="table-light shadow-lg">
+                                    <tr class="table-th-tr">
+                                        <th>Domain</th>
+                                        <th>Sub Domain</th>
+                                        <th>Level1 : Key Areas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="v-middle shadow-sm" *ngFor="let behaviorSkill of behaviorSkillInfo">
+                                        <td
+                                            [ngClass]="behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Self' ? 'border-left-success' : (behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Performance' ? 'border-left-orange' : (behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Inter Personal' ? 'border-left-blue' : 'domain1'))">
+                                            <span class="badge font-size-11"
+                                                [ngClass]="behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Self' ? 'badge-soft-custom-green' : (behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Performance' ? 'badge-soft-custom-orange' : (behaviorSkill.behavior_domain_info.behavior_domain_nm == 'Inter
+                                            Personal' ? 'badge-soft-custom-blue' : 'badge-soft-custom-purple'))">{{behaviorSkill.behavior_domain_info.behavior_domain_nm}}</span>
+                                        </td>
+                                        <td class="flex">
+                                            {{behaviorSkill.behavior_subdomain_info.behavior_subdomain_nm}}
+                                        </td>
+                                        <td>{{behaviorSkill.behavior_keyarea_info.behavior_level1_traits_nm}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>  -->
+
+
+
+    <!-- <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <blockquote class="card mb-0 pt-1 bg-light">
+                        <h6> <img src="assets/images/menu-icon/AdditionalSkill.png">
+                            Additional Details | <span class="text-end font-size-13"><a routerLink="/additional-skill">
+                                    See
+                                    All
+                                </a></span></h6>
+                    </blockquote>
+                    <div class="row">
+
+                        <div class="col-lg-4 pb-4" *ngIf="additionalSkillInfo">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 badge-soft-warning">
+
+                                        <div class="card bg-light p-0 shadow-none">
+                                            <div class="card-body custom-space">
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <h6>Additional Skills</h6>
+                                                    </div>
+                                                    <div class="col-lg-4 text-end font-size-13">
+                                                        <a
+                                                            [routerLink]="['/additional-skill/'+additionalSkillInfo.additional_skill_type]">
+                                                            See
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{additionalSkillInfo.title}}</h6>
+                                        <div class="row" *ngIf="additionalSkillInfo.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{additionalSkillInfo.status}}
+                                                </p>
+                                                <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="additionalSkillInfo.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{additionalSkillInfo.scope}}
+                                                    </div>
+                                                    <div *ngIf="additionalSkillInfo.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{additionalSkillInfo.scope}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{additionalSkillInfo.description}} </p>
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="additionalSkillInfo.approval_status == 0">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="additionalSkillInfo.approval_status == 1 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{additionalSkillInfo.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="additionalSkillInfo.approval_status == 2 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+                                        <div class='col-md-6 text-end' *ngIf="additionalSkillInfo.create_ts">
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{additionalSkillInfo.create_ts | date:'mediumDate'}} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 pb-4" *ngIf="trainingCertificates">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 badge-soft-danger">
+
+                                        <div class="card bg-light p-0 shadow-none">
+                                            <div class="card-body custom-space">
+                                                <div class="row ">
+                                                    <div class="col-lg-8">
+                                                        <h6>Training / Certificates</h6>
+                                                    </div>
+                                                    <div class="col-lg-4 text-end font-size-13">
+                                                        <a
+                                                            [routerLink]="['/additional-skill/'+trainingCertificates.additional_skill_type]">
+                                                            See
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{trainingCertificates.title}}</h6>
+                                        <div class="row"
+                                            *ngIf="trainingCertificates.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{trainingCertificates.status}}
+                                                </p>
+                                                <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="trainingCertificates.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{trainingCertificates.scope}}
+                                                    </div>
+                                                    <div *ngIf="trainingCertificates.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{trainingCertificates.scope}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{trainingCertificates.description}} </p>
+
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="trainingCertificates.approval_status == 0 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="trainingCertificates.approval_status == 1">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{trainingCertificates.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="trainingCertificates.approval_status == 2">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 text-end" *ngIf="trainingCertificates.create_ts">
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{trainingCertificates.create_ts | date:'mediumDate'}} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 pb-4" *ngIf="patentSkillInfo">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 badge-soft-purple">
+
+                                        <div class="card bg-light p-0 shadow-none">
+                                            <div class="card-body custom-space">
+                                                <div class="row ">
+                                                    <div class="col-lg-8">
+                                                        <h6>Patents</h6>
+                                                    </div>
+                                                    <div class="col-lg-4 text-end font-size-13">
+                                                        <a
+                                                            [routerLink]="['/additional-skill/'+patentSkillInfo.additional_skill_type]">
+                                                            See
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{patentSkillInfo.title}}</h6>
+                                        <div class="row" *ngIf="patentSkillInfo.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{patentSkillInfo.status}}
+                                                </p>
+                                                                                              <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="patentSkillInfo.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{patentSkillInfo.scope}}
+                                                    </div>
+                                                    <div *ngIf="patentSkillInfo.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{patentSkillInfo.scope}}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{patentSkillInfo.description}} </p>
+
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="patentSkillInfo.approval_status == 0 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="patentSkillInfo.approval_status == 1 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{patentSkillInfo.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="patentSkillInfo.approval_status == 2">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+                                        <div class='col-md-6 text-end' *ngIf="patentSkillInfo.create_ts">
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{patentSkillInfo.create_ts | date:'mediumDate'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4" *ngIf="productLaunches">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body ">
+                                    <blockquote class="blockquote mb-0 badge-soft-primary">
+
+                                        <div class="card bg-light p-0 shadow-none">
+                                            <div class="card-body custom-space">
+                                                <div class="row ">
+                                                    <div class="col-lg-8">
+                                                        <h6>Product Launches</h6>
+                                                    </div>
+                                                    <div class="col-lg-4 text-end font-size-13">
+                                                        <a
+                                                            [routerLink]="['/additional-skill/'+productLaunches.additional_skill_type]">
+                                                            See
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{productLaunches.title}}</h6>
+                                        <div class="row" *ngIf="productLaunches.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{productLaunches.status}}
+                                                </p>
+                                                <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="productLaunches.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{productLaunches.scope}}
+                                                    </div>
+                                                    <div *ngIf="productLaunches.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{productLaunches.scope}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{productLaunches.description}}</p>
+
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="patentSkillInfo?.approval_status == 0">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="patentSkillInfo?.approval_status == 1">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{patentSkillInfo.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="patentSkillInfo?.approval_status == 2">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{productLaunches.create_ts | date:'mediumDate'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4" *ngIf="consultation">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 badge-soft-danger">
+
+                                        <div class="card bg-light p-0 shadow-none">
+                                            <div class="card-body custom-space">
+                                                <div class="row ">
+                                                    <div class="col-lg-8">
+                                                        <h6>Consultation</h6>
+                                                    </div>
+                                                    <div class="col-lg-4 text-end font-size-13">
+                                                        <a
+                                                            [routerLink]="['/additional-skill/'+consultation.additional_skill_type]">
+                                                            See
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{consultation.title}} </h6>
+                                        <div class="row" *ngIf="consultation.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{consultation.status}}
+                                                </p>
+                                                <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="consultation.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{consultation.scope}}</div>
+                                                    <div *ngIf="consultation.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{consultation.scope}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{consultation.description}} </p>
+
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="consultation.approval_status == 0">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="consultation.approval_status == 1">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{consultation.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="consultation.approval_status == 2">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6 text-end" class='col-md-6 text-end'>
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{consultation.create_ts | date:'mediumDate'}} </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4" *ngIf="conferences">
+                            <div class="card mt-2 h-100">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0 badge-soft-info">
+                                        <div class="blockquote bg-light">
+                                            <div class="row ">
+                                                <div class="col-lg-8">
+                                                    <h6>Conferences</h6>
+                                                </div>
+                                                <div class="col-lg-4 text-end font-size-13">
+                                                    <a
+                                                        [routerLink]="['/additional-skill/'+conferences.additional_skill_type]">
+                                                        See
+                                                        All
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h6>{{conferences.title}}</h6>
+                                        <div class="row" *ngIf="conferences.additional_skill_type == 'Patents'">
+                                            <div class="col-lg-12">
+                                                <p class=" badge badge-soft-custom m-0 py-2 me-2">
+                                                    {{conferences.status}}
+                                                </p>
+                                                <div class=" badge badge-soft-custom m-0 py-2">
+                                                    <div *ngIf="conferences.scope === 'Global'"><i
+                                                            class="fas fa-globe pe-2"></i>{{conferences.scope}}</div>
+                                                    <div *ngIf="conferences.scope === 'Local'"><i
+                                                            class="fas fa-building pe-2"></i>{{conferences.scope}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                    <div>
+                                        <h6 class="pt-4">Details</h6>
+                                        <p>{{conferences.description}} </p>
+
+                                    </div>
+                                    <div>
+                                        <h6> <i class="fas fa-paperclip"></i> Attachments</h6>
+                                        <span class="p-1 shadow-none ">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                            <img src="assets/images/icons/jpg3.png" class="p-2 attachment">
+                                        </span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6" *ngIf="conferences.approval_status == 0">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-warning font-size-13 pr-2"><i
+                                                        class="fas fa-hourglass-half"></i></span>
+                                                Waiting for approval
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="conferences.approval_status == 1">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-success font-size-13 pr-2"><i
+                                                        class="fas fa-check-circle"></i></span>
+                                                Approved on {{conferences.approval_date | date:'mediumDate' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6" *ngIf="conferences.approval_status == 2 ">
+                                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                                <span class="text-danger font-size-13 pr-2"><i
+                                                        class="fas fa-window-close"></i></span>
+                                                Recheck
+                                            </span>
+                                        </div>
+
+                                        <div class='col-md-6 text-end'>
+                                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                                {{conferences.create_ts | date:'mediumDate'}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  -->
+
+    <!-- <div class="card-body">
+        <div class="row">
+            <blockquote class="card mb-0 pt-1 bg-light">
+                <h6> <img src="assets/images/menu-icon/Jobchat.png">
+                    Job Chat | <span class="text-end font-size-13"><a routerLink="/job-chat">
+                            See
+                            All
+                        </a></span></h6>
+            </blockquote>
+            <div class="card mt-4 shadow-none">
+                <div class="card-body">
+                    <h6> Career Aspiration statement </h6>
+                    <p class="font-size-13 text-muted">
+                        {{jobChatInfo?.aspiration_stmt}}
+                    </p>
+                    <blockquote class="blockquote pb-2 bg-light">
+                        <h6 class="py-2"> Career Milestones </h6>
+                        <div class="row pb-2">
+                            <div class="col-4" *ngFor="let jobChatData of jobChatInfo?.career_plan_infos; let j=index">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <span class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2">
+                                            <span class="font-size-12 pr-4 "><i class="fas fa-check-circle"></i>
+                                                {{jobChatData?.time_frame}} </span>
+                                        </span>
+                                        <blockquote class="blockquote mb-0"
+                                            [ngClass]="j == 0 ? 'bg-light' : (j == 1 ? 'badge-soft-info' : 'badge-soft-danger') ">
+                                            <h6 class="font-size-13 text-muted"> Aspired Role </h6>
+
+                                            <div class="row ">
+                                                <div class="card mb-2 pt-1">
+                                                    <div class="row mb-2">
+                                                        <div class="col font-size-13">
+                                                            <span class="text-dark font-weight-bold">
+                                                                Company
+                                                            </span>
+                                                        </div>
+                                                        <div class="col font-size-13 text-muted text-end">
+                                                            {{jobChatData.aspired_role?.company}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card mb-2 pt-1">
+                                                    <div class="row mb-2">
+                                                        <div class="col font-size-13">
+                                                            <span class="text-dark font-weight-bold">
+                                                                Category
+                                                            </span>
+                                                        </div>
+                                                        <div class="col font-size-13 text-muted text-end">
+                                                            {{jobChatData.aspired_role?.category}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card mb-2 pt-1" *ngIf="jobChatData.aspired_role.unit">
+                                                    <div class="row mb-2">
+                                                        <div class="col font-size-13">
+                                                            <span class="text-dark font-weight-bold">
+                                                                {{jobChatData.aspired_role?.unit.name}}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col font-size-13 text-muted text-end">
+                                                            {{jobChatData.aspired_role?.unit.value}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card mb-2 pt-1" *ngIf="jobChatData.aspired_role.location">
+                                                    <div class="row mb-2">
+                                                        <div class="col font-size-13">
+                                                            <span class="text-dark font-weight-bold">
+                                                                Location
+                                                            </span>
+                                                        </div>
+                                                        <div class="col font-size-13 text-muted text-end">
+                                                            {{jobChatData.aspired_role?.location}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </blockquote>
+                                        <div>
+                                            <h6 class="mt-2"> Comments </h6>
+                                            <p class="font-size-13 text-muted">
+                                                {{jobChatData?.comments_nm}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </blockquote>
+                    <blockquote class="blockquote mt-4 mb-0 bg-light">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6 font-size-13">
+                                    <span> Career Path Preference : <b> {{jobChatInfo?.path_preference}} </b>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </blockquote>
+                
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-2" *ngIf="jobChatInfo?.approval_status == 0">
+                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                <span class="text-warning font-size-13 pr-2"><i
+                                        class="fas fa-hourglass-half"></i></span>
+                                Waiting for approval
+                            </span>
+                        </div>
+                        <div class="col-md-6 mb-2" *ngIf="jobChatInfo?.approval_status == 1">
+                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                <span class="text-success font-size-13 pr-2"><i class="fas fa-check-circle"></i></span>
+                                Approved on {{jobChatInfo?.approval_date | date:'mediumDate' }}
+                            </span>
+                        </div>
+                        <div class="col-md-6 mb-2" *ngIf="jobChatInfo?.approval_status == 2">
+                            <span class="badge rounded-pill badge-outline-secondary ms-1 p-1">
+                                <span class="text-danger font-size-13 pr-2"><i class="fas fa-window-close"></i></span>
+                                Recheck
+                            </span>
+                        </div>
+                        <div class='col-md-6 text-end' *ngIf="jobChatInfo?.create_ts">
+                            <span class="pe-4"> <i class="fas fa-calendar-alt"></i>
+                                {{jobChatInfo?.create_ts | date:'mediumDate'}} </span>
+                            <span *ngIf="jobChatInfo.approval_status != 1 ">
+                                <a class="text-decoration-underline"
+                                    [routerLink]="['/job-chat/edit-job-chat/'+jobChatInfo.job_chat_id]">
+                                    <i class="fas fa-pencil-alt"> Edit</i>
+                                </a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>  -->
+</div>

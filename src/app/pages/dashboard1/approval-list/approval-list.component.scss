@@ -1,0 +1,61 @@
+.modal-header {
+    background-color: #f5f7fc;
+}
+
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.badge-soft-custom-primary {
+    background-color: #c3dffa;
+    color: #1d527c;
+    padding: 7px;
+}
+
+.badge-soft-custom-warning {
+    background-color: #fdefdb;
+    color: #a35828;
+    padding: 7px;
+}
+
+.badge-soft-custom-purple {
+    background-color: #eac4ff;
+    color: #904fab;
+    padding: 7px;
+}
+
+.card-text-wrap{
+    white-space: nowrap; 
+    width: 89px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    font-size: 9px
+   
+}
+
+.file-size{
+    font-size:50px;
+    color:#f15642;
+    padding: 13px;
+}
+
+.attachment-card{
+    padding-top: 8px;
+    padding-bottom: 14px;
+    padding-right: 8rem;
+}
+
+.rejectbtn{
+    margin-left: -7px;
+}

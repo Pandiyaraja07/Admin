@@ -1,0 +1,211 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 text-capitalize"> Profile /
+    {{basicInfo?.emp_nm | lowercase}} /
+    <a routerLink="/team" style="color: #00448a;"> Employee Technical Skills Tabulate </a></span>
+<div class="row m-0 p-0">
+    <div class="col-lg-8">
+        <h5 class="mb-0  heading-black" style="margin-left:-10px;padding-top: -20px;">
+            <a class="btn pointer" onclick="history.back()"><i class="fas fa-arrow-left px-2"></i></a>
+            Employee Technical Skills Tabulate
+        </h5>
+        <!-- <p class="ps-2 body-grey" style="margin-left: 21px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p> -->
+    </div>
+    <!--div class="col-lg-4 text-end mt-4">
+        <button class="btn custom_btn" (click)="setSkill()"
+            [disabled]="updateSkillData == '' && createSkillData == '' "><i class="fas fa-sync-alt px-2"></i> Update
+        </button>
+    </div-->
+</div>
+
+<div class="card mt-2">
+    <div class="card-body">
+        <div class="row">
+            <div class="card  mb-0 pt-1 bg-light">
+                <div class="col-lg-12 ">
+                    <h6 class="heading-black"> <img src="assets/images/menu-icon/TechnicalSkill.png">
+                        Technical Skills <span class="text-end font-size-13"></span></h6>
+
+                    <div
+                        *ngIf="((currentUserId.role == this.appRoles.roles[2] && currentUserId.tempRole == this.appRoles.roles[2]) || (currentUserId.role == this.appRoles.roles[0]) )">
+                        <div class="col-lg-12 ">
+                            <!-- <span *ngIf="pendingTechnicalSkillsCount > 0; else elseBlock">
+                                <a (click)="changeTechSkillStatus(1)"
+                                    class="btn  badge badge-soft-secondary custom-float-right py-2 mb-0 me-2 font-size-16 textalign1"><i
+                                        class="far fa-check-circle text-success"></i>
+                                    Approve
+                                </a>
+                                <a (click)="changeTechSkillStatus(2)"
+                                    class="btn badge badge-soft-secondary custom-float-right py-2 mb-0 me-2 font-size-16 textalign"><i
+                                        class="far fa-times-circle text-danger"></i>
+                                    Reject
+                                </a>
+                            </span> 
+                            <ng-template #elseBlock>
+                                <span *ngIf="pendingCount">
+                                    <a *ngIf="pendingCount?.approval_status == 1"
+                                        class="btn  badge badge-soft-secondary custom-float-right py-2 mb-0 me-2 font-size-16 textalign2"><i
+                                            class="far fa-check-circle text-success" aria-disabled="true"></i>
+                                        Approved
+                                    </a>
+                                    <a *ngIf="pendingCount?.approval_status == 2"
+                                        class="btn  badge badge-soft-secondary custom-float-right py-2 mb-0 me-2 font-size-16 rejectalign"><i
+                                            class="far fa-times-circle text-danger"></i>
+                                        Rejected
+                                    </a>
+                                </span>
+                            </ng-template>-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-theme table-row v-middle">
+                            <thead class="table-light mt-2 shadow-lg"
+                                style=" border: solid 1px #ddddea; border-radius: 8px;">
+                                <tr class="table-th-tr">
+                                    <th>Domain</th>
+                                    <th>Sub Domain</th>
+                                    <th>Level1 : Key Area</th>
+                                    <th>Level2 : Specialisation</th>
+                                    <th>Level3 : Core Specialisation</th>
+                                    <th>Target Proficiency</th>
+
+                                    <th
+                                        *ngIf="(currentUserId.role == this.appRoles.roles[2] && currentUserId.tempRole == this.appRoles.roles[2]) || (currentUserId.role == this.appRoles.roles[3] ||
+                                        currentUserId.role == this.appRoles.roles[0])">
+                                        Technical Depth</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="v-middle shadow-sm" *ngFor=" let techSkill of techSkillInfo; let i = index">
+                                    <td
+                                        [ngClass]="techSkill.domain == 1 ? 'domain1' : (techSkill.domain == 2 ? 'domain2' : (techSkill.domain == 3 ? 'domain3' : 'border-left-success'))">
+                                        <span
+                                            [ngClass]="techSkill.domain == 1 ? 'badge-soft-custom-purple' : (techSkill.domain == 2 ? 'badge-soft-custom-primary' : (techSkill.domain == 3 ? 'badge-soft-custom-warning' : 'badge-soft-custom-green'))"
+                                            class="font-size-14 badge text-capitalize">
+                                            {{techSkill.domain_nm | lowercase}}
+                                        </span>
+                                    </td>
+                                    <td class="flex font-size-14 text-capitalize">
+                                        {{techSkill.subdomain_nm | lowercase}}
+                                    </td>
+                                    <td class="font-size-14">{{techSkill.level1}}</td>
+                                    <td><span class="font-size-14">{{techSkill.level2}}</span></td>
+                                    <td><span class="font-size-14">{{techSkill.level3}}</span> </td>
+                                    <td><span class="font-size-14 text-capitalize">{{techSkill.target_proficiency_nm |
+                                            lowercase}}</span>
+                                        <div class="progress gap-1">
+                                            <div *ngFor="let level of counter(techSkill.target_proficiency_level);let i = index"
+                                                class="progress-bar tech-depth-static-bar" role="progressbar"
+                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="(currentUserId.role == this.appRoles.roles[2] && currentUserId.tempRole == this.appRoles.roles[2]) || (currentUserId.role == this.appRoles.roles[3] ||
+                                    currentUserId.role == this.appRoles.roles[0])"
+                                        class="font-size-14 ">
+                                        <!-- (change)="getSelectedTechDepth($event, techSkill.team_id, techSkill.skill_mapping_id,techSkill.domain, techSkill.sub_domain)" -->
+                                        {{techSkill.approval_status == 0 
+											? (techSkill.technical_depth_nm ? techSkill.technical_depth_nm : "N/A") + " →" 
+											: ""}}
+                                        <ng-select name="techDepth" [clearable]="false" [searchable]="false"
+                                            appendTo="body" [items]="techDepthLevels" bindLabel="technical_depth_nm"
+                                            (change)="clicked=false" bindValue="technical_depth_id"
+                                            [(ngModel)]="techSkill.new_tech_depth"
+                                            class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms"
+                                            [multiple]="false" [maxSelectedItems]="1" placeholder="Select">
+                                        </ng-select>
+                                    </td>
+                                    <td *ngIf="(techSkill.skill_mapping_id || techSkill.new_tech_depth)">
+                                        <a data-bs-toggle="modal" data-bs-target="#qualitativeCommentModel"
+                                            (click)="qualitativeCommentModelFn(qualitativeCommentModel, techSkill)"
+                                            class="text-muted"> <i class="fas fa-comment-alt"></i> </a>
+                                    </td>
+                                    <td>
+                                        <i *ngIf="techSkill.approval_status == 0" title="Waiting for Approval"
+                                            class="fa fa-user-clock text-info"></i>
+                                        <i *ngIf="techSkill.approval_status == 1" title="Approved"
+                                            class="far fa-check-circle text-success"></i>
+                                        <i *ngIf="techSkill.approval_status == 2" title="Rejected"
+                                            class="far fa-times-circle text-danger"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <ng-template #qualitativeCommentModel let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="qualitativeCommentModelTitle">Update Employee Qualitative Comment
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="modal.close('Close click')">
+                        </button>
+                    </div>
+
+                    <div class="card rounded_card mb-0 shadow-lg">
+                        <div class="card-body">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label for="qualitative_comments_nm" class="font-size-16 body-black">Qualitative
+                                            Comments</label>
+                                        <!-- <span class="text-danger">*</span> -->
+                                        <textarea class="form-control" placeholder="" id="qualitative_comments_nm"
+                                            [(ngModel)]="techSkillInModal.qualitative_comments_nm"
+                                            [disabled]="currentUserId.role == 'HR' || (techSkillInModal.new_tech_depth == techSkillInModal.technical_depth_id)"
+                                            name="qualitative_comments_nm" style="height: 100px"></textarea>
+                                        <!-- <span class="text-danger" *ngIf="!techSkillInModal.qualitative_comments_nm">
+                                            <span>Qualitative Comment is
+                                                required</span>
+                                        </span> -->
+                                        <br />
+                                        <span>Note: Data is saved only on clicking Update in Technical Skills
+                                            table.</span>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer cursor-pointer">
+                                    <button type="button" class="btn custom_btn_danger" data-bs-dismiss="modal"
+                                        aria-label="Close" (click)="modal.close('Close click')">Close</button>
+                                    <!-- <button *ngIf="currentUserId.role != 'HR' " (click)="modal.close('Close click')" class="btn custom_btn"
+                                            id="btn-save-event"> Save </button> -->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+                <div class="row ">
+                    <div class="col-sm-6 ">
+                        <button (click)="updateTechSkill(); clicked=true" [disabled]="clicked"
+                            class="btn badge badge-soft-secondary py-2 mb-0 me-2 font-size-16"><i
+                                class="far fa-check-circle text-success"></i>
+                            Update
+                        </button><br />
+                        <span>All updates need to be approved</span>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="text-md-right float-md-end pagination-rounded">
+                            <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2"
+                                [collectionSize]="totalCount" [(page)]="page" [pageSize]="limit" [maxSize]="5"
+                                [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage(page)">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--div class="col-lg-12">
+            <a href="team/update-emp-skill?sgId={{profileId}}"
+                class="btn badge badge-soft-secondary custom-float-right py-2 mb-0 me-2 font-size-13"><i
+                    class="fas fa-history"></i> Update
+            </a>
+        </div-->
+        </div>
+    </div>

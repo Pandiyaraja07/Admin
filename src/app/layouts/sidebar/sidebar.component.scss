@@ -1,0 +1,23 @@
+#sidebar-menu ul li.mm-active>a {
+    color: #1c468a;
+    border-right: 1px solid #1c468a;
+    border-width: thick;
+}
+
+#sidebar-menu ul li.mm-active>a .nav-icon {
+    color: #1c468a !important;
+}
+
+#sidebar-menu ul li a {
+    margin: -7px 5px;
+    font-size: 12px;
+}
+
+#sidebar-menu ul li a .nav-icon {
+    /*min-width: 6.5rem;*/
+    padding-bottom: 1.8em;
+}
+
+.dashboard{
+    height: 80px;
+}

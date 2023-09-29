@@ -1,0 +1,250 @@
+<div class="row custom-text">
+    <div class="card shadow-lg mt-4 bg-wrap">
+        <div class="card-body bg-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <img _ngcontent-ado-c113="" src="assets/images/menu-icon/FunctionSkillMap.png" alt=""
+                                class="d-block" />
+                        </div>
+                        <div class="col-lg-11 pt-2 paragraph">
+                            <h5 style="
+                  width: 100%;
+                  font-family: Ubuntu;
+                  font-size: 23px;
+                  font-weight: bold;
+                  margin-left: -12px;
+                  color: #454545;
+                  margin-top: 7px;
+                ">
+                                Functional Skill Map
+                            </h5>
+                            <!-- <p class="text-muted" style="font-family:Ubuntu;">Skills that you need in your function for
+                                now and in future</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-end pt-2">
+                    <!-- <a routerLink="/functional-skill-map/view-skill-map" class="btn custom_btn_white me-2"> View
+                        Summary</a> -->
+                    <a *ngIf="
+              (currentUserId.role == this.appRoles.roles[2] &&
+              currentUserId.tempRole == this.appRoles.roles[2]) || ( btnchkData && currentUserId.role == this.appRoles.roles[3] &&
+              currentUserId.tempRole == this.appRoles.roles[3] ) || (currentUserId.role == this.appRoles.roles[0] &&
+              currentUserId.tempRole == this.appRoles.roles[0])
+            " routerLink="/functional-skill-map/add-skill-map" class="btn custom_btn ms-2 addbtnskillgap">
+                        <i class="fas fa-plus"></i> Add Skill Map</a>
+                </div>
+
+                <div class="row m-0 py-4">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="choices-multiple-remove-button" class="form-label font-size-16"
+                                    style="font-family: Ubuntu; font-weight: normal; color: #191d23">Department</label>
+                                <ng-select name="dept" [(ngModel)]="selectedDept" [clearable]="false"
+                                    (change)="getSelectedDept()"
+                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                    [multiple]="false" [maxSelectedItems]="1">
+                                    <ng-option *ngFor="let department of dept" [value]="department.dept_id">
+                                        {{ department.name }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="choices-multiple-remove-button" class="form-label font-size-16"
+                                    style="font-family: Ubuntu; font-weight: normal; color: #191d23">Sub
+                                    Department</label>
+                                <ng-select name="subDept" [(ngModel)]="selectedSubdept" [clearable]="false"
+                                    (change)="getSelectedSubdept()"
+                                    class="ng-select ng-select-searchable ng-select-clearable ng-select-bottoms text-capitalize"
+                                    [multiple]="false" [maxSelectedItems]="1">
+                                    <ng-option *ngFor="let sdept of subDept" [value]="sdept.subdept_id">
+                                        {{ sdept.name }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card my-2 p-3 shadow-lg">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-theme table-row v-middle dt-responsive">
+                                <thead class="table-light mt-2 shadow-lg">
+                                    <tr class="table-th-tr text-muted">
+                                        <th>Domain</th>
+                                        <th>Sub Domain</th>
+                                        <th>Level 1 : Key Area</th>
+                                        <th>Level 2 : Specialisation</th>
+                                        <th>Level 3 : Core Specialisation</th>
+                                        <th>Target Proficiency Level</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="v-middle shadow-sm" *ngFor="let skill of teamSkills; let i = index">
+                                        <td [ngClass]="
+                  skill.domain == 1
+                    ? 'domain1'
+                    : skill.domain == 2
+                    ? 'domain2'
+                    : skill.domain == 3
+                    ? 'domain3'
+                    : 'border-left-success'
+                ">
+                                            <span [ngClass]="
+                    skill.domain == 1
+                      ? 'badge-soft-custom-purple'
+                      : skill.domain == 2
+                      ? 'badge-soft-custom-primary'
+                      : skill.domain == 3
+                      ? 'badge-soft-custom-warning'
+                      : 'badge-soft-custom-green'
+                  " class="badge font-size-16 text-capitalize">{{ skill.domain_info.domain_nm | lowercase }}</span>
+                                        </td>
+                                        <td class="text-capitalize box-title-text">
+                                            {{ skill.subdomain_info.subdomain_nm | lowercase }}
+                                        </td>
+                                        <td class="box-title-text text-capitalize">
+                                            {{ skill.level1?.skill_nm | lowercase }}
+                                        </td>
+                                        <td class="box-title-text text-capitalize">
+                                            <span>{{ skill.level2?.skill_nm | lowercase }}</span>
+                                        </td>
+                                        <td class="box-title-text text-capitalize">
+                                            <span>{{ skill.level3?.skill_nm | lowercase }}</span>
+                                        </td>
+                                        <td>
+                                            <p class="pb-0 mb-1 box-title-text text-capitalize">
+                                                {{ skill.technical_depth.technical_depth_nm | lowercase }}
+                                            </p>
+                                            <div class="progress gap-1">
+                                                <div *ngFor="
+                      let level of counter(skill.technical_depth.level_no);
+                      let i = index
+                    " class="progress-bar tech-depth-static-bar" role="progressbar" aria-valuenow="20"
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+
+                                            <div class="flex">
+                                                <div *ngIf="
+                    currentUserId.role == this.appRoles.roles[2] &&
+                    currentUserId.tempRole == this.appRoles.roles[2]
+                  ">
+                                                    <span class="badge badge-soft-secondary py-3 mb-0 me-2 font-size-13"
+                                                        placement="left" [ngbPopover]="popContent"><i
+                                                            class="fas fa-history"></i>
+                                                    </span>
+
+
+                                                    <ng-template #popContent
+                                                        class="p-2 large row justify-content-center">
+                                                        <h6
+                                                            class="badge rounded-pill badge-soft-secondary text-muted mt-2 ms-1 mb-2 font-size-12">
+                                                            <i class="fas fa-history"></i>
+                                                            Target Proficiency Level Timeline History
+                                                        </h6>
+
+                                                        <h6 class="text-muted">Technical Depth</h6>
+
+                                                        <div class="timeline-steps aos-init aos-animate col-lg-12 pt-2"
+                                                            data-aos="fade-up">
+                                                            <div class="inline"
+                                                                *ngFor="let acheived of skill.targetAchievedHistory">
+                                                                <div class="timeline-content">
+                                                                    <i [ngClass]="{
+                                                                                      'last-time-line': acheived.last,
+                                                                                      'past-time-line': !acheived.last
+                                                                                    }"
+                                                                        class="fas fa-dot-circle timelineColor"></i>
+                                                                    <div *ngIf="!acheived.last"
+                                                                        class="timeline-line line"></div>
+                                                                    <div *ngIf="acheived.last" class="last-time-line">
+                                                                    </div>
+                                                                    <div class="text-center mx-auto my-auto total-exp">
+                                                                        <h6>{{ acheived.max_depth_name }}</h6>
+                                                                        <p class="font-size-11">{{ acheived.yyyy }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <h6 class="text-muted">Target Depth</h6>
+                                                        <div class="timeline-steps aos-init aos-animate col-lg-12 pt-2"
+                                                            data-aos="fade-up">
+                                                            <div class="inline"
+                                                                *ngFor="let history of skill.target_proficiency_history">
+                                                                <div class="timeline-content">
+                                                                    <i [ngClass]="{
+                              'last-time-line': history.last,
+                              'past-time-line': !history.last
+                            }" class="fas fa-dot-circle timelineColor"></i>
+                                                                    <div *ngIf="!history.last"
+                                                                        class="timeline-line line"></div>
+                                                                    <div *ngIf="history.last" class="last-time-line">
+                                                                    </div>
+                                                                    <div class="text-center mx-auto my-auto total-exp">
+                                                                        <h6>{{ history.name }}</h6>
+                                                                        <p class="font-size-11">{{ history.date }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="dropdown" ngbDropdown>
+                                                    <a class="btn btn-link text-dark dropdown-toggle shadow-none"
+                                                        style="margin-left: -5px; margin-top: 4px"
+                                                        href="javascript:void(0);" role="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                                        ngbDropdownToggle>
+                                                        <i class="uil uil-ellipsis-v"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                                                        <li>
+                                                            <a class="dropdown-item Edit" [routerLink]="[
+                            '/functional-skill-map/add-skill-map/' +
+                              skill.team_skill_id
+                          ]">
+                                                                <i class="fas fa-pencil-alt text-primary"
+                                                                    style="margin-right: 5px"></i>
+                                                                Edit</a>
+                                                        </li>
+                                                        <!-- <li><a class="dropdown-item" (click)="deleteFunctional(i)">
+                                                                <i class="fa fa-trash text-danger ml-2 delete_icon_top"
+                                                                    style="margin-right:5px;" data-toggle="tooltip"></i>
+                                                                Delete </a>
+                                                        </li> -->
+                                                    </ul>
+                                                </div>
+                                                <div>
+                                                    <label class="switch">
+                                                        <input type="checkbox" [(ngModel)]="skill.delete_status"
+                                                            (change)="getTeamSkillDeletedStatus($event, i ,skill)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <span *ngIf="skill.delete_status; else elseBlock">Enabled</span>
+                                                    <ng-template #elseBlock>Disabled</ng-template>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <div class="text-md-right float-md-end pagination-rounded">
+                        <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2"
+                            [collectionSize]="totalCount" [(page)]="page" [pageSize]="limit" [maxSize]="5"
+                            [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage(page)">
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>

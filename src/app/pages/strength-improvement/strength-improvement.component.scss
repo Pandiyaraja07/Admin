@@ -1,0 +1,131 @@
+.card {
+    margin-bottom: 0px;
+    box-shadow: 0 2px 3px #eaedf2 !important;
+}
+
+.flex{
+    display: flex;
+}
+
+.custom-tab-head {
+    background: #fff !important;
+}
+
+.blockquote {
+    border-left: none;
+}
+
+.custom-file-badge {
+    white-space: break-spaces !important;
+}
+
+.modal-header {
+    background-color: #f5f7fc;
+}
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.badge-soft-primary {
+    color: #038edc;
+    background-color: #dff1f2;
+}
+
+.badge-soft-warning {
+    background-color: #f8f0ef !important;
+}
+
+.declerators-card{
+    width: 100%;
+    margin-top: 10px;
+    height: 100%;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.text-muted{
+    font-size: 14px;
+}
+
+.para1{
+    margin-top:10px;
+    margin-left: 5px;
+}
+
+.para2{
+    margin-top:10px;
+    margin-left: 5px;
+}
+
+.calenderdate{
+  
+    margin-top: 85px;
+    margin-left: 5px;
+}
+
+.edit-delete{
+    margin-top: -8px;
+}
+
+.accelerator-card{
+    width: 100%;
+    height: 475px;
+}
+
+.headalign{
+    margin-top:  19px;
+}
+.paragraphdate{
+   
+        height: 17px;
+        margin: 8px 0 284px;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.22;
+        letter-spacing: normal;
+        text-align: left;
+        color: #64748B;
+    
+}
+
+.d-block{
+    margin-top: 14px;
+}
+
+.approved1{
+    font-size: 13px !important;
+    font-weight: normal !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    line-height: 1.23 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    color: #64748b !important;
+    margin-bottom: 33px !important;
+}
+
+.approved{
+    font-size: 13px !important;
+    font-weight: normal !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    line-height: 1.23 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    color: #64748b !important;
+    margin-bottom: 33px !important;
+}

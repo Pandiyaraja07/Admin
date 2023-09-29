@@ -1,0 +1,176 @@
+.modal-header {
+    background-color: #f5f7fc;
+}
+
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.ng-select .ng-clear-wrapper {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .27rem;
+    outline: 0;
+}
+
+.modal-window .modal-dialog {
+    max-width: 10%;
+    max-height: 20%;
+  }
+
+  .radio-on {
+    background-color: #e8f1f1;
+    border-color:#4cadb0;
+  }
+
+  .adddrop{
+    width: 100%;
+    height: 400px;
+    border: dashed 2px #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .title{
+    margin: 0 384px 8px 0;
+    font-size: 23px;
+    font-weight: bold;
+    font-family:'Ubuntu', sans-serif;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: -0.07px;
+    text-align: left;
+    color: #191d23;
+    margin-left: -20px;
+}
+
+.sub-title{
+    width: 240px;
+    font-family:'Ubuntu', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.22;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23; 
+}
+
+.heading{
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    text-align: left;
+    color: #191d23;
+    margin-left: 20px;
+}
+
+.light-text{
+color:#64748b;
+}
+
+.paragraph{
+    width: 550px;
+    height: 17px;
+    margin: 8px 0 0;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height:0.5;
+    letter-spacing: normal;
+    text-align: left;
+    color: #64748b;
+}
+
+.box-card{
+    border-radius: 10px;
+    box-shadow: 0 6px 16px 0 rgb(112 130 180 / 10%);
+    background-color: #fff;
+}
+
+.edit-delete{
+    margin-top: -75px;
+    margin-right: 20px;
+}
+
+.heading-last{
+    margin-left: 26px;
+}
+
+.cancel-button{
+    box-shadow: inset -6px -4px 6px 0 rgba(8, 46, 47, 0.16);
+  border: solid 1px #ddddea;
+  background-color: #fff;
+  color: #ce1431;
+  font-size: 16px;
+}
+
+.careermile{
+    font-family: Ubuntu;
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--night-blue);
+}
+
+.adddrop{
+    width: 85%;
+    height: 420px;
+    border: dashed 2px #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+
+.blockquote{
+    border-left: none;
+}
+
+.comments{
+    margin-left: 0px;
+}
+
+.txtdeco{
+    text-decoration: underline;
+}
+
+.btn-outline-light {
+    color: black;
+}

@@ -1,0 +1,26 @@
+.ngx-file-drop__drop-zone {
+    border: none !important;
+}
+
+.text-overflow-img{
+    white-space: nowrap;
+    width: 141px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.img-close{
+    position: relative;
+    bottom: 7.58rem;
+    left: 7rem;
+    border: none;
+    background-color: #f76060;
+}
+
+.addaditional{
+    margin-left: 15px;
+}
+
+.btn-outline-light {
+    color: black;
+}

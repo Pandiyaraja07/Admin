@@ -1,0 +1,291 @@
+<div *ngIf="currentUserId.role != this.appRoles.roles[4] || currentUserId.tempRole != this.appRoles.roles[4] ">
+    <span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize">Profile /
+        {{basicInfo?.emp_nm | lowercase}}
+        / <a style="color: #00448a;">Behavioural skills</a>
+    </span>
+
+    <h5 class="mb-0  font-size-23 heading-black " style="margin-left: -10px;padding-top:-0.5rem"><a class="btn pointer"
+            onclick="history.back()"><i class="fas fa-arrow-left p-2 "></i></a>
+        Behavioural skills of <a class="text-capitalize heading-black">{{basicInfo?.emp_nm | lowercase}} </a></h5>
+</div>
+
+<div class="row custom-text">
+    <div class="card mt-2 rounded_card bg-wrap shadow-lg">
+        <div class="card-body bg-content" style="margin-bottom:-30px;">
+            <div class="row">
+                <div class="col-lg-8 col-md-9 col-12">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <h1><img src="assets/images/menu-icon/BehaviouralSkill.png"
+                                    style="padding:15px;margin-left:-30px; height:100px;margin-top:-13px;padding-top:25px;">
+                            </h1>
+                        </div>
+                        <div class="col-lg-11 pt-2">
+                            <h5 class="heading-black">Behavioural Skills</h5>
+                            <!-- <p class="heading-grey">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                industry</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="margin-top: -73px;margin-left:-115px;"
+                    *ngIf="flAccess || supervisorAccess">
+                    <div class="col-lg-12">
+                        <a type="button" class="btn custom_btn addbtnbehave" style="margin-top:-8px;"
+                            data-bs-toggle="modal" data-bs-target="#myModal" (click)="openModal(content)"> <i
+                                class="fas fa-plus"></i> Add</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card rounded_card shadow-lg">
+        <div class="card-body">
+            <table id="datatable" class="table dt-responsive nowrap w-100 datatables table-row table-theme">
+                <thead class="table-light table-bordered">
+                    <tr class="table-th-tr shadow-lg">
+                        <th class="font-size-14" (click)="sort('behavior_domain_info.behavior_domain_nm')"
+                            [ngClass]="{'asc': isDesc && column == 'behavior_domain_info.behavior_domain_nm', 'desc': !isDesc && column == 'behavior_domain_info.behavior_domain_nm'}">
+                            Domain</th>
+                        <th (click)="sort('behavior_subdomain_info.behavior_subdomain_nm')"
+                            [ngClass]="{'asc': isDesc && column == 'behavior_subdomain_info.behavior_subdomain_nm', 'desc': !isDesc && column == 'behavior_subdomain_info.behavior_subdomain_nm'}">
+                            Sub Domain</th>
+                        <th (click)="sort('behavior_keyarea_info.behavior_level1_traits_nm')"
+                            [ngClass]="{'asc': isDesc && column == 'behavior_keyarea_info.behavior_level1_traits_nm', 'desc': !isDesc && column == 'behavior_keyarea_info.behavior_level1_traits_nm'}">
+                            Level 1 - Traits</th>
+                        <th
+                            *ngIf="flAccess|| supervisorAccess || hrRole">
+                            Demonstration Levels </th>
+                        <th *ngIf="flAccess"></th>
+
+                    </tr>
+                </thead>
+                <tbody class="table_content shadow-lg">
+                    <tr height="10px" class="v-middle shadow-lg" *ngFor="let table of behaviorSkillInfo">
+                        <td class="text-capitalize"
+                            [ngClass]="table.behavior_domain_info.behavior_domain_nm == 'Self' ? 'border-left-success' : (table.behavior_domain_info.behavior_domain_nm == 'Performance' ? 'domain3' : (table.behavior_domain_info.behavior_domain_nm == 'Leadership' ? 'border-left-primary' : 'domain1'))">
+
+                            <span
+                                [ngClass]="table.behavior_domain_info.behavior_domain_nm == 'Self' ? 'badge-soft-custom-green' : (table.behavior_domain_info.behavior_domain_nm == 'Performance' ? 'badge-soft-custom-warning' : (table.behavior_domain_info.behavior_domain_nm == 'Leadership' ? 'badge-soft-custom-primary' : 'badge-soft-custom-purple'))"
+                                class="font-size-14 badge shadow-lg sentenceCase">
+
+                                {{table.behavior_domain_info.behavior_domain_nm | lowercase}}
+                            </span>
+                        </td>
+                        <td class="flex font-size-14 text-capitalize">
+                            {{table.behavior_subdomain_info.behavior_subdomain_nm | lowercase}}
+                        </td>
+                        <td class="font-size-14 text-capitalize ">
+                            {{table.behavior_keyarea_info.behavior_level1_traits_nm | lowercase}}
+                        </td>
+                        <td class="font-size-14"
+                            *ngIf="flAccess || supervisorAccess || hrRole">
+                            <span *ngIf="table.new_demonstrated_level == 1"> Seldom </span>
+                            <span *ngIf="table.new_demonstrated_level == 2"> Occasional </span>
+                            <span *ngIf="table.new_demonstrated_level == 3"> Extensive </span>
+                            <span *ngIf="table.new_demonstrated_level == 4"> Role Model </span>
+                        </td>
+                        <td>
+                            <span class='col-md-6 text-end'>
+                                <span>
+                                    <i *ngIf="table.approval_status == 0" title="Waiting for Approval"
+                                        class="fa fa-user-clock text-info p-2"></i>
+                                    <i *ngIf="table.approval_status == 1" title="Approved"
+                                        class="far fa-check-circle text-success p-2"></i>
+                                    <i *ngIf="table.approval_status == 2" title="Rejected"
+                                        class="far fa-times-circle text-danger p-2"></i>
+                                </span>
+
+                                <span
+                                    *ngIf="flAccess || supervisorAccess">
+                                    <span *ngIf="table.approval_status == 0">
+                                        <i class="fa fa-trash text-danger ml-2 delete_icon_top"
+                                            style="padding:10px;cursor: pointer;" data-toggle="tooltip"
+                                            (click)="openDeleteModal(table.behavior_skill_id)"></i>
+                                    </span>
+
+                                    <span>
+                                        <a class="text-decoration-underline Edit" style="cursor: pointer;"
+                                            (click)="editCareer(table.behavior_skill_id,content)">
+                                            <i class="fas fa-pencil-alt"></i> Edit</a>
+                                    </span>
+
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+            <div class="col-sm-12 col-md-12">
+                <div class="text-md-right float-md-end pagination-rounded">
+                    <ngb-pagination class="d-flex justify-content-end mr-auto pagination mt-2"
+                        [collectionSize]="totalCount" [(page)]="page" [pageSize]="limit" [maxSize]="5"
+                        [ellipses]="false" [boundaryLinks]="true" (pageChange)="loadPage(page)">
+                    </ngb-pagination>
+                </div>
+            </div>
+
+            <ng-template #content role="document" let-modal>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addContactModalLabel">Add / Update Employee Behavioural Skills </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="onClose()"></button>
+                </div>
+                <div class="shadow-lg rounded_card">
+                    <div class="card-body">
+                        <form (ngSubmit)="saveBehaviorSkill()" [formGroup]="behaviorSkillForm">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="addcontact-name-input" class="form-label">Behaviour
+                                                Domain</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="row">
+                                                <div class="col-lg-3 p-2"
+                                                    *ngFor="let domain of behaviorDomainAll; let i = index">
+                                                    <div class="form-check form-radio-border text-center pb-0  "
+                                                        [ngClass]="domain.selected == true? 'radio-on':''">
+                                                        <input class="form-check-input  radio-btn-resize pe-2"
+                                                            type="radio" name="behaviorDomain"
+                                                            [checked]="domain.selected"
+                                                            (change)="getSelectedDomain(domain.behavior_domain_id)"
+                                                            [(ngModel)]="selectedObj.behavior_domain_id"
+                                                            [value]="domain.behavior_domain_id"
+                                                            [attr.disabled]="editOption ? '' : null "
+                                                            formControlName="behaviorDomain" id="behaviorDomain{{i}}"
+                                                            [ngClass]="{'is-invalid': submitted && form.behaviorDomain.errors}">
+                                                        <label
+                                                            class="form-check-label font-size-13 text-muted px-2 pb-3 text-capitalize"
+                                                            for="behaviorDomain{{i}}">
+                                                            {{domain.behavior_domain_nm | lowercase}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="submitted && form.behaviorDomain.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="form.behaviorDomain.errors.required">Behaviour Domain
+                                                        is
+                                                        required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3" *ngIf="behaviorSubDomainAll.length > 0">
+                                                <label for="addcontact-name-input" class="form-label">Behaviour
+                                                    Sub
+                                                    Domain</label>
+                                                <span class="text-danger">*</span>
+                                                <div class="row">
+                                                    <div class="col-lg-4 p-2"
+                                                        *ngFor="let subdomain of behaviorSubDomainAll; let i = index">
+                                                        <div class="form-check form-radio-border text-center pb-0  "
+                                                            [ngClass]="subdomain.selected == true? 'radio-on':''">
+                                                            <input class="form-check-input  radio-btn-resize pe-2"
+                                                                type="radio" name="behaviorSubDomain"
+                                                                [(ngModel)]="selectedObj.behavior_subdomain_id"
+                                                                [checked]="subdomain.selected"
+                                                                (change)='getSelectedSubDomain(subdomain.behavior_subdomain_id)'
+                                                                [value]="subdomain.behavior_subdomain_id"
+                                                                formControlName="behaviorSubDomain"
+                                                                [attr.disabled]="editOption ? '' : null "
+                                                                id="behaviorSubDomain{{i}}"
+                                                                [ngClass]="{'is-invalid': submitted && form.behaviorSubDomain.errors}">
+                                                            <label
+                                                                class="form-check-label font-size-13 text-muted px-2 pb-3 text-capitalize"
+                                                                for="behaviorSubDomain{{i}}">
+                                                                {{subdomain.behavior_subdomain_nm | lowercase}}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="submitted && form.behaviorSubDomain.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="form.behaviorSubDomain.errors.required">Behaviour
+                                                        Sub Domain is required</span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3" *ngIf="behaviorLeve1Traits.length > 0">
+                                                <label for="addcontact-name-input" class="form-label">Behaviour Level 1
+                                                    Traits</label>
+                                                <span class="text-danger">*</span>
+                                                <div class="row">
+                                                    <div class="col-lg-6 p-2"
+                                                        *ngFor="let level1 of behaviorLeve1Traits; let i = index">
+                                                        <div class="form-check form-radio-border text-center pb-0  "
+                                                            [ngClass]="level1.selected == true? 'radio-on':''">
+                                                            <input class="form-check-input  radio-btn-resize pe-2"
+                                                                type="radio" name="behaviorLevel1"
+                                                                [checked]="level1.selected"
+                                                                (change)='getselectedLevel1()'
+                                                                [(ngModel)]="selectedObj.behavior_keyarea_id"
+                                                                [value]="level1.behavior_level1_traits_id"
+                                                                formControlName="behaviorLevel1"
+                                                                [attr.disabled]="editOption ? '' : null "
+                                                                id="behaviorLevel1{{i}}"
+                                                                [ngClass]="{'is-invalid': submitted && form.behaviorLevel1.errors}">
+                                                            <label
+                                                                class="form-check-label font-size-13 text-muted px-2 pb-3 text-capitalize"
+                                                                for="behaviorLevel1{{i}}">
+                                                                {{level1.behavior_level1_traits_nm | lowercase}}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="submitted && form.behaviorLevel1.errors"
+                                                class="invalid-feedback">
+                                                <span *ngIf="form.behaviorLevel1.errors.required">Behaviour
+                                                    Level 1 : Traits is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3" *ngIf="isShowdemonstratedLevels">
+                                            <label for="addcontact-name-input" class="form-label">Demonstration
+                                                Levels</label>
+                                            <span class="text-danger">*</span>
+                                            <div class="row" *ngIf="isShowdemonstratedLevels">
+                                                <div class="col-md-3 p-2"
+                                                    *ngFor="let dlevel of demonstratedLevels; let i = index">
+                                                    <div class="form-check form-radio-border text-center">
+                                                        <input class="form-check-input radio-btn-resize width-auto"
+                                                            type="radio" name="new_demonstrated_level"
+                                                            id="new_demonstrated_level{{i+1}}"
+                                                            formControlName="new_demonstrated_level"
+                                                            [value]="dlevel.demonstrated_level"
+                                                            [(ngModel)]="selectedObj.new_demonstrated_level"
+                                                            [ngClass]="{ 'is-invalid': form.submitted && form.new_demonstrated_level.errors}"
+                                                            required />
+                                                        <label class="form-check-label font-size-13 text-muted text-capitalize"
+                                                            style="display:flex;justify-content: center;"
+                                                            for="new_demonstrated_level{{i+1}}">
+                                                            {{dlevel.value | lowercase}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="submitted && form.new_demonstrated_level.errors"
+                                                class="invalid-feedback">
+                                                <span *ngIf="form.new_demonstrated_level.errors.required">Behaviour
+                                                    Demonstrated Level required</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light w-sm cancel-button"
+                                    (click)="onClose()">Close</button>
+                                <button type="submit" class="btn theme-custom-color w-sm"
+                                    id="btn-save-event">{{button}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>

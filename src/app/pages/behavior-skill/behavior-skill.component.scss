@@ -1,0 +1,80 @@
+.custom-text {
+    font-size: 13 !important;
+    /* font-family: "Roboto",
+        sans-serif !important;*/
+}
+
+.badge-soft-custom-primary {
+    background-color: #c3dffa;
+    color: #1d527c;
+    padding: 7px;
+}
+
+.badge-soft-custom-green {
+    // background-color: #f0f8f0;
+    // color: #64a559;
+    // padding: 7px;
+    background-color: #cef6ed;
+    color: #1f9bb4;
+    padding: 7px;
+}
+
+.badge-soft-custom-warning {
+    background-color: #fdefdb;
+    color: #a35828;
+    padding: 7px;
+}
+
+.badge-soft-custom-orange {
+    background-color: #f8f0ed;
+    color: #e86838;
+    padding: 7px;
+}
+
+.badge-soft-custom-blue {
+    background-color: #f4f0fd;
+    color: #916ff7;
+    padding: 7px;
+}
+
+.badge-soft-custom-purple {
+    background-color: #eac4ff;
+    color: #904fab;
+    padding: 7px;
+}
+
+.modal-header {
+    background-color: #f5f7fc;
+}
+
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.invalid-feedback {
+    display: flow-root;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 87.5%;
+    color: #f34e4e;
+}
+
+
+.cancel-button {
+    box-shadow: inset -6px -4px 6px 0 rgba(8, 46, 47, 0.16);
+    border: solid 1px #ddddea;
+    background-color: #fff;
+    color: #ce1431;
+    font-size: 16px;
+}

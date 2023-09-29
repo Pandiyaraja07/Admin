@@ -1,0 +1,440 @@
+<span class="badge btn-outline-light page-breadcrumb-bg btn-rounded p-2 font-size-13 text-capitalize" style="margin-top:5px;"> Job Chat
+    / {{basicInfo?.emp_nm | lowercase}} /
+    <a routerLink="/emp-add-additional-skill" style="color: #00448a;"> {{editOrAddButton}} Job Chat 
+    </a></span>
+
+<h5 class="mb-0  heading-black " style="margin-left:-10px;padding-top:-0.5rem"><a class="btn pointer" onclick="history.back()"><i
+            class="fas fa-arrow-left p-2 "></i></a>{{editOrAddButton}} Job Chat for <a class="text-capitalize heading-black">{{basicInfo?.emp_nm | lowercase}}</a> </h5>
+
+<form name="JobChatFinalForm" (ngSubmit)="fs.form.valid && onSubmit(fs);" #fs="ngForm" role="forms" class="forms"
+    novalidate>
+    <div class="row pt-0">
+        <div class="col-xl-12">
+            <div class="card mt-2 rounded_card shadow-lg" style="margin-bottom:20px;margin-top:23px;">
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <label class="font-size-16 body-black" for="floatingTextarea2" class="heading">Career Aspiration
+                            Statement</label>
+                        <span class="text-danger">*</span>
+                        <div class="custom_enter_text1">(The entered text cannot exceed more than 500 characters)</div>
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="aspiration_stmt"
+                                id="aspiration_stmt" style="height: 180px;margin-left:20px;width:96%" maxlength="500"
+                                [(ngModel)]="jobChatFinalObj.aspiration_stmt" #aspiration_stmt="ngModel"
+                                [ngClass]="{ 'is-invalid': fs.submitted && aspiration_stmt.invalid }"
+                                required></textarea>
+                            <label for="aspiration_stmt" class="font-size-16 body-grey" style="margin-left:20px;">Enter
+                                Career Aspiration
+                                Statement</label>
+                            <span class="text-danger" *ngIf="fs.submitted && aspiration_stmt.invalid">
+                                <span style="margin-left:20px;" *ngIf="aspiration_stmt?.errors?.required"> career
+                                    aspiration
+                                    statement required</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-1">
+        <div class="col-xl-12">
+            <div class="card rounded_card h-100 shadow-lg p-0 m-0">
+                <div class="card-body">
+                    <h6 class="py-2 careermile" style="margin-top:15px;margin-left:20px;"> Career Milestones <span
+                            class="text-danger">*</span> </h6>
+                    <!-- <p class="font-size-16 details-definition" style="margin-left:20px;">Lorem ipsum
+                        dolor sit amet,
+                        consectetur adipiscing
+                        elit, sed do eiusmod tempor.</p> -->
+                    <div *ngIf="career_plan_infos.length > 0">
+                        <div class="row ">
+                            <div class="col-lg-4 m-0 p-0" *ngFor="let jobchatData of career_plan_infos; let i=index">
+                                <div *ngIf="i==0 || i == 1 || i == 2">
+                                    <div class="card rounded_card  shadow-lg"
+                                        style="width: 90%;height:420px;margin-left:20px;">
+                                        <div class="card-body" style="width: 101%; height: 98%">
+                                            <span
+                                                class="badge rounded-pill badge-soft-secondary ms-1 p-1 mb-2 font-size-14 "
+                                                style="font-weight:normal; color: #191d23;"> <span
+                                                    class="font-size-14 body-black pr-2"><img
+                                                        src="assets/images/users/Time.png"></span>
+                                                {{jobchatData.time_frame}}
+                                            </span>
+                                            <blockquote class="blockquote mb-0 rounded_card" style="border-radius:8px;"
+                                                [style.background-color]="jobchatData.time_frame === 'Long Term' ? '#ddddea' : (jobchatData.time_frame === 'Mid Term' ? '#dff1f2' : '#faf4e0')">
+                                                <span class="heading"
+                                                    style="font-size:14px;font-weight:normal;margin-left: 0px !important;">
+                                                    Aspired Role </span>
+                                                <div class="row">
+                                                    <div class="card rounded_card mb-2 pt-1">
+                                                        <div class="row mb-2">
+                                                            <div class="col font-size-13">
+                                                                <span class="light-text font-weight-bold">
+                                                                    Company
+                                                                </span>
+                                                            </div>
+                                                            <div class="col font-size-13 text-dark text-end">
+                                                                {{jobchatData.aspired_role?.company}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card rounded_card mb-2 pt-1 shadow-lg"
+                                                        *ngIf="jobchatData.aspired_role?.category">
+                                                        <div class="row mb-2">
+                                                            <div class="col font-size-14">
+                                                                <span class="light-text font-weight-bold">
+                                                                    Category
+                                                                </span>
+                                                            </div>
+                                                            <div class="col font-size-14 text-dark text-end">
+                                                                {{jobchatData.aspired_role?.category}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card rounded_card mb-2 pt-1 shadow-lg"
+                                                        *ngIf="jobchatData.aspired_role.unit">
+                                                        <div class="row mb-2">
+                                                            <div class="col font-size-14">
+                                                                <span class="light-text  font-weight-bold">
+                                                                    Unit
+                                                                </span>
+                                                            </div>
+                                                            <div class="col font-size-14 text-dark text-end">
+                                                                {{jobchatData.aspired_role.unit.value}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card rounded_card mb-2 pt-1 shadow-lg"
+                                                        *ngIf="jobchatData.aspired_role.location">
+                                                        <div class="row mb-2">
+                                                            <div class="col font-size-14">
+                                                                <span class="light-text font-weight-bold">
+                                                                    Location
+                                                                </span>
+                                                            </div>
+                                                            <div class="col font-size-14 text-dark text-end">
+                                                                {{jobchatData.aspired_role?.location}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                            <h6 class="mt-2 heading comments"> Comments </h6>
+                                         <p class="font-size-14 details-definition" style="margin-bottom:50px;">
+                                        <span class="collapsable float-left">
+                                            {{(readMore) ? jobchatData.comments_nm : jobchatData.comments_nm| slice:0:100}} 
+                                                <span *ngIf="(jobchatData.comments_nm.length>100)">
+                                                    <div class="dropdown" ngbDropdown>
+                                                        <a class="btn btn-link text-dark dropdown-toggle shadow-none "
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                            href="javascript:;"
+                                                            ngbDropdownToggle><span style="color: #00448a ;">...{{showTxt}}</span>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                                                            <li class="custom_li">
+                                                                {{jobchatData.comments_nm}}
+                                                            </li>
+                                                          </ul>
+                                                    </div>
+                                               </span>
+                                        </span>
+                                    </p>
+                                </div>
+                                 <div class="col font-size-13 text-muted text-end edit-delete"
+                                    *ngIf="jobChatFinalObj.approval_status != 1">
+                                    <span>
+                                        <i class="fa fa-trash text-danger ml-2 delete_icon_top"
+                                            style="padding:24px 12px 16px;cursor: pointer;" data-toggle="tooltip"
+                                            (click)="openDeleteModal(i)"></i>
+                                    </span>
+                                     <!-- <span *ngIf="editOrAddButton == 'Edit'"><a class="text-decoration-underline" style="cursor: pointer;"
+                                            (click)="editCareer(i,strongAreaModel1)">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Edit
+                                        </a></span>  -->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4" *ngIf="career_plan_infos.length < 3">
+                                <div class="adddrop rounded_card" style="margin-left: 0px;">
+                                    <div class="card-body card-text-center w-100  text-center"
+                                        (click)="strongAreaModelFn(strongAreaModel1)">
+                                        <img src="assets/images/icons/Create.png" alt="">
+
+                                        <h6 class="pt-2 txtdeco">
+                                            <a data-bs-toggle="modal" data-bs-target="#strongAreaModel1"
+                                                class="text-decoration-underline cursor-default" style="font-family: Ubuntu; color: #00448a;"> Add
+                                                Career Milestones </a>
+                                        </h6>
+                                        <!-- <p>Lorem Ipsum is simply dummy text</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4" style="margin-top: 20px; margin-left:20px;"
+                            *ngIf="career_plan_infos.length == 0">
+                            <div class="adddrop rounded_card">
+                                <div class="card-body" (click)="strongAreaModelFn(strongAreaModel1)">
+                                    <div class="text-center">
+                                        <img class="center-img" src="assets/images/icons/Create.png" alt="">
+                                        <h6 class="pt-2 txtdeco">
+                                            <a data-bs-toggle="modal" data-bs-target="#strongAreaModel1"
+                                                class="text-decoration-underline cursor-default" style="font-family: Ubuntu;color: #00448a;"> Add
+                                                Career Milestones </a>
+                                        </h6>
+                                        <!-- <p class="text-muted">Lorem Ipsum is simply dummy text</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4">
+                        <label for="basicpill-location-input" class="form-label heading-last body-black font-size-16">
+                            Career Path Preference</label>
+                        <span class="text-danger">*</span>
+                        <div class="row" style="margin-left: 16px;">
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check form-radio-border text-center"
+                                    [ngClass]="jobChatFinalObj.path_preference === 'Technical Expert' ? 'radio-on' : ''">
+                                    <input class="form-check-input radio-btn-resize" type="radio" name="path_preference"
+                                        value="Technical Expert" id="Technical"
+                                        [(ngModel)]="jobChatFinalObj.path_preference" #path_preference="ngModel"
+                                        [ngClass]="{ 'is-invalid': fs.submitted && path_preference.invalid }"
+                                        required />
+                                    <label class="form-check-label font-size-16 body-black " for="Technical"
+                                        [style.color]="jobChatFinalObj.path_preference === 'Technical Expert' ? '#191d23' : '#74788d'">
+                                        Technical Expert
+                                    </label>
+                                </div>
+                                <span class="text-danger" *ngIf="fs.submitted && path_preference.invalid">
+                                    <span *ngIf="path_preference?.errors?.required">path preference required</span>
+                                </span>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check form-radio-border text-center"
+                                    [ngClass]="jobChatFinalObj.path_preference === 'People Manager' ? 'radio-on' : ''">
+                                    <input class="form-check-input radio-btn-resize" type="radio" name="path_preference"
+                                        value="People Manager" id="Manager"
+                                        [(ngModel)]="jobChatFinalObj.path_preference" #path_preference="ngModel"
+                                        [ngClass]="{ 'is-invalid': fs.submitted && path_preference.invalid }"
+                                        required />
+                                    <label class="form-check-label font-size-16 body-black" for="Manager"
+                                        [style.color]="jobChatFinalObj.path_preference === 'People Manager' ? '#191d23' : '#74788d' ">
+                                        People Manager
+                                    </label>
+                                </div>
+                                <!-- <span class="text-danger" *ngIf="fs.submitted && path_preference.invalid">
+                                    <span *ngIf="path_preference.errors.required">path preference required</span>
+                                 </span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-4 mt-3">
+        <div class="col-lg-12 text-end">
+            <span class="px-2">
+                <button class="btn cancel-button font-weight-bold" (click)="onCancel()">Cancel </button>
+            </span>
+            <span class="px-2 font-size-14">
+                <button class="btn custom_btn " style="font-family: Ubuntu;font-size: 16px;"> {{button}}</button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<ng-template #strongAreaModel1 let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title sub-title" id="job-chart">Create Career Milestones
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            (click)="modal.close('Close click')">
+        </button>
+    </div>
+
+    <form name="JobChatForm" (ngSubmit)="fs.form.valid && addJobChats(fs);" #fs="ngForm" role="form" class="form"
+        novalidate>
+        <div class="card rounded_card mb-0 shadow-lg">
+            <div class="card-body">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-lg-4">
+                            <div class="form-check form-radio-border text-center"
+                                [ngClass]="jobChatObjs.time_frame === 'Short Term' ? 'radio-on' : ''">
+                                <input class="form-check-input radio-btn-resize" type="radio" value="Short Term"
+                                    name="time_frame" id="Short Term" [(ngModel)]="jobChatObjs.time_frame"
+                                    #time_frame="ngModel"
+                                    [ngClass]="{ 'is-invalid': fs.submitted && time_frame.invalid }" required
+                                    (change)="test(jobChatObj.time_frame)" />
+                                <label class="form-check-label font-size-13 text-muted"
+                                    [style.color]="jobChatObjs.time_frame === 'Short Term' ? '#191d23' : '#74788d' "
+                                    style="display:flex;justify-content:end;" for="Short Term">
+                                    Short Term
+                                </label>
+                            </div>
+                            <span class="text-danger" *ngIf="fs.submitted && time_frame.invalid">
+                                <span *ngIf="time_frame?.errors?.required">required</span>
+                            </span>
+                        </div>
+                        <div class="mb-3 col-lg-4">
+                            <div class="form-check form-radio-border text-center"
+                                [ngClass]="jobChatObjs.time_frame === 'Mid Term' ? 'radio-on' : ''">
+                                <input class="form-check-input radio-btn-resize" type="radio" value="Mid Term"
+                                    name="time_frame" id="Mid Term" [(ngModel)]="jobChatObjs.time_frame"
+                                    #time_frame="ngModel"
+                                    [ngClass]="{ 'is-invalid': fs.submitted && time_frame.invalid }"
+                                    (change)="test(jobChatObj.time_frame)" required />
+                                <label class="form-check-label font-size-13 text-muted"
+                                    [style.color]="jobChatObjs.time_frame === 'Mid Term' ? '#191d23' : '#74788d' "
+                                    style="display:flex;justify-content:end;" for="Mid Term">
+                                    Mid Term
+                                </label>
+                            </div>
+                            <span class="text-danger" *ngIf="fs.submitted && time_frame.invalid">
+                                <span *ngIf="time_frame?.errors?.required">required</span>
+                            </span>
+                        </div>
+                        <div class="mb-3 col-lg-4">
+                            <div class="form-check form-radio-border text-center"
+                                [ngClass]="jobChatObjs.time_frame === 'Long Term' ? 'radio-on' : ''">
+                                <input class="form-check-input radio-btn-resize" type="radio" value="Long Term"
+                                    name="time_frame" id="Long Term" [(ngModel)]="jobChatObjs.time_frame"
+                                    #time_frame="ngModel"
+                                    [ngClass]="{ 'is-invalid': fs.submitted && time_frame.invalid }"
+                                    (change)="test(jobChatObj.time_frame)" required />
+                                <label class="form-check-label font-size-13 text-muted"
+                                    [style.color]="jobChatObjs.time_frame === 'Long Term' ? '#191d23' : '#74788d' "
+                                    style="display:flex;justify-content:end;" for="Long Term">
+                                    Long Term
+                                </label>
+                            </div>
+                            <span class="text-danger" *ngIf="fs.submitted && time_frame.invalid">
+                                <span *ngIf="time_frame?.errors?.required">required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                    <h5 class="sub-title">Aspired Role</h5>
+                    <div class="mb-3">
+                        <label class="font-weight-bold heading" style="margin-left:0px;">Company</label>
+                        <span class="text-danger">*</span>
+                        <div class="form-floating mb-3">
+                            <ng-select [(ngModel)]="aspired_roleObjs.company" name="company" id="company"
+                                [searchable]="false" #company="ngModel" [clearable]="false"
+                                (change)="onChangeCompany($event)"
+                                [ngClass]="{ 'is-invalid': fs.submitted && company.invalid }" required>
+                                <ng-option *ngFor="let company of Company" [value]="company">{{company}}</ng-option>
+                            </ng-select>
+                            <span class="text-danger" *ngIf="fs.submitted && company.invalid">
+                                <span *ngIf="company?.errors?.required">company is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="aspired_roleObjs.company != 'Others'">
+                        <label class="font-weight-bold heading" style="margin-left:0px;">Category</label>
+                        <span class="text-danger">*</span>
+                        <div class="form-floating mb-3">
+                            <ng-select [(ngModel)]="aspired_roleObjs.category" name="category" id="category"
+                                [searchable]="false" #category="ngModel" [clearable]="false"
+                                (change)="onChangeCategory($event)"
+                                [ngClass]="{ 'is-invalid': fs.submitted && category.invalid }" required>
+                                <ng-option *ngFor="let category of Category" [value]="category">{{category}}</ng-option>
+                            </ng-select>
+                            <span class="text-danger" *ngIf="fs.submitted && category.invalid">
+                                <span *ngIf="category?.errors?.required">category is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        *ngIf="aspired_roleObjs.category == 'Manufacturing/Operations' && aspired_roleObjs.company == 'SG India'">
+                        <div class="mb-3">
+                            <label class="font-weight-bold heading" style="margin-left:0px;">Unit</label>
+                            <span class="text-danger">*</span>
+                            <div class="form-floating mb-3">
+                                <ng-select [(ngModel)]="unitObjs.value" name="value" id="value" [clearable]="false"
+                                    [searchable]="false" #value="ngModel" (change)="onChangeBusiness($event)"
+                                    [ngClass]="{ 'is-invalid': fs.submitted && value.invalid }" required>
+                                    <ng-option *ngFor="let business of Business" [value]="business">{{business}}
+                                    </ng-option>
+                                </ng-select>
+                                <span class="text-danger" *ngIf="fs.submitted && value.invalid">
+                                    <span *ngIf="value?.errors?.required">unit is required</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="font-weight-bold heading" style="margin-left:0px;">Location</label>
+                            <span class="text-danger">*</span>
+                            <div class="form-floating mb-3">
+                                <ng-select [(ngModel)]="aspired_roleObjs.location" name="location" id="location"
+                                    #location="ngModel" [clearable]="false" [searchable]="false"
+                                    [ngClass]="{ 'is-invalid': fs.submitted && location.invalid }" required>
+                                    <ng-option *ngFor="let location of Location" [value]="location">{{location}}
+                                    </ng-option>
+                                </ng-select>
+                                <span class="text-danger" *ngIf="fs.submitted && location.invalid">
+                                    <span *ngIf="location?.errors?.required">location is required</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3"
+                        *ngIf="!isOthers && aspired_roleObjs.category != 'Manufacturing/Operations' && aspired_roleObjs.company != 'SG India'">
+                        <label class="font-weight-bold heading" style="margin-left:0px;">Unit</label>
+                        <span class="text-danger">*</span>
+                        <div class="form-floating mb-3">
+                            <ng-select [(ngModel)]="unitObjs.value" name="value" id="value" #value="ngModel"
+                                [clearable]="false" [searchable]="false"
+                                [ngClass]="{ 'is-invalid': fs.submitted && value.invalid }" required>
+                                <ng-option *ngFor="let unit of unitArray" [value]="unit">{{unit}}</ng-option>
+                            </ng-select>
+                            <span class="text-danger" *ngIf="fs.submitted && value.invalid">
+                                <span *ngIf="value?.errors?.required">unit is required</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="isOthers">
+                        <label class="font-weight-bold heading" style="margin-left:0px;">Unit</label>
+                        <span class="text-danger">*</span>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="value" name="value" placeholder="Enter text"
+                                #value="ngModel" name="value" [(ngModel)]="unitObjs.value"
+                                [ngClass]="{ 'is-invalid': fs.submitted && value.invalid }" required />
+                        </div>
+                        <span class="text-danger" *ngIf="fs.submitted && value.invalid">
+                            <span *ngIf="value?.errors?.required">text is required</span>
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="font-weight-bold heading" style="margin-left:0px;">Comments</label>
+                        <span class="text-danger">*</span>
+                        <div class="custom_enter_text">(The entered text cannot exceed more than 500 characters)</div>
+                        <div class="form-floating">
+                            <textarea class="form-control p-1" placeholder="Strong Area Review" name="comments_nm"
+                                id="comments_nm" [(ngModel)]="jobChatObjs.comments_nm" style="height: 100px"
+                                maxlength="500" #comments_nm="ngModel"
+                                [ngClass]="{ 'is-invalid': fs.submitted && comments_nm.invalid }" required></textarea>
+                            <span class="text-danger" *ngIf="fs.submitted && comments_nm.invalid">
+                                <span *ngIf="comments_nm?.errors?.required">comments is required</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer cursor-pointer">
+            <button type="button" class="btn custom_btn_danger " (click)="AspiredRoleClose()">Cancel</button>
+            <button type="submit" class="btn custom_btn" id="btn-save-event">Add</button>
+        </div>
+    </form>
+</ng-template>

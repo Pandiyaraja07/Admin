@@ -1,0 +1,234 @@
+.modal-header {
+    background-color: #f5f7fc;
+}
+
+.modal {
+    display: block !important;
+    /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.badge-soft-custom-primary {
+    background-color: #c3dffa;
+    color: #1d527c;
+    padding: 7px;
+}
+
+.badge-soft-custom-warning {
+    background-color: #fdefdb;
+    color: #a35828;
+    padding: 7px;
+}
+
+.badge-soft-custom-purple {
+    background-color: #eac4ff;
+    color: #904fab;
+    padding: 7px;
+}
+
+.demo-chart {
+    height: 100%;
+}
+
+.round-card {
+    flex: 0 0 auto;
+    width: 19%;
+    text-align: center
+}
+
+.custom-round1 h5 {
+	color: #7a1ba0 !important;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+    font-weight: bolder;
+}
+
+.custom-round1:hover, .custom-round1:hover h5 {
+    color: #fff !important;
+}
+
+.custom-round1 {
+    color: #7a1ba0 !important;
+    box-shadow: inset -6px -4px 6px 0 rgba(8, 46, 47, 0.16);
+    background-color: #edd7f6;
+    padding-top: 100%;
+    position: relative;
+}
+
+.custom-round1:hover {
+    color: #fff !important;
+    background-image: linear-gradient(148deg, #edd7f6 -13%, #7a1ba0 113%);
+    box-shadow: 0 10px 25px 0 rgba(78, 176, 179, 0.16),
+        inset -6px -4px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.custom-round2 h5 {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+    color: #0a3f6a !important;
+    font-weight: bolder;
+}
+
+.custom-round2:hover, .custom-round2:hover h5 {
+    color: #fff !important;
+}
+
+.custom-round2 {
+    color: #0a3f6a !important;
+    box-shadow: inset -4px -2px 6px 0 rgba(8, 46, 47, 0.16);
+    background-color: #c3dffa;
+    padding-top: 100%;
+    position: relative;
+}
+
+.custom-round2:hover {
+    color: #fff !important;
+    background-image: linear-gradient(148deg, #edd7f6 -13%, #0a3f6a 113%);
+    box-shadow: 0 10px 25px 0 rgba(78, 176, 179, 0.16),
+        inset -6px -4px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.custom-round3 h5 {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	transform: translate(-50%, -50%);
+    color: #9b4a09 !important;
+    font-weight: bolder;
+}
+
+.custom-round3:hover, .custom-round3:hover h5 {
+    color: #fff !important;
+}
+
+.custom-round3 {
+    color: #9b4a09 !important;
+    box-shadow: inset -4px -2px 6px 0 rgba(8, 46, 47, 0.16);
+    background-color: #fff1dd;
+    padding-top: 100%;
+    position: relative;
+}
+
+.custom-round3:hover {
+    color: #fff !important;
+    background-image: linear-gradient(148deg, #edd7f6 -13%, #9b4a09 113%);
+    box-shadow: 0 10px 25px 0 rgba(78, 176, 179, 0.16),
+        inset -6px -4px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+.circle {
+    position: relative;
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    padding-top: 100%;
+    background: red;
+}
+
+.cancel {
+    box-shadow: inset -6px -4px 6px 0 rgba(8, 46, 47, 0.16);
+    border: solid 1px #ddddea;
+    background-color: #fff;
+    color: #e4063b;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.reject {
+    color: #fff;
+}
+
+
+.card-text-wrap{
+    white-space: nowrap; 
+    width: 89px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    font-size: 9px
+   
+}
+
+.file-size{
+    font-size:50px;
+    color:#f15642;
+    padding: 13px;
+}
+
+.attachment-card{
+    padding-top: 8px;
+    padding-bottom: 14px;
+    padding-right: 8rem;
+}
+
+.rejectbtn{
+    margin-left: -7px;
+
+}
+
+.approvebtn{
+    margin-left: -7px;
+}
+
+.sentenceCase {
+text-transform: none;
+}
+
+
+  
+  /* Tooltip text */
+  .tool .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(12, 12, 12);
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 4px;
+    width: 155px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    bottom: 93px;
+    left: 71px;
+    
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tool:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+.tooltipborder1{
+    border: 1px solid  #edd7f6;
+}
+
+.tooltipborder2{
+    border: 1px solid #c3dffa;
+}
+
+.tooltipborder3{
+    border: 1px solid #fff1dd;
+}
+
+.pending-list{
+    overflow: scroll;
+    height: 57vh;
+    overflow-x: hidden;
+}
+
+
+
